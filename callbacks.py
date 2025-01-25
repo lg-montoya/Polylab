@@ -30,14 +30,14 @@ def callback_wrapper(app):
     
 
     @app.callback(
-        Output("collapse_1", "is_open"),
+        Output("slider_1_a", "disabled"),
+        Output("slider_1_b", "disabled"),
+        Output("slider_1_c", "disabled"),
+        Output("slider_1_d", "disabled"),
         Input("dropdown_menu_1", "value"),
-        [State("collapse_1", "is_open")]
     )
-    def reveal_coefficients(selected_value, is_open):
-        if selected_value is not None:
-            return True
-        return False
+    def update_slider_status(chosen_polynomial):
+        return [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
     
     
     @app.callback(
