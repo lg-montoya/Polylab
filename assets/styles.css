@@ -1,0 +1,9 @@
+.slider-container {
+    display: flex;
+    align-items: center;
+}
+
+.slider-label {
+    margin-right: 1px;
+    min-width: 50px;  /* Adjust the width as needed */
+}
