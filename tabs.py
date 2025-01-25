@@ -52,7 +52,7 @@ tab_0 = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=poly.plot(), id='tab-0-graph')), )
+                        dbc.Card(dcc.Graph(figure=Polynomial().plot_axes(), id='tab-0-graph')), )
                     ], width=8),
     
     

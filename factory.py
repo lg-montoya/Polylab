@@ -4,7 +4,7 @@ from sympy import symbols, latex, expand
 import plotly.io as pio
 
 class Polynomial:
-    def __init__(self, coefficients):
+    def __init__(self, coefficients=[1,1,1,1]):
         """
         Initialize the polynomial with coefficients.
         :param coefficients: List of coefficients [a_n, a_(n-1), ..., a_0]
@@ -50,13 +50,31 @@ class Polynomial:
         fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
 
         # Plot the x=0 line
-        # fig.add_trace(go.Scatter(x=[0, 0], y=[min(y_values), max(y_values)], mode='lines', line=dict(color='black')))
-        fig.add_trace(go.Scatter(x=[0, 0], y=[min(y_values), max(y_values)], mode='lines'))
-        # Plot the f(x)=0 line
-        # fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines', line=dict(color='black')))
-        fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines'))
+        # fig.add_trace(go.Scatter(x=[0, 0], y=[min(y_values), max(y_values)], mode='lines'))
+        # fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines'))
         
         fig.update_layout(showlegend=False)
+        
+        return fig
+    
+    def plot_axes(self):
+        """
+        Plot only the x-axis and y-axis in the interval [-10, 10] using Plotly Dash.
+        """
+        fig = go.Figure()
+
+        # Plot the x=0 line (y-axis)
+        fig.add_trace(go.Scatter(x=[0, 0], y=[-10, 10], mode='lines', line=dict(color='black')))
+
+        # Plot the f(x)=0 line (x-axis)
+        fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines', line=dict(color='black')))
+
+        # Update layout to set the range for x-axis and y-axis
+        fig.update_layout(
+            showlegend=False,
+            xaxis=dict(range=[-10, 10], zeroline=False),
+            yaxis=dict(range=[-10, 10], zeroline=False),
+        )
 
             
         return fig
