@@ -2,7 +2,7 @@ from dash.dependencies import Input, Output, State
 from dash import clientside_callback, Patch
 import plotly.io as pio
 from defaults import POLYNOMIALS
-from factory import Polynomial
+from factory import Polynomial, plot_axes
 
 
 clientside_callback(
@@ -48,10 +48,15 @@ def callback_wrapper(app):
     def update_general_formula(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['general_form'] 
     
-    
+    # callback for adding the default polynomial to the graph according to the chosen polynomial type.
     @app.callback(
         Output("tab-0-graph", "figure", allow_duplicate=True),
+        Output("slider_1_a", "value"),
+        Output("slider_1_b", "value"),
+        Output("slider_1_c", "value"),
+        Output("slider_1_d", "value"),
         Input("dropdown_menu_1", "value"),
+        allow_duplicate=True  # Allow duplicate callback
     )
     def update_graph(selected_polynomial):
         if selected_polynomial is None:
@@ -59,13 +64,15 @@ def callback_wrapper(app):
 
         coefficients = POLYNOMIALS[selected_polynomial]['default_coefficients']
         poly = Polynomial(coefficients)
-        fig = poly.plot_axes()  # Start with the axes
+        fig = plot_axes()  # Start with the axes
 
         # Add the polynomial trace
         poly_trace = poly.plot().data[0]
         fig.add_trace(poly_trace)
 
-        return fig
+        return fig, *coefficients
+    
+ 
     
     
     

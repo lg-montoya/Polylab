@@ -1,13 +1,13 @@
 import dash_bootstrap_components as dbc
 from dash import html
-from factory import Polynomial
+from factory import plot_axes
 from dash import dcc
 from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
 
 load_figure_template(["sketchy_dark", "minty"])
 
-poly = Polynomial([1, 1, 1])
+
 
 
 
@@ -31,19 +31,19 @@ tab_0 = html.Div([
                         dbc.Card([    
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad a$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_a",min=-5, max=5, value=1,marks={i: str(i) for i in range(-5, 6)}, className="mt-4 mb-4",), ),
+                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mt-4 mb-4",), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad b$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_b",min=-5, max=5, value=1,marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad c$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_c",min=-5, max=5, value=1,marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad d$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_d",min=-5, max=5, value=1,marks={i: str(i) for i in range(-5, 6)}), ),
+                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}), ),
                             ])
                         ], style={'width': '100%', 'height': '100%'})    
                     ),
@@ -52,7 +52,7 @@ tab_0 = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=Polynomial().plot_axes(), id='tab-0-graph')), )
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph')), )
                     ], width=8),
     
     
