@@ -4,15 +4,15 @@ POLYNOMIALS = {
         'available_sliders':[True, False, False, False]
         },
     'linear':{
-        'default_coefficients':[0,1,0,0], 'general_form':r"$f(x)=ax + b$",
+        'default_coefficients':[0,1,0,0], 'general_form':r"$f(x)=a + bx$",
         'available_sliders':[True, True, False, False]
         },
     'quadratic':{
-        'default_coefficients':[0,0,1,0], 'general_form':r"$f(x)=ax^2+bx+c$",
+        'default_coefficients':[0,0,1,0], 'general_form':r"$f(x)=a+bx+cx^2$",
         'available_sliders':[True, True, True, False]
         },
     'cubic':{
-        'default_coefficients':[0,0,0,1], 'general_form':r"$f(x)=ax^3+bx^2+cx+d$",
+        'default_coefficients':[0,0,0,1], 'general_form':r"$f(x)=a+bx+cx^2+dx^3$",
         'available_sliders':[True, True, True, True]
         },
     }

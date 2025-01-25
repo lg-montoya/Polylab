@@ -8,10 +8,6 @@ from dash_bootstrap_templates import load_figure_template
 load_figure_template(["sketchy_dark", "minty"])
 
 
-
-
-
-
 tab_0 = html.Div([
             # ROW with just the instructions button
             dbc.Row(
@@ -31,19 +27,19 @@ tab_0 = html.Div([
                         dbc.Card([    
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad a$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mt-4 mb-4",), ),
+                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mt-4 mb-4",), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad b$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad c$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
                             ]),
                             dbc.Row([
                                 dbc.Label(html.Div(dcc.Markdown("$$\quad d$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}), ),
+                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}), ),
                             ])
                         ], style={'width': '100%', 'height': '100%'})    
                     ),

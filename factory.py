@@ -48,11 +48,6 @@ class Polynomial:
 
         # Plot the polynomial
         fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
-
-        # Plot the x=0 line
-        # fig.add_trace(go.Scatter(x=[0, 0], y=[min(y_values), max(y_values)], mode='lines'))
-        # fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines'))
-        
         fig.update_layout(showlegend=False)
         
         return fig
@@ -76,7 +71,6 @@ def plot_axes():
         showlegend=False,
         xaxis=dict(range=[-10, 10], zeroline=False),
         yaxis=dict(range=[-10, 10], zeroline=False),
-        # plot_bgcolor='white'
     )
 
     return fig
