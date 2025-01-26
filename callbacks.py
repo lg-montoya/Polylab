@@ -29,7 +29,7 @@ def callback_wrapper(app):
         patched_figure["layout"]["template"] = template
         return patched_figure 
     
-    # callback for updating availability of sliders.
+    # Callback for updating availability of sliders.
     @app.callback(
         Output("slider_1_a", "disabled"),
         Output("slider_1_b", "disabled"),
@@ -40,7 +40,7 @@ def callback_wrapper(app):
     def update_slider_status(chosen_polynomial):
         return [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
     
-    # callback for updating general formula of the chosen polynomial.
+    # Callback for updating general formula of the chosen polynomial.
     @app.callback(
         Output("eq_1", "children"),
         Input("dropdown_menu_1", "value"),
@@ -48,7 +48,7 @@ def callback_wrapper(app):
     def update_general_formula(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['general_form'] 
     
-    # callback for adding the default polynomial to the graph according to the chosen polynomial type.
+    # Callback for adding the default polynomial to the graph according to the chosen polynomial type.
     @app.callback(
         Output("tab-0-graph", "figure", allow_duplicate=True),
         Output("slider_1_a", "value"),
@@ -73,7 +73,7 @@ def callback_wrapper(app):
         return fig, *coefficients
     
         
-    # New callback to add a new trace of the polynomial to the existing graph based on the slider values
+    # Callback to add a new trace of the polynomial to the existing graph based on the slider values
     @app.callback(
         Output("tab-0-graph", "figure", allow_duplicate=True),
         Input("slider_1_a", "value"),

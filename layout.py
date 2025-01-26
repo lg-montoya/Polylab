@@ -8,7 +8,7 @@ from tabs import tab_0
 def page_layout():
     layout = html.Div(children=[
 
-            dbc.Container(fluid=False, children=[
+            dbc.Container(fluid=True, children=[
                 html.Div(color_mode_switch, className="d-flex justify-content-end"),
                 # html.Div(className="d-flex justify-content-end"),
                 dbc.Tabs(id='tab-group', class_name='nav-stack',  children=[

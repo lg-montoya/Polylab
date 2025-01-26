@@ -22,28 +22,29 @@ tab_0 = html.Div([
                                     clearable=False, placeholder='CHOOSE A POLYNOMIAL'))),
                     # Row for the general form of the polynomial in LaTeX
                     dbc.Row(html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"})),
-                    # Row for the sliders
-                    dbc.Row(    
+                    # Row for the sliders is contained in a card
+                    dbc.Row(
+                        html.Div(    
                         dbc.Card([    
                             dbc.Row([
-                                dbc.Label(html.Div(dcc.Markdown("$$\quad a$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mt-4 mb-4",), ),
+                                dbc.Col(html.Div(dcc.Markdown("$$\quad a$$",mathjax=True)), width=1, className='mt-4'),
+                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mt-4 mb-3 '),
                             ]),
                             dbc.Row([
-                                dbc.Label(html.Div(dcc.Markdown("$$\quad b$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(html.Div(dcc.Markdown("$$\quad b$$",mathjax=True)), width=1,),
+                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
                             ]),
                             dbc.Row([
-                                dbc.Label(html.Div(dcc.Markdown("$$\quad c$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}, className="mb-4"), ),
+                                dbc.Col(html.Div(dcc.Markdown("$$\quad c$$",mathjax=True)), width=1,),
+                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
                             ]),
                             dbc.Row([
-                                dbc.Label(html.Div(dcc.Markdown("$$\quad d$$",mathjax=True)), width=1),
-                                dbc.Col(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)}), ),
-                            ])
-                        ], style={'width': '100%', 'height': '100%'})    
-                    ),
-                ], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
+                                dbc.Col(html.Div(dcc.Markdown("$$\quad d$$",mathjax=True)), width=1,),
+                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
+                            ]),                        
+                        ], style={'width': '100%', 'height': '100%'})
+                        )    
+                    )], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
 
                 
                 dbc.Col([
