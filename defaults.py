@@ -17,4 +17,6 @@ POLYNOMIALS = {
         },
     }
 
+# GENERAL_FORM = fr"$f(x)={{{P}}}x+b$"
+
 GENERAL_FORM = r"$f(x)=ax+b$"

@@ -2,7 +2,8 @@ from dash.dependencies import Input, Output, State
 from dash import clientside_callback, Patch
 import plotly.io as pio
 from defaults import POLYNOMIALS
-from factory import Polynomial, plot_axes    
+from factory import Polynomial, plot_axes
+import plotly.graph_objects as go
 
 
 clientside_callback(
@@ -59,8 +60,9 @@ def callback_wrapper(app):
         allow_duplicate=True  # Allow duplicate callback
     )
     def update_graph(selected_polynomial):
+        # Return an empty figure if no polynomial is selected
         if selected_polynomial is None:
-            return Patch()  # Return an empty figure if no polynomial is selected
+            return Patch()  
 
         coefficients = POLYNOMIALS[selected_polynomial]['default_coefficients']
         poly = Polynomial(coefficients)
@@ -73,7 +75,7 @@ def callback_wrapper(app):
         return fig, *coefficients
     
         
-    # Callback to add a new trace of the polynomial to the existing graph based on the slider values
+    # Callback updating existing graph based on the slider values
     @app.callback(
         Output("tab-0-graph", "figure", allow_duplicate=True),
         Input("slider_1_a", "value"),
@@ -89,8 +91,21 @@ def callback_wrapper(app):
         # Add the polynomial trace
         poly_trace = poly.plot().data[0]
         fig.add_trace(poly_trace)
+        
+        # Update the title
+        title = poly.update_figure_title(a, b, c, d)
+        fig.update_layout(
+            title={
+                "text": title,
+                "x": 0.5,  # Center the title
+                "xanchor": "center",
+                "yanchor": "top"
+            },
+            title_font_size=20
+        )
         return fig
  
-    
-    
+
+
+
     

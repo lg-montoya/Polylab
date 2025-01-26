@@ -19,16 +19,61 @@ class Polynomial:
         :param x: Value or array of values to evaluate.
         :return: Result(s) as a NumPy array or scalar.
         """
-        return self.poly(x)
+        return self.poly(x)    
+    
+    
+    # def update_figure_title(self, a, b, c, d):
+    #     return fr"$f(x)={{{a}}}{{{b}}}x{{{c}}}x^2{{{d}}}x^3$"
+         
+    
+    def update_figure_title(self, a, b, c, d):
+        # Rule 1: When all coefficients are zero, return f(x) = 0
+        if a == 0 and b == 0 and c == 0 and d == 0:
+            return r"$f(x)=0$"
 
-    def latex(self):
-        """
-        Generate the LaTeX representation of the polynomial.
-        :return: LaTeX string for the polynomial.
-        """
-        x = symbols('x')
-        polynomial_exp = sum(coeff * x**i for i, coeff in enumerate(reversed(self.coefficients)))
-        return f"$${latex(expand(polynomial_exp))}$$"
+        # Initialize the list for polynomial terms
+        terms = []
+
+        # Rule 2 and 3: Add terms only if their coefficients are non-zero and follow sign rules
+        if a != 0:
+            if a == 1:
+                terms.append(f"+")  # Only the sign, without the 1
+            elif a == -1:
+                terms.append(f"-")  # Only the sign, without the -1
+            else:
+                terms.append(f"{a}")
+
+        if b != 0:
+            if b == 1:
+                terms.append(f"+x")  # Only sign and variable
+            elif b == -1:
+                terms.append(f"-x")  # Only sign and variable
+            else:
+                terms.append(f"{'+' if b > 0 else ''}{b}x")
+
+        if c != 0:
+            if c == 1:
+                terms.append(f"+x^2")  # Only sign and variable
+            elif c == -1:
+                terms.append(f"-x^2")  # Only sign and variable
+            else:
+                terms.append(f"{'+' if c > 0 else ''}{c}x^2")
+
+        if d != 0:
+            if d == 1:
+                terms.append(f"+x^3")  # Only sign and variable
+            elif d == -1:
+                terms.append(f"-x^3")  # Only sign and variable
+            else:
+                terms.append(f"{'+' if d > 0 else ''}{d}x^3")
+
+        # Rule 3: If only one term exists, include its sign only if negative
+        if len(terms) == 1 and terms[0][0] != '-':
+            terms[0] = terms[0].lstrip('+')
+
+        # Combine terms into the polynomial string
+        return fr"$f(x)={''.join(terms)}$"
+
 
     def __str__(self):
         """
