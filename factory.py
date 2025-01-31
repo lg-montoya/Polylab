@@ -21,9 +21,6 @@ class Polynomial:
         """
         return self.poly(x)    
     
-    
-    # def update_figure_title(self, a, b, c, d):
-    #     return fr"$f(x)={{{a}}}{{{b}}}x{{{c}}}x^2{{{d}}}x^3$"
          
     
     def update_figure_title(self, a, b, c, d):
@@ -36,12 +33,7 @@ class Polynomial:
 
         # Rule 2 and 3: Add terms only if their coefficients are non-zero and follow sign rules
         if a != 0:
-            if a == 1:
-                terms.append(f"+")  # Only the sign, without the 1
-            elif a == -1:
-                terms.append(f"-")  # Only the sign, without the -1
-            else:
-                terms.append(f"{a}")
+            terms.append(f"{a}")
 
         if b != 0:
             if b == 1:
@@ -72,7 +64,7 @@ class Polynomial:
             terms[0] = terms[0].lstrip('+')
 
         # Combine terms into the polynomial string
-        return fr"$f(x)={''.join(terms)}$"
+        return fr"$f(x)={''.join(terms).lstrip('+')}$"
 
 
     def __str__(self):
