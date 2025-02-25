@@ -4,6 +4,7 @@ import plotly.io as pio
 from defaults import POLYNOMIALS
 from factory import Polynomial, plot_axes
 import plotly.graph_objects as go
+import sympy as sp
 
 
 clientside_callback(
@@ -21,7 +22,7 @@ clientside_callback(
 def callback_wrapper(app):
     
     @app.callback(
-        Output("tab-0-graph", "figure"),
+        Output("tab-0-graph-y", "figure"),
         Input("switch", "value"),
     )
     def update_chart_theme(is_dark):
@@ -51,7 +52,7 @@ def callback_wrapper(app):
     
     # Callback for adding the default polynomial to the graph according to the chosen polynomial type.
     @app.callback(
-        Output("tab-0-graph", "figure", allow_duplicate=True),
+        Output("tab-0-graph-y", "figure", allow_duplicate=True),
         Output("slider_1_a", "value"),
         Output("slider_1_b", "value"),
         Output("slider_1_c", "value"),
@@ -75,9 +76,9 @@ def callback_wrapper(app):
         return fig, *coefficients
     
         
-    # Callback updating existing graph based on the slider values
+    # Callback updating f(x) graph based on the slider values
     @app.callback(
-        Output("tab-0-graph", "figure", allow_duplicate=True),
+        Output("tab-0-graph-y", "figure", allow_duplicate=True),
         Input("slider_1_a", "value"),
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
@@ -93,7 +94,7 @@ def callback_wrapper(app):
         fig.add_trace(poly_trace)
         
         # Update the title
-        title = poly.update_figure_title(a, b, c, d)
+        title = poly.update_figure_title(*coefficients)
         fig.update_layout(
             title={
                 "text": title,
@@ -104,6 +105,84 @@ def callback_wrapper(app):
             title_font_size=20
         )
         return fig
+    
+    # Callback updating f'(x) graph based on the slider values
+    @app.callback(
+        Output("tab-0-graph-dy", "figure", allow_duplicate=True),
+        Input("slider_1_a", "value"),
+        Input("slider_1_b", "value"),
+        Input("slider_1_c", "value"),
+        Input("slider_1_d", "value"),
+    )
+    def update_graph_from_sliders(a, b, c, d):
+        coefficients = [a, b, c, d]
+        coeffs = Polynomial(coefficients).first_order_derivative().coef
+        poly = Polynomial(coeffs)
+        fig = plot_axes()  # Start with the axes
+
+        # Add the polynomial trace
+        poly_trace = poly.plot().data[0]
+        fig.add_trace(poly_trace)
+        
+        # Update the title
+        x = sp.Symbol('x')
+        dp_sympy = sum(coef * x**i for i, coef in enumerate(coeffs))
+        # fr"$f(x)={''.join(terms).lstrip('+')}$"
+        
+        terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
+        derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
+        title=fr"$f'(x)={derivative_str}$"
+        
+        fig.update_layout(
+            title={
+                "text": title,
+                "x": 0.5,  # Center the title
+                "xanchor": "center",
+                "yanchor": "top"
+            },
+            title_font_size=20
+        )
+        return fig
+    
+    
+    # Callback updating f''(x) graph based on the slider values
+    @app.callback(
+        Output("tab-0-graph-d2y", "figure", allow_duplicate=True),
+        Input("slider_1_a", "value"),
+        Input("slider_1_b", "value"),
+        Input("slider_1_c", "value"),
+        Input("slider_1_d", "value"),
+    )
+    def update_graph_from_sliders(a, b, c, d):
+        coefficients = [a, b, c, d]
+        coeffs = Polynomial(coefficients).second_order_derivative().coef
+        poly = Polynomial(coeffs)
+        fig = plot_axes()  # Start with the axes
+
+        # Add the polynomial trace
+        poly_trace = poly.plot().data[0]
+        fig.add_trace(poly_trace)
+        
+        # Update the title
+        x = sp.Symbol('x')
+        dp_sympy = sum(coef * x**i for i, coef in enumerate(coeffs))
+        # fr"$f(x)={''.join(terms).lstrip('+')}$"
+        
+        terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
+        derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
+        title=fr"$f''(x)={derivative_str}$"
+        
+        fig.update_layout(
+            title={
+                "text": title,
+                "x": 0.5,  # Center the title
+                "xanchor": "center",
+                "yanchor": "top"
+            },
+            title_font_size=20
+        )
+        return fig
+    
  
 
 

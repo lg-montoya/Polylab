@@ -4,6 +4,7 @@ from factory import plot_axes
 from dash import dcc
 from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
+from dash.dependencies import Input, Output
 
 load_figure_template(["sketchy_dark", "minty"])
 
@@ -49,9 +50,29 @@ tab_0 = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-y', mathjax=True)), )
                     ], width=8),
     
     
-            ]), 
+            ]),
+            # ROW containing the second graph
+            dbc.Row([
+                dbc.Col(),
+                dbc.Col([
+                    html.Div(
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-dy', mathjax=True)), )
+                    ], width=8, class_name='mt-4'),
+                
+                ]),
+            
+            # ROW containing the third graph
+            dbc.Row([
+                dbc.Col(),
+                dbc.Col([
+                    html.Div(
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-d2y', mathjax=True)), )
+                    ], width=8, class_name='mt-4'),
+                
+                ]),
+             
         ], className="mt-4")

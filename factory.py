@@ -21,7 +21,19 @@ class Polynomial:
         """
         return self.poly(x)    
     
-         
+    def first_order_derivative(self):
+        """
+        Compute the first-order derivative of the polynomial.
+        :return: coefficients of first-order derivative.
+        """
+        return self.poly.deriv(m=1)
+    
+    def second_order_derivative(self):
+        """
+        Compute the second-order derivative of the polynomial.
+        :return: A new Polynomial object representing the second-order derivative.
+        """
+        return self.poly.deriv(m=2)
     
     def update_figure_title(self, a, b, c, d):
         # Rule 1: When all coefficients are zero, return f(x) = 0
