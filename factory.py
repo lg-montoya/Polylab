@@ -41,7 +41,6 @@ class MyPolynomial:
 
         # Plot the polynomial
         fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
-        # fig.update_layout(showlegend=False)
         
         return fig
 
