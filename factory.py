@@ -3,7 +3,7 @@ import numpy as np
 from sympy import symbols, latex, expand
 import plotly.io as pio
 
-class Polynomial:
+class MyPolynomial:
     def __init__(self, coefficients):
         """
         Initialize the polynomial with coefficients.
@@ -28,6 +28,22 @@ class Polynomial:
         :return: A new Polynomial object representing the derivative.
         """
         return self.poly.deriv(m=order)
+    
+    def plot(self):
+        """
+        Plot the polynomial in the interval [-10, 10] using Plotly Dash.
+        """
+
+        x_values = np.linspace(-10, 10, 400)
+        y_values = self.evaluate(x_values)
+
+        fig = go.Figure()
+
+        # Plot the polynomial
+        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
+        # fig.update_layout(showlegend=False)
+        
+        return fig
 
     
     def update_figure_title(self, a, b, c, d):
@@ -80,21 +96,7 @@ class Polynomial:
         """
         return str(self.poly)
     
-    def plot(self):
-        """
-        Plot the polynomial in the interval [-10, 10] using Plotly Dash.
-        """
-
-        x_values = np.linspace(-10, 10, 400)
-        y_values = self.evaluate(x_values)
-
-        fig = go.Figure()
-
-        # Plot the polynomial
-        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
-        fig.update_layout(showlegend=False)
-        
-        return fig
+    
 
 
 
@@ -105,10 +107,10 @@ def plot_axes():
     fig = go.Figure()
 
     # Plot the x=0 line (y-axis)
-    fig.add_trace(go.Scatter(x=[0, 0], y=[-10, 10], mode='lines', line=dict(color='black')))
+    fig.add_trace(go.Scatter(x=[0, 0], y=[-10, 10], mode='lines', line=dict(color='black'), showlegend=False))
 
     # Plot the f(x)=0 line (x-axis)
-    fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines', line=dict(color='black')))
+    fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines', line=dict(color='black'), showlegend=False))
 
     # Update layout to set the range for x-axis and y-axis
     fig.update_layout(
@@ -116,6 +118,8 @@ def plot_axes():
         xaxis=dict(range=[-10, 10], zeroline=False),
         yaxis=dict(range=[-10, 10], zeroline=False),
     )
+    
+    # fig.update_layout(showlegend=False)
 
     return fig
     

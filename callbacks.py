@@ -1,8 +1,8 @@
 from dash.dependencies import Input, Output, State
 from dash import clientside_callback, Patch
 import plotly.io as pio
-from defaults import POLYNOMIALS
-from factory import Polynomial, plot_axes
+from defaults import POLYNOMIALS, derivative_notation
+from factory import MyPolynomial, plot_axes
 import plotly.graph_objects as go
 import sympy as sp
 
@@ -66,11 +66,11 @@ def callback_wrapper(app):
             return Patch()  
 
         coefficients = POLYNOMIALS[selected_polynomial]['default_coefficients']
-        poly = Polynomial(coefficients)
+        my_polynomial = MyPolynomial(coefficients)
         fig = plot_axes()  # Start with the axes
 
         # Add the polynomial trace
-        poly_trace = poly.plot().data[0]
+        poly_trace = my_polynomial.plot().data[0]
         fig.add_trace(poly_trace)
 
         return fig, *coefficients
@@ -86,15 +86,28 @@ def callback_wrapper(app):
     )
     def update_graph_from_sliders(a, b, c, d):
         coefficients = [a, b, c, d]
-        poly = Polynomial(coefficients)
+        my_polynomial = MyPolynomial(coefficients)
         fig = plot_axes()  # Start with the axes
 
         # Add the polynomial trace
-        poly_trace = poly.plot().data[0]
+        poly_trace = my_polynomial.plot().data[0]
+        poly_trace.update(name=fr"$y$")
         fig.add_trace(poly_trace)
         
+        # # Add the first-order derivative trace
+        first_derivative = my_polynomial.derivative(order=1)
+        first_derivative_trace = MyPolynomial(first_derivative.coef).plot().data[0]
+        first_derivative_trace.update(name=fr"${derivative_notation[1]}$")
+        fig.add_trace(first_derivative_trace)
+        
+        # Add the second-order derivative trace
+        second_derivative = my_polynomial.derivative(order=2)
+        second_derivative_trace = MyPolynomial(second_derivative.coef).plot().data[0]
+        second_derivative_trace.update(name=fr"${derivative_notation[2]}$")
+        fig.add_trace(second_derivative_trace)
+        
         # Update the title
-        title = poly.update_figure_title(*coefficients)
+        title = my_polynomial.update_figure_title(*coefficients)
         fig.update_layout(
             title={
                 "text": title,
@@ -103,12 +116,12 @@ def callback_wrapper(app):
                 "yanchor": "top"
             },
             title_font_size=20
-        )
+            )
+        fig.update_layout(showlegend=True)
+        
         return fig
     
-    # derivative_notation={1:"f'(x)", 2:"f''(x)"}
-    derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
-    # derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
+
     
     def update_derivative_graph(order):
         @app.callback(
@@ -120,12 +133,14 @@ def callback_wrapper(app):
         )
         def update_graph_from_sliders(a, b, c, d):
             coefficients = [a, b, c, d]
-            coeffs = Polynomial(coefficients).derivative(order=order).coef
-            poly = Polynomial(coeffs)
+            coeffs = MyPolynomial(coefficients).derivative(order=order).coef
+            poly = MyPolynomial(coeffs)
             fig = plot_axes()  # Start with the axes
 
             # Add the polynomial trace
             poly_trace = poly.plot().data[0]
+            # poly_trace.update(hovertemplate='x: %{x}<br>y: %{y}<extra></extra>')
+            poly_trace.update(name=f"Derivative Order {order}")
             fig.add_trace(poly_trace)
             
             # Update the title

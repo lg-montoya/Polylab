@@ -20,3 +20,7 @@ POLYNOMIALS = {
 # GENERAL_FORM = fr"$y={{{P}}}x+b$"
 
 GENERAL_FORM = r"$y=ax+b$"
+
+# derivative_notation={1:"f'(x)", 2:"f''(x)"}
+derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
+# derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
