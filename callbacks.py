@@ -106,82 +106,46 @@ def callback_wrapper(app):
         )
         return fig
     
-    # Callback updating f'(x) graph based on the slider values
-    @app.callback(
-        Output("tab-0-graph-dy", "figure", allow_duplicate=True),
-        Input("slider_1_a", "value"),
-        Input("slider_1_b", "value"),
-        Input("slider_1_c", "value"),
-        Input("slider_1_d", "value"),
-    )
-    def update_graph_from_sliders(a, b, c, d):
-        coefficients = [a, b, c, d]
-        coeffs = Polynomial(coefficients).first_order_derivative().coef
-        poly = Polynomial(coeffs)
-        fig = plot_axes()  # Start with the axes
-
-        # Add the polynomial trace
-        poly_trace = poly.plot().data[0]
-        fig.add_trace(poly_trace)
-        
-        # Update the title
-        x = sp.Symbol('x')
-        dp_sympy = sum(coef * x**i for i, coef in enumerate(coeffs))
-        # fr"$f(x)={''.join(terms).lstrip('+')}$"
-        
-        terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
-        derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
-        title=fr"$f'(x)={derivative_str}$"
-        
-        fig.update_layout(
-            title={
-                "text": title,
-                "x": 0.5,  # Center the title
-                "xanchor": "center",
-                "yanchor": "top"
-            },
-            title_font_size=20
-        )
-        return fig
+    # derivative_notation={1:"f'(x)", 2:"f''(x)"}
+    derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
+    # derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
     
-    
-    # Callback updating f''(x) graph based on the slider values
-    @app.callback(
-        Output("tab-0-graph-d2y", "figure", allow_duplicate=True),
-        Input("slider_1_a", "value"),
-        Input("slider_1_b", "value"),
-        Input("slider_1_c", "value"),
-        Input("slider_1_d", "value"),
-    )
-    def update_graph_from_sliders(a, b, c, d):
-        coefficients = [a, b, c, d]
-        coeffs = Polynomial(coefficients).second_order_derivative().coef
-        poly = Polynomial(coeffs)
-        fig = plot_axes()  # Start with the axes
-
-        # Add the polynomial trace
-        poly_trace = poly.plot().data[0]
-        fig.add_trace(poly_trace)
-        
-        # Update the title
-        x = sp.Symbol('x')
-        dp_sympy = sum(coef * x**i for i, coef in enumerate(coeffs))
-        # fr"$f(x)={''.join(terms).lstrip('+')}$"
-        
-        terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
-        derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
-        title=fr"$f''(x)={derivative_str}$"
-        
-        fig.update_layout(
-            title={
-                "text": title,
-                "x": 0.5,  # Center the title
-                "xanchor": "center",
-                "yanchor": "top"
-            },
-            title_font_size=20
+    def update_derivative_graph(order):
+        @app.callback(
+            Output(f"tab-0-graph-d{order}y", "figure", allow_duplicate=True),
+            Input("slider_1_a", "value"),
+            Input("slider_1_b", "value"),
+            Input("slider_1_c", "value"),
+            Input("slider_1_d", "value"),
         )
-        return fig
+        def update_graph_from_sliders(a, b, c, d):
+            coefficients = [a, b, c, d]
+            coeffs = Polynomial(coefficients).derivative(order=order).coef
+            poly = Polynomial(coeffs)
+            fig = plot_axes()  # Start with the axes
+
+            # Add the polynomial trace
+            poly_trace = poly.plot().data[0]
+            fig.add_trace(poly_trace)
+            
+            # Update the title
+            terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
+            derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
+            title = fr"${derivative_notation[order]}={derivative_str}$"
+            
+            fig.update_layout(
+                title={
+                    "text": title,
+                    "x": 0.5,  # Center the title
+                    "xanchor": "center",
+                    "yanchor": "top"
+                },
+                title_font_size=20
+            )
+            return fig
+
+    update_derivative_graph(1)
+    update_derivative_graph(2)
     
  
 

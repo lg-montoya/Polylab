@@ -21,24 +21,19 @@ class Polynomial:
         """
         return self.poly(x)    
     
-    def first_order_derivative(self):
+    def derivative(self, order=1):
         """
-        Compute the first-order derivative of the polynomial.
-        :return: coefficients of first-order derivative.
+        Compute the derivative of the polynomial.
+        :param order: Order of the derivative.
+        :return: A new Polynomial object representing the derivative.
         """
-        return self.poly.deriv(m=1)
-    
-    def second_order_derivative(self):
-        """
-        Compute the second-order derivative of the polynomial.
-        :return: A new Polynomial object representing the second-order derivative.
-        """
-        return self.poly.deriv(m=2)
+        return self.poly.deriv(m=order)
+
     
     def update_figure_title(self, a, b, c, d):
         # Rule 1: When all coefficients are zero, return f(x) = 0
         if a == 0 and b == 0 and c == 0 and d == 0:
-            return r"$f(x)=0$"
+            return r"$y=0$"
 
         # Initialize the list for polynomial terms
         terms = []
@@ -76,7 +71,7 @@ class Polynomial:
             terms[0] = terms[0].lstrip('+')
 
         # Combine terms into the polynomial string
-        return fr"$f(x)={''.join(terms).lstrip('+')}$"
+        return fr"$y={''.join(terms).lstrip('+')}$"
 
 
     def __str__(self):

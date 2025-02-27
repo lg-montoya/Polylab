@@ -60,7 +60,7 @@ tab_0 = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-dy', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-d1y', mathjax=True)), )
                     ], width=8, class_name='mt-4'),
                 
                 ]),
