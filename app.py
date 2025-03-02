@@ -1,7 +1,7 @@
 import dash
 import dash_bootstrap_components as dbc
 from layout import page_layout
-from callbacks import clientside_callback, callback_wrapper
+import callbacks, callbacks_theme_toggle 
 import os
 
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
@@ -32,8 +32,9 @@ server=app.server
 app.layout = page_layout()
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
-clientside_callback
-callback_wrapper(app)
+callbacks_theme_toggle.clientside_callback
+callbacks_theme_toggle.callback_wrapper(app)
+callbacks.callback_wrapper(app)
 
 
 
