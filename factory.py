@@ -86,7 +86,6 @@ class MyPolynomial:
             terms[0] = terms[0].lstrip('+')
 
         # Combine terms into the polynomial string
-        # return fr"$y={''.join(terms).lstrip('+')}, \frac{{dy}}{{dx}}, \frac{{d^2y}}{{dx^2}}$"
         return fr"$y={''.join(terms).lstrip('+')}$"
 
 
