@@ -92,7 +92,7 @@ def callback_wrapper(app):
         title = my_polynomial.update_figure_title(*coefficients)
         fig.update_layout(
             title={
-                "text": title,
+                "text": title.replace("0.0 + ", ""),
                 "x": 0.5,  # Center the title
                 "xanchor": "center",
                 "yanchor": "top"
@@ -128,8 +128,8 @@ def callback_wrapper(app):
             
             # Update the title
             terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
-            derivative_str = " + ".join(terms).replace("x^1", "x").replace(".0x", "x")
-            title = fr"${derivative_notation[order]}={derivative_str}$"
+            derivative_str = " + ".join(terms).replace(" ","").replace("+0.0x^1","").replace("x^1","x").replace("0.0+","").replace("+0.0x^2","")
+            title = fr"${derivative_notation[order]}={derivative_str}$".replace("=0.0", "=0")
             
             fig.update_layout(
                 title={
