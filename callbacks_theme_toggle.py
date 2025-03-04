@@ -17,13 +17,16 @@ clientside_callback(
             
 def callback_wrapper(app):    
     @app.callback(
-        Output("tab-0-graph-y", "figure"),
+        [Output("tab-0-graph-y", "figure", allow_duplicate=True),
+        Output("tab-0-graph-d1y", "figure", allow_duplicate=True),
+        Output("tab-0-graph-d2y", "figure", allow_duplicate=True)],
         Input("switch", "value"),
+        allow_duplicate=True
     )
     def update_chart_theme(is_dark):
         template = pio.templates["sketchy_dark"] if is_dark else pio.templates["minty"]
         patched_figure = Patch()
         patched_figure["layout"]["template"] = template
-        return patched_figure 
+        return patched_figure,patched_figure,patched_figure 
     
    
