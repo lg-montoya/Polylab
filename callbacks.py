@@ -64,8 +64,9 @@ def callback_wrapper(app):
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
         Input("slider_1_d", "value"),
+        Input("switch", "value"),
     )
-    def update_graph_from_sliders(a, b, c, d,):
+    def update_graph_from_sliders(a, b, c, d, is_dark):
         coefficients = [a, b, c, d]
         my_polynomial = MyPolynomial(coefficients)
         first_derivative = my_polynomial.derivative(order=1)
@@ -101,6 +102,10 @@ def callback_wrapper(app):
             )
         fig.update_layout(showlegend=True),
         
+        # Update the theme
+        template = pio.templates["sketchy_dark"] if is_dark else pio.templates["minty"]
+        fig.update_layout(template=template)
+        
         return fig
     
     
@@ -111,8 +116,9 @@ def callback_wrapper(app):
             Input("slider_1_b", "value"),
             Input("slider_1_c", "value"),
             Input("slider_1_d", "value"),
+            Input("switch", "value"),
         )
-        def update_graph_from_sliders(a, b, c, d):
+        def update_graph_from_sliders(a, b, c, d, is_dark):
             coefficients = [a, b, c, d]
             coeffs = MyPolynomial(coefficients).derivative(order=order).coef
             poly = MyPolynomial(coeffs)
@@ -140,6 +146,10 @@ def callback_wrapper(app):
                 },
                 title_font_size=20
             )
+            
+            # Update the theme
+            template = pio.templates["sketchy_dark"] if is_dark else pio.templates["minty"]
+            fig.update_layout(template=template)
             return fig
 
     update_derivative_graph(1,"blue")
