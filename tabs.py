@@ -4,7 +4,6 @@ from factory import plot_axes
 from dash import dcc
 from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
-from dash.dependencies import Input, Output
 
 load_figure_template(["sketchy_dark", "minty"])
 

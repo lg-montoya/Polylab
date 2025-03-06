@@ -5,7 +5,6 @@ from defaults import POLYNOMIALS, derivative_notation
 from factory import MyPolynomial, plot_axes
 
 
-            
 def callback_wrapper(app):    
 
     # Callback for updating availability of sliders.
@@ -19,8 +18,7 @@ def callback_wrapper(app):
     def update_slider_status(chosen_polynomial):
         return [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
     
-    
-    
+
     # Callback for updating general formula of the chosen polynomial.
     @app.callback(
         Output("eq_1", "children"),
@@ -55,8 +53,6 @@ def callback_wrapper(app):
         return fig, *coefficients
     
 
-    
-        
     # Callback updating f(x) graph based on the slider values
     @app.callback(
         Output("tab-0-graph-y", "figure", allow_duplicate=True),
@@ -64,9 +60,8 @@ def callback_wrapper(app):
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
         Input("slider_1_d", "value"),
-        Input("switch", "value"),
     )
-    def update_graph_from_sliders(a, b, c, d, is_dark):
+    def update_graph_from_sliders(a, b, c, d):
         coefficients = [a, b, c, d]
         my_polynomial = MyPolynomial(coefficients)
         first_derivative = my_polynomial.derivative(order=1)
@@ -100,12 +95,7 @@ def callback_wrapper(app):
             },
             title_font_size=20
             )
-        fig.update_layout(showlegend=True),
-        
-        # Update the theme
-        template = pio.templates["sketchy_dark"] if is_dark else pio.templates["minty"]
-        fig.update_layout(template=template)
-        
+        fig.update_layout(showlegend=True),        
         return fig
     
     
@@ -116,9 +106,8 @@ def callback_wrapper(app):
             Input("slider_1_b", "value"),
             Input("slider_1_c", "value"),
             Input("slider_1_d", "value"),
-            Input("switch", "value"),
         )
-        def update_graph_from_sliders(a, b, c, d, is_dark):
+        def update_graph_from_sliders(a, b, c, d):
             coefficients = [a, b, c, d]
             coeffs = MyPolynomial(coefficients).derivative(order=order).coef
             poly = MyPolynomial(coeffs)
@@ -127,7 +116,6 @@ def callback_wrapper(app):
             # Add the polynomial trace
             poly_trace = poly.plot().data[0]
             
-            # poly_trace.update(name=f"Derivative Order {order}", line=dict(color=color))
             poly_trace.update(name=f"Derivative Order {order}", line=dict(color=color))
             
             fig.add_trace(poly_trace)
@@ -147,9 +135,6 @@ def callback_wrapper(app):
                 title_font_size=20
             )
             
-            # Update the theme
-            template = pio.templates["sketchy_dark"] if is_dark else pio.templates["minty"]
-            fig.update_layout(template=template)
             return fig
 
     update_derivative_graph(1,"blue")
