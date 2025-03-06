@@ -1,4 +1,4 @@
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 from dash import Patch
 import plotly.io as pio
 from defaults import POLYNOMIALS, derivative_notation
@@ -139,6 +139,18 @@ def callback_wrapper(app):
 
     update_derivative_graph(1,"blue")
     update_derivative_graph(2,"red")
+    
+    def modal_builder(name, link='lnk'):
+        @app.callback(Output(f"mdl-{name}", "is_open"),
+                    [Input(f"{link}-mdl-{name}-o", "n_clicks"),
+                    Input(f"btn-mdl-{name}-q", "n_clicks")],
+                    [State(f"mdl-{name}", "is_open")], )
+        def function(n1, n2, is_open):
+            if n1 or n2:
+                return not is_open
+            return is_open
+        
+    modal_builder('instructions', link='btn')
     
  
 
