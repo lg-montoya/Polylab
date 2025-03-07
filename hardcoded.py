@@ -1,7 +1,7 @@
 POLYNOMIAL_INSTRUCTIONS = '''
 **Dropdown**  
 Begin by choosing from the dropdown the desired polynomial whose form and derivatives 
-you wish to explore. The highest order polynomial you can currently select is a cubic.
+you wish to explore. The highest order polynomial available is a cubic.
 
 **Sliders**  
 These are disabled until a polynomial is selected from the dropdown.

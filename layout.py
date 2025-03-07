@@ -12,10 +12,11 @@ def page_layout():
                 # html.Div(className="d-flex justify-content-end"),
                 dbc.Tabs(id='tab-group', class_name='nav-stack',  children=[
                 dbc.Tab(id='tab-0', label='Polynomials',
-                        children=[tab_0], active_label_style={"color": "#FB79B3"}),
                         # children=[tab_0], active_label_style={"color": "#FB79B3"}),
+                        children=[tab_0]),
                 dbc.Tab(id='tab-1',  label='Other', disabled=False,
-                        active_label_style={"color": "#FB79B3"})
+                        # active_label_style={"color": "#FB79B3"})
+                        )
                         
             ],)
         ], class_name="mt-2 dbc"),
