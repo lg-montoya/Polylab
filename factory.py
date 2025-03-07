@@ -118,7 +118,6 @@ def plot_axes():
         yaxis=dict(range=[-10, 10], zeroline=False),
     )
     
-    # fig.update_layout(showlegend=False)
 
     return fig
     

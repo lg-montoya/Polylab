@@ -6,7 +6,10 @@ from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 
-load_figure_template(["sketchy_dark", "minty"])
+# load_figure_template(["bootstrap_dark", "minty"])
+load_figure_template(["zephyr_dark", "minty"])
+# load_figure_template(["pulse_dark", "minty"])
+# load_figure_template(["vapor_dark", "minty"])
 
 
 tab_0 = html.Div([
@@ -50,8 +53,8 @@ tab_0 = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-y', mathjax=True)), )
-                    ], width=8),
+                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-y', mathjax=True)))
+                    ], width=8, align='end'),
     
     
             ]),

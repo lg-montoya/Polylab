@@ -1,15 +1,12 @@
 POLYNOMIAL_INSTRUCTIONS = '''
 **Dropdown**  
-Begin by choosing the desired polynomial whose form and derivatives you wish to
- explore from the dropdown menu. The highest order polynomial you can currently
- select is a cubic.
+Begin by choosing from the dropdown the desired polynomial whose form and derivatives you wish to
+ explore. The highest order polynomial you can currently select is a cubic.
 
 **Sliders**  
-Sliders are disabled until a polynomial is selected from the dropdown menu.
- Each polynomial has a different set of coefficients that can be adjusted using 
- the sliders. The
- general form of the polynomial is displayed in LaTeX format above the sliders.
- The graphs will update dynamically as you adjust the sliders. 
+These are disabled until a polynomial is selected from the dropdown.
+ Each polynomial has a different set of coefficients whose values can be 
+ adjusted using the sliders. The graphs will reflect the coeffiecient changes dynamically.
 
 **Legend**  
 Activate and deactivate the traces by single clicking on the legend. The traces are
