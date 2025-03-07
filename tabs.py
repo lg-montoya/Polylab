@@ -6,12 +6,12 @@ from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 
-load_figure_template(["zephyr_dark", "minty"])
-# load_figure_template(["bootstrap_dark", "minty"])
-# load_figure_template(["pulse_dark", "minty"])
-# load_figure_template(["vapor_dark", "minty"])
+# load_figure_template(["zephyr_dark"])
+# load_figure_template(["bootstrap_dark"])
+# load_figure_template(["pulse_dark"])
 # load_figure_template(["quartz"])
-# load_figure_template(["morph"])
+load_figure_template(["vapor_dark"])
+
 
 
 tab_0 = html.Div([
