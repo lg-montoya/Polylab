@@ -1,17 +1,16 @@
 POLYNOMIAL_INSTRUCTIONS = '''
 **Dropdown**  
-Begin by choosing from the dropdown the desired polynomial whose form and derivatives you wish to
- explore. The highest order polynomial you can currently select is a cubic.
+Begin by choosing from the dropdown the desired polynomial whose form and derivatives 
+you wish to explore. The highest order polynomial you can currently select is a cubic.
 
 **Sliders**  
 These are disabled until a polynomial is selected from the dropdown.
- Each polynomial has a different set of coefficients whose values can be 
- adjusted using the sliders. The graphs will reflect the coeffiecient changes dynamically.
+Each polynomial has a different set of coefficients whose values can be 
+adjusted using the sliders. The graphs will reflect the coeffiecients' changes dynamically.
 
 **Legend**  
-Activate and deactivate the traces by single clicking on the legend. The traces are
- color-coded and correspond to the polynomial, its first derivative, and its
- second derivative. Double-clicking on the legend will isolate the trace.
+Activate and deactivate the traces by single clicking on the legend.
+Double-click a trace to isolate it.
 '''
 
 POLYNOMIAL_ABOUT = '''

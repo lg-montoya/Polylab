@@ -6,10 +6,12 @@ from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 
-# load_figure_template(["bootstrap_dark", "minty"])
 load_figure_template(["zephyr_dark", "minty"])
+# load_figure_template(["bootstrap_dark", "minty"])
 # load_figure_template(["pulse_dark", "minty"])
 # load_figure_template(["vapor_dark", "minty"])
+# load_figure_template(["quartz"])
+# load_figure_template(["morph"])
 
 
 tab_0 = html.Div([
@@ -25,7 +27,7 @@ tab_0 = html.Div([
                     dbc.Row(html.Div(dcc.Dropdown(id='dropdown_menu_1', options=[{'label': key, 'value': key} for key in POLYNOMIALS.keys()], 
                                     clearable=False, placeholder='CHOOSE A POLYNOMIAL'))),
                     # Row for the general form of the polynomial in LaTeX
-                    dbc.Row(html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-3')),
+                    dbc.Row(html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2')),
                     # Row for the sliders is contained in a card
                     dbc.Row(
                         html.Div(    

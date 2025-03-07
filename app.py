@@ -18,6 +18,7 @@ external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                     ]
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 external_stylesheets = [dbc.themes.SLATE, dbc_css, dbc.icons.FONT_AWESOME]
+# external_stylesheets = [dbc.themes.QUARTZ, dbc_css, dbc.icons.FONT_AWESOME]
 # external_stylesheets = [dbc.themes.DARKLY, dbc_css, dbc.icons.FONT_AWESOME]
 # external_stylesheets = [dbc.themes.CYBORG, dbc_css, dbc.icons.FONT_AWESOME]
 # external_stylesheets = [dbc.themes.VAPOR, dbc_css, dbc.icons.FONT_AWESOME]
