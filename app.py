@@ -4,9 +4,15 @@ from layout import page_layout
 # import callbacks, callbacks_theme_toggle 
 import callbacks
 import os
-from dash_bootstrap_templates import load_figure_template
+from dash_bootstrap_templates import ThemeSwitchAIO
 
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
+
+# page themes
+page_default_theme= dbc.themes.QUARTZ
+page_other_theme = dbc.themes.CYBORG
+
+from defaults import chart_default_theme, chart_other_theme
 
 
 MATHJAX_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js?'
@@ -18,10 +24,7 @@ external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                      },
                     ]
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-# external_stylesheets = [dbc.themes.SLATE, dbc_css, dbc.icons.FONT_AWESOME]
-# external_stylesheets = [dbc.themes.QUARTZ, dbc_css, dbc.icons.FONT_AWESOME]
-# external_stylesheets = [dbc.themes.DARKLY, dbc_css, dbc.icons.FONT_AWESOME]
-external_stylesheets = [dbc.themes.CYBORG, dbc_css, dbc.icons.FONT_AWESOME]
+external_stylesheets = [page_default_theme, dbc_css, dbc.icons.FONT_AWESOME]
 
 
 
@@ -35,12 +38,12 @@ app = dash.Dash(__name__,
 
 
 server=app.server
-app.layout = page_layout()
+app.layout = page_layout(page_default_theme, page_other_theme)
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # callbacks_theme_toggle.clientside_callback
 # callbacks_theme_toggle.callback_wrapper(app)
-callbacks.callback_wrapper(app)
+callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)
 
 
 

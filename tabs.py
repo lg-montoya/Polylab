@@ -1,22 +1,18 @@
 import dash_bootstrap_components as dbc
 from dash import html
-# from factory import plot_axes
 from dash import dcc
-from defaults import POLYNOMIALS,GENERAL_FORM
+from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
+from defaults import chart_default_theme
 
-# load_figure_template(["zephyr_dark"])
-# load_figure_template(["bootstrap_dark"])
-# load_figure_template(["pulse_dark"])
-# load_figure_template(["quartz"])
-load_figure_template(["vapor_dark"])
+load_figure_template([chart_default_theme])
 
 empty_figure = go.Figure()
 empty_figure.update_layout(
     xaxis=dict(range=[-10, 10], zeroline=True),
-    yaxis=dict(range=[-10, 10], zeroline=True)
+    yaxis=dict(range=[-10, 10], zeroline=True),
 )
 
 tab_0 = html.Div([
