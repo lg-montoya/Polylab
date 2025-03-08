@@ -1,10 +1,11 @@
 import dash_bootstrap_components as dbc
 from dash import html
-from factory import plot_axes
+# from factory import plot_axes
 from dash import dcc
 from defaults import POLYNOMIALS,GENERAL_FORM
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
+import plotly.graph_objects as go
 
 # load_figure_template(["zephyr_dark"])
 # load_figure_template(["bootstrap_dark"])
@@ -12,7 +13,11 @@ from modals import modal_instructions
 # load_figure_template(["quartz"])
 load_figure_template(["vapor_dark"])
 
-
+empty_figure = go.Figure()
+empty_figure.update_layout(
+    xaxis=dict(range=[-10, 10], zeroline=True),
+    yaxis=dict(range=[-10, 10], zeroline=True)
+)
 
 tab_0 = html.Div([
             # ROW with just the instructions button
@@ -55,7 +60,7 @@ tab_0 = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-y', mathjax=True)))
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-y', mathjax=True)))
                     ], width=8, align='end'),
     
     
@@ -65,7 +70,7 @@ tab_0 = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-d1y', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-d1y', mathjax=True)), )
                     ], width=8, class_name='mt-4'),
                 
                 ]),
@@ -75,7 +80,7 @@ tab_0 = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=plot_axes(), id='tab-0-graph-d2y', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-d2y', mathjax=True)), )
                     ], width=8, class_name='mt-4'),
                 
                 ]),

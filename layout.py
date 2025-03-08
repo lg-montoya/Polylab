@@ -2,11 +2,12 @@ import dash_bootstrap_components as dbc
 from dash import html
 # from forms import color_mode_switch
 from tabs import tab_0
+from dash import dcc
 
 
 def page_layout():
     layout = html.Div(children=[
-
+            dcc.Store(id='store-mypoly', storage_type='memory'),
             dbc.Container(fluid=True, children=[
                 # html.Div(color_mode_switch, className="d-flex justify-content-end"),
                 # html.Div(className="d-flex justify-content-end"),

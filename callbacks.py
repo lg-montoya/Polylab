@@ -2,7 +2,10 @@ from dash.dependencies import Input, Output, State
 from dash import Patch
 import plotly.io as pio
 from defaults import POLYNOMIALS, derivative_notation
-from factory import MyPolynomial, plot_axes
+import plotly.graph_objs as go
+# from factory import MyPolynomial, plot_axes, PolynomialGraph
+from factory import MyPolynomial, PolynomialGraph
+
 
 
 def callback_wrapper(app):    
@@ -27,6 +30,7 @@ def callback_wrapper(app):
     def update_general_formula(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['general_form'] 
     
+    
     # Callback for adding the default polynomial to the graph according to the chosen polynomial type.
     @app.callback(
         Output("tab-0-graph-y", "figure", allow_duplicate=True),
@@ -44,7 +48,7 @@ def callback_wrapper(app):
 
         coefficients = POLYNOMIALS[selected_polynomial]['default_coefficients']
         my_polynomial = MyPolynomial(coefficients)
-        fig = plot_axes()  # Start with the axes
+        fig = go.Figure()  # Start with the axes
 
         # Add the polynomial trace
         poly_trace = my_polynomial.plot().data[0]
@@ -60,14 +64,16 @@ def callback_wrapper(app):
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
         Input("slider_1_d", "value"),
+        State("tab-0-graph-y", "figure"),
     )
-    def update_graph_from_sliders(a, b, c, d):
+    def update_graph_from_sliders(a, b, c, d, fignow):
+        f = fignow
         coefficients = [a, b, c, d]
         my_polynomial = MyPolynomial(coefficients)
         first_derivative = my_polynomial.derivative(order=1)
         second_derivative = my_polynomial.derivative(order=2)
         
-        fig = plot_axes()  # Start with the axes
+        fig = go.Figure()  # Start with the axes
 
         # Add the polynomial trace
         poly_trace = my_polynomial.plot().data[0]
@@ -93,9 +99,13 @@ def callback_wrapper(app):
                 "xanchor": "center",
                 "yanchor": "top"
             },
-            title_font_size=20
+            title_font_size=20,
+            showlegend=True,
+            xaxis=dict(range=[-10, 10], zeroline=True),
+            yaxis=dict(range=[-10, 10], zeroline=True),
+            
             )
-        fig.update_layout(showlegend=True),        
+             
         return fig
     
     
@@ -111,7 +121,7 @@ def callback_wrapper(app):
             coefficients = [a, b, c, d]
             coeffs = MyPolynomial(coefficients).derivative(order=order).coef
             poly = MyPolynomial(coeffs)
-            fig = plot_axes()  # Start with the axes
+            fig = go.Figure()  # Start with the axes
 
             # Add the polynomial trace
             poly_trace = poly.plot().data[0]
@@ -132,7 +142,9 @@ def callback_wrapper(app):
                     "xanchor": "center",
                     "yanchor": "top"
                 },
-                title_font_size=20
+                title_font_size=20,
+                xaxis=dict(range=[-10, 10], zeroline=True),
+                yaxis=dict(range=[-10, 10], zeroline=True),
             )
             
             return fig

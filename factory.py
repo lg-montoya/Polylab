@@ -3,6 +3,51 @@ import numpy as np
 from sympy import symbols, latex, expand
 import plotly.io as pio
 
+
+
+
+
+
+
+
+x_values = np.linspace(-10, 10, 400)
+
+
+class PolynomialGraph:
+    def __init__(self, coefficients):
+        self.graph = go.Figure()
+        self.coefficients = coefficients
+        self.polynomial_y = None
+        self.polynomial_dy = None
+        self.polynomial_d2y = None
+   
+        
+    def set_polynomial_y(self):
+        self.polynomial_y = np.polynomial.Polynomial(self.coefficients)
+        return self
+    
+    def set_polynomial_dy(self):
+        self.polynomial_dy = self.polynomial_y.deriv(m=1)
+        return self
+    
+    def set_polynomial_d2y(self):
+        self.polynomial_d2y = self.polynomial_y.deriv(m=2)
+        return self
+    
+    def update_polynomials(self, coefficients):
+        self.polynomial_y.coef = coefficients
+        self.set_polynomial_dy()
+        self.set_polynomial_d2y()
+        return self
+    
+    def evaluate_polynomials(self):
+        return self.polynomial_y(x_values), self.polynomial_dy(x_values), self.polynomial_d2y(x_values)
+
+
+
+
+
+
 class MyPolynomial:
     def __init__(self, coefficients):
         """
@@ -94,31 +139,5 @@ class MyPolynomial:
         Return a human-readable string for the polynomial.
         """
         return str(self.poly)
-    
-    
-
-
-
-def plot_axes():
-    """
-    Plot only the x-axis and y-axis in the interval [-10, 10] using Plotly Dash.
-    """
-    fig = go.Figure()
-
-    # Plot the x=0 line (y-axis)
-    fig.add_trace(go.Scatter(x=[0, 0], y=[-10, 10], mode='lines', line=dict(color='black'), showlegend=False))
-
-    # Plot the f(x)=0 line (x-axis)
-    fig.add_trace(go.Scatter(x=[-10, 10], y=[0, 0], mode='lines', line=dict(color='black'), showlegend=False))
-
-    # Update layout to set the range for x-axis and y-axis
-    fig.update_layout(
-        showlegend=False,
-        xaxis=dict(range=[-10, 10], zeroline=False),
-        yaxis=dict(range=[-10, 10], zeroline=False),
-    )
-    
-
-    return fig
     
     
