@@ -1,13 +1,6 @@
 import plotly.graph_objs as go
 import numpy as np
-from sympy import symbols, latex, expand
 import plotly.io as pio
-
-
-
-
-
-
 
 
 x_values = np.linspace(-10, 10, 400)
@@ -26,7 +19,7 @@ class PolynomialGraph:
         self.polynomial_y = np.polynomial.Polynomial(self.coefficients)
         return self
     
-    def set_polynomial_dy(self):
+    def set_polynomial_d1y(self):
         self.polynomial_dy = self.polynomial_y.deriv(m=1)
         return self
     
@@ -36,7 +29,7 @@ class PolynomialGraph:
     
     def update_polynomials(self, coefficients):
         self.polynomial_y.coef = coefficients
-        self.set_polynomial_dy()
+        self.set_polynomial_d1y()
         self.set_polynomial_d2y()
         return self
     
@@ -45,49 +38,17 @@ class PolynomialGraph:
 
 
 
-
-
-
 class MyPolynomial:
     def __init__(self, coefficients):
-        """
-        Initialize the polynomial with coefficients.
-        :param coefficients: List of coefficients [a_n, a_(n-1), ..., a_0]
-                             where a_n * x^n + a_(n-1) * x^(n-1) + ... + a_0
-        """
         self.coefficients = coefficients
         self.poly = np.polynomial.Polynomial(coefficients)  # Create a NumPy polynomial object
 
     def evaluate(self, x):
-        """
-        Evaluate the polynomial at a given value of x.
-        :param x: Value or array of values to evaluate.
-        :return: Result(s) as a NumPy array or scalar.
-        """
         return self.poly(x)    
     
     def derivative(self, order=1):
-        """
-        Compute the derivative of the polynomial.
-        :param order: Order of the derivative.
-        :return: A new Polynomial object representing the derivative.
-        """
         return self.poly.deriv(m=order)
-    
-    def plot(self):
-        """
-        Plot the polynomial in the interval [-10, 10] using Plotly Dash.
-        """
 
-        x_values = np.linspace(-10, 10, 400)
-        y_values = self.evaluate(x_values)
-
-        fig = go.Figure()
-
-        # Plot the polynomial
-        fig.add_trace(go.Scatter(x=x_values, y=y_values, mode='lines'))
-        
-        return fig
 
     
     def update_figure_title(self, a, b, c, d):
