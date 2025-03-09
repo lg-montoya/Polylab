@@ -5,9 +5,9 @@ from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
-from defaults import chart_default_theme
+from defaults import chart_other_theme
 
-load_figure_template([chart_default_theme])
+load_figure_template([chart_other_theme])
 
 empty_figure = go.Figure()
 empty_figure.update_layout(
@@ -17,9 +17,12 @@ empty_figure.update_layout(
 
 tab_0 = html.Div([
             # ROW with just the instructions button
-            dbc.Row(
-                dbc.Col(
-                    [dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-o'), modal_instructions], class_name='mb-3')
+            dbc.Row([
+                dbc.Col([
+                    dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-o'),
+                    modal_instructions
+                        ], class_name='mb-3'
+                    )],
                 ),
             # ROW containing ALL the controls. This is subdivided itself into 2 columns. The first column has THREE rows.
             dbc.Row([

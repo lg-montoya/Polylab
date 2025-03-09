@@ -112,10 +112,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         patched_figure['data'][2]['name'] = fr"${derivative_notation[2]}$"  
         
         patched_figure['layout']['title']['text'] = title.replace("0.0 + ", "")
-        patched_figure['layout']['title']['x'] = 0.5
-        patched_figure['layout']['title']['xanchor'] = "center"
-        patched_figure['layout']['title']['yanchor'] = "top"
-        patched_figure['layout']['title_font_size'] = 20
+
       
         return patched_figure
     
@@ -152,14 +149,11 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
-            patched_figure['data'][0]['name'] = f"Derivative Order {order}"
+            # patched_figure['data'][0]['name'] = f"Derivative Order {order}"
             patched_figure['data'][0]['line']['color'] = color
-            
             patched_figure['layout']['title']['text'] = title
-            patched_figure['layout']['title']['x'] = 0.5
-            patched_figure['layout']['title']['xanchor'] = "center"
-            patched_figure['layout']['title']['yanchor'] = "top"
-            patched_figure['layout']['title_font_size'] = 20
+            patched_figure["layout"]["showlegend"] = False
+
             
             return patched_figure
         
