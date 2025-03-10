@@ -6,7 +6,7 @@ from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
 from defaults import chart_other_theme, slider_default
-from hardcoded import DISCLAIMER_TITLE, DISCLAIMER2
+from hardcoded import HISTORY
 from factory import my_slider
 
 load_figure_template([chart_other_theme])
@@ -21,13 +21,12 @@ empty_figure.update_layout(
 tab_0 = html.Div([
     dbc.Row([
         dbc.Col([
-            dcc.Markdown(DISCLAIMER_TITLE, mathjax=True),
+            dcc.Markdown(HISTORY, mathjax=True),
             html.A(id='tabla-topologia'),
-            html.H5("Información Geografica"),
-            dcc.Markdown(DISCLAIMER2),
+            # html.H5("Información Geografica"),
             html.Div([
-                dbc.Button("Aceptar", outline=False, color="success", class_name="me-1", id='btn-aceptar'),
-                dbc.Button("Rechazar", outline=False, color="danger", class_name="me-1", id='btn-rechazar'),
+                # dbc.Button("Aceptar", outline=False, color="success", class_name="me-1", id='btn-aceptar'),
+                # dbc.Button("Rechazar", outline=False, color="danger", class_name="me-1", id='btn-rechazar'),
                 ])]
         )])
     ], className="mt-4")
@@ -107,9 +106,15 @@ tab_1 = html.Div([
 tab_2 = html.Div(
     dbc.Row([
         dbc.Col(
-            [html.H4(f'Coming soon ....'),]
+            [html.H4(f'Coming soon ...'),]
         )
     ], class_name="mt-4")
-    
-    
+)
+
+tab_3 = html.Div(
+    dbc.Row([
+        dbc.Col(
+            [html.H4(f'But first sinusoidals.'),]
+        )
+    ], class_name="mt-4")
 )
