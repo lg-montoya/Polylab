@@ -5,17 +5,35 @@ from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
-from defaults import chart_other_theme
+from defaults import chart_other_theme, slider_default
+from hardcoded import DISCLAIMER_TITLE, DISCLAIMER2
+from factory import my_slider
 
 load_figure_template([chart_other_theme])
 
 empty_figure = go.Figure()
 empty_figure.update_layout(
-    xaxis=dict(range=[-10, 10], zeroline=True),
-    yaxis=dict(range=[-10, 10], zeroline=True),
+    xaxis=dict(range=[slider_default["min"], slider_default["max"]], zeroline=True),
+    yaxis=dict(range=[slider_default["min"], slider_default["max"]], zeroline=True),
 )
 
+
 tab_0 = html.Div([
+    dbc.Row([
+        dbc.Col([
+            dcc.Markdown(DISCLAIMER_TITLE, mathjax=True),
+            html.A(id='tabla-topologia'),
+            html.H5("Información Geografica"),
+            dcc.Markdown(DISCLAIMER2),
+            html.Div([
+                dbc.Button("Aceptar", outline=False, color="success", class_name="me-1", id='btn-aceptar'),
+                dbc.Button("Rechazar", outline=False, color="danger", class_name="me-1", id='btn-rechazar'),
+                ])]
+        )])
+    ], className="mt-4")
+
+
+tab_1 = html.Div([
             # ROW with just the instructions button
             dbc.Row([
                 dbc.Col([
@@ -38,19 +56,19 @@ tab_0 = html.Div([
                         dbc.Card([    
                             dbc.Row([
                                 dbc.Col(html.Div(dcc.Markdown("$$\quad a$$",mathjax=True)), width=1, className='mt-4'),
-                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_a",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mt-4 mb-3 '),
+                                dbc.Col(html.Div(my_slider(slider_default["min"],slider_default["max"],"slider_1_a")), width=11, className='mt-4 mb-3 '),
                             ]),
                             dbc.Row([
                                 dbc.Col(html.Div(dcc.Markdown("$$\quad b$$",mathjax=True)), width=1),
-                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_b",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
+                                dbc.Col(html.Div(my_slider(slider_default["min"],slider_default["max"],"slider_1_b")), width=11, className='mb-3'),
                             ]),
                             dbc.Row([
                                 dbc.Col(html.Div(dcc.Markdown("$$\quad c$$",mathjax=True)), width=1),
-                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_c",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
+                                dbc.Col(html.Div(my_slider(slider_default["min"],slider_default["max"],"slider_1_c")), width=11, className='mb-3'),
                             ]),
                             dbc.Row([
                                 dbc.Col(html.Div(dcc.Markdown("$$\quad d$$",mathjax=True)), width=1),
-                                dbc.Col(html.Div(dcc.Slider(updatemode='drag',disabled=True,id="slider_1_d",min=-5, max=5, marks={i: str(i) for i in range(-5, 6)})), width=11, className='mb-3'),
+                                dbc.Col(html.Div(my_slider(slider_default["min"],slider_default["max"],"slider_1_d")), width=11, className='mb-3'),
                             ]),                        
                         ], style={'width': '100%', 'height': '100%'})
                         )    
@@ -85,3 +103,13 @@ tab_0 = html.Div([
                 ]),
              
         ], className="mt-4")
+
+tab_2 = html.Div(
+    dbc.Row([
+        dbc.Col(
+            [html.H4(f'Coming soon ....'),]
+        )
+    ], class_name="mt-4")
+    
+    
+)

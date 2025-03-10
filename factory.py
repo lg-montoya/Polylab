@@ -1,9 +1,11 @@
 import plotly.graph_objs as go
 import numpy as np
 import plotly.io as pio
+from dash import dcc
+from defaults import slider_max
 
 
-x_values = np.linspace(-10, 10, 400)
+x_values = np.linspace(-slider_max, slider_max, 400)
 
 
 class PolynomialGraph:
@@ -101,4 +103,11 @@ class MyPolynomial:
         """
         return str(self.poly)
     
-    
+def my_slider(min, max, id):
+    step = int(max/5)
+    slider = dcc.Slider(
+                updatemode='drag',disabled=True,id=id, min=min, max=max, 
+                marks={i: str(i) for i in range(min, max+1, step)}
+            )
+    return slider
+

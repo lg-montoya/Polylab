@@ -30,4 +30,9 @@ chart_default_theme = "quartz"
 # chart_other_theme = "vapor"
 chart_other_theme = "vizro_dark"
 
+slider_max = 20
+slider_default = {"min":-slider_max, 
+                   "max":slider_max
+                   }
+
 

@@ -3,10 +3,10 @@ import plotly.io as pio
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 from dash import Patch, callback_context, no_update
-from defaults import POLYNOMIALS, derivative_notation
+from defaults import POLYNOMIALS, derivative_notation, slider_max
 from factory import MyPolynomial
 
-x_values = np.linspace(-10, 10, 400)
+x_values = np.linspace(-slider_max, slider_max, 400)
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):    
