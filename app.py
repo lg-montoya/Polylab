@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 from layout import page_layout 
 import callbacks
 import os
+from defaults import chart_default_theme, chart_other_theme
 
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 
@@ -10,14 +11,8 @@ FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 page_default_theme= dbc.themes.QUARTZ
 page_other_theme = dbc.themes.CYBORG
 
-
-
-from defaults import chart_default_theme, chart_other_theme
-
-
 MATHJAX_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js?'
 
-FONT_AWESOME = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
 
 external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                     {'type': 'text/javascript',
@@ -27,8 +22,6 @@ external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                     ]
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 external_stylesheets = [page_default_theme, dbc_css, dbc.icons.FONT_AWESOME]
-
-# external_stylesheets = [page_default_theme, dbc_css, FONT_AWESOME]
 
 
 
