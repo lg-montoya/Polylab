@@ -1,7 +1,7 @@
 import numpy as np
 import plotly.io as pio
 from dash.dependencies import Input, Output, State
-from dash_bootstrap_templates import ThemeSwitchAIO
+from dash_bootstrap_templates import ThemeSwitchAIO, load_figure_template
 from dash import Patch, callback_context, no_update
 from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours
 from factory import MyPolynomial
@@ -10,84 +10,50 @@ x_values = np.linspace(-slider_max, slider_max, 400)
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):    
+    load_figure_template([default_chart_theme, other_chart_theme])
 
-    # Callback for updating availability of sliders.
+    # Callback setting sliders' visibility and general equation.
     @app.callback(
+        Output("eq_1", "children"),
         Output("slider_1_a", "disabled"),
         Output("slider_1_b", "disabled"),
         Output("slider_1_c", "disabled"),
         Output("slider_1_d", "disabled"),
-        Input("dropdown_menu_1", "value"),
-    )
-    def update_slider_status(chosen_polynomial):
-        return [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
-    
+        Input("dropdown_menu_1", "value"))
+    def update_(chosen_polynomial):
+        general_form = POLYNOMIALS[chosen_polynomial]['general_form'] 
+        available_sliders = [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
+        return general_form, *available_sliders
 
-    # Callback for updating general formula of the chosen polynomial.
-    @app.callback(
-        Output("eq_1", "children"),
-        Input("dropdown_menu_1", "value"),
-    )
-    def update_general_formula(chosen_polynomial):
-        return POLYNOMIALS[chosen_polynomial]['general_form'] 
     
-    
-    # Callback for adding the default polynomial to the graph according to the chosen polynomial type.
+    # Callback initialising slider values.
     @app.callback(
-        Output("tab-0-graph-y", "figure", allow_duplicate=True),
         Output("slider_1_a", "value"),
         Output("slider_1_b", "value"),
         Output("slider_1_c", "value"),
         Output("slider_1_d", "value"),
-        Input("dropdown_menu_1", "value"),
-        Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
-        allow_duplicate=True
-    )
-    def set_default_graphs(selected_polynomial, theme_toggle):
-        
-        ctx = callback_context
-        if type(ctx.triggered[0]['value']) == bool:
-            patched_figure = Patch()
-            template = pio.templates[default_chart_theme]  if theme_toggle else pio.templates[other_chart_theme]
-            patched_figure["layout"]["template"] = template
-            return patched_figure, no_update, no_update, no_update, no_update
-        
-
-  
-
-        coefficients = POLYNOMIALS[selected_polynomial]['default_coefficients']
-        my_polynomial = MyPolynomial(coefficients)
-        y_values = my_polynomial.evaluate(x_values)
-        
-        
-        
-        patched_figure = Patch()
-        patched_figure['data'][0]['y'] = y_values
-        
-
-        return patched_figure, *coefficients
+        Input("dropdown_menu_1", "value"))
+    def set_default_graphs(chosen_polynomial):
+        return POLYNOMIALS[chosen_polynomial]['default_coefficients']
     
 
-    # Callback updating f(x) graph based on the slider values
+    # Callback updating f(x) graph based on slider values.
     @app.callback(
         Output("tab-0-graph-y", "figure", allow_duplicate=True),
         Input("slider_1_a", "value"),
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
         Input("slider_1_d", "value"),
-        Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
-        allow_duplicate=True
-    )
-    def update_graph_from_sliders(a, b, c, d, theme_toggle):
+        Input(ThemeSwitchAIO.ids.switch("theme"), "value"))
+    def update_graph_from_sliders(a, b, c, d, is_dark):
         
         ctx = callback_context
         patched_figure = Patch()
         
         if type(ctx.triggered[0]['value']) == bool:
-            template = pio.templates[default_chart_theme]  if theme_toggle else pio.templates[other_chart_theme]
+            template = pio.templates[default_chart_theme]  if is_dark else pio.templates[other_chart_theme]
             patched_figure["layout"]["template"] = template
             return patched_figure
-        
         
         coefficients = [a, b, c, d]
         y = MyPolynomial(coefficients)
@@ -98,7 +64,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         y_values = y.evaluate(x_values)
         d1y_values = MyPolynomial(d1y.coef).evaluate(x_values)
         d2y_values = MyPolynomial(d2y.coef).evaluate(x_values)
-        
         
         patched_figure['data'][0]['x'] = x_values
         patched_figure['data'][1]['x'] = x_values    
@@ -112,14 +77,12 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         patched_figure['data'][1]['name'] = fr"${derivative_notation[1]}$"
         patched_figure['data'][2]['name'] = fr"${derivative_notation[2]}$"  
         
-        
         patched_figure['layout']['title']['text'] = title.replace("0.0 + ", "")
-
       
         return patched_figure
     
+
     
-    # def update_derivative_graph(order, color):
     def update_derivative_graph(order):
         @app.callback(
             Output(f"tab-0-graph-d{order}y", "figure", allow_duplicate=True),
@@ -127,15 +90,13 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             Input("slider_1_b", "value"),
             Input("slider_1_c", "value"),
             Input("slider_1_d", "value"),
-            Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
-            allow_duplicate=True
-        )
-        def inner_function(a, b, c, d, theme_toggle):
+            Input(ThemeSwitchAIO.ids.switch("theme"), "value"))
+        def inner_function(a, b, c, d, is_dark):
             ctx = callback_context
             patched_figure = Patch()
             
             if type(ctx.triggered[0]['value']) == bool:
-                if theme_toggle:
+                if is_dark:
                     template = pio.templates[default_chart_theme]
                     patched_figure['data'][0]['line']['color'] = trace_colours['default_theme'][order]
                 else:
@@ -159,7 +120,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
             
-            patched_figure['data'][0]['line']['color'] = trace_colours['default_theme'][order]
+            # SMALL BUG AROUND LINE BELOW
+            patched_figure['data'][0]['line']['color']=trace_colours['default_theme'][order]
             
             patched_figure['layout']['title']['text'] = title
             patched_figure["layout"]["showlegend"] = False

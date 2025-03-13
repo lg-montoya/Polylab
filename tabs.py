@@ -5,10 +5,11 @@ from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
-from defaults import chart_default_theme,  slider_default, trace_colours
+from defaults import chart_default_theme, chart_other_theme, slider_default, trace_colours
 from hardcoded import HISTORY
 from factory import my_slider
 
+# load_figure_template([chart_default_theme, chart_other_theme])
 load_figure_template([chart_default_theme])
 
 empty_figure = go.Figure()
