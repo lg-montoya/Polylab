@@ -12,9 +12,10 @@ def page_layout(default_theme, other_theme):
             dbc.Container(fluid=True, children=[
                 # html.Div(color_mode_switch, className="d-flex justify-content-end"),
                 html.Div(ThemeSwitchAIO(aio_id="theme", themes=[default_theme, other_theme],
-                                        icons={"left":"fa fa-cloud-moon", "right":"fa fa-sun"}, 
+                                        # icons={"left":"fa fa-cloud-moon", "right":"fa fa-sun"}, 
+                                        icons={"left":"fa fa-sun", "right":"fa fa-cloud-moon"}, 
                                         # icons={"left":"fa fa-spider", "right":"fa fa-horse"}, 
-                                        switch_props={"value":False}), className="d-flex justify-content-end"),
+                                        switch_props={"value":True}), className="d-flex justify-content-end"),
                 # html.Div(theme_switch, className="d-flex justify-content-end"),
                 # html.Div(className="d-flex justify-content-end"),
                 dbc.Tabs(id='tab-group', class_name='nav-stack',  children=[

@@ -8,8 +8,8 @@ from defaults import chart_default_theme, chart_other_theme
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 
 # page themes
-page_default_theme= dbc.themes.QUARTZ
-page_other_theme = dbc.themes.CYBORG
+page_default_theme= dbc.themes.CYBORG
+page_other_theme = dbc.themes.QUARTZ
 
 MATHJAX_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js?'
 

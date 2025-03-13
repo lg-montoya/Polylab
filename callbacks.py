@@ -59,6 +59,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         my_polynomial = MyPolynomial(coefficients)
         y_values = my_polynomial.evaluate(x_values)
         
+        
+        
         patched_figure = Patch()
         patched_figure['data'][0]['y'] = y_values
         
@@ -125,9 +127,15 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             Input("slider_1_c", "value"),
             Input("slider_1_d", "value"),
             Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            # Input("tab-0-graph-y", "figure"),
             allow_duplicate=True
         )
-        def update_graph_from_sliders(a, b, c, d, theme_toggle):
+        # def inner_function(a, b, c, d, theme_toggle, patched_figure):
+        def inner_function(a, b, c, d, theme_toggle):
+            
+            # trace_colors = patched_figure['data'][0].line.color
+            # trace_colors = [trace.line.color for trace in fig.data]
+            # print(trace_colors)
             
             ctx = callback_context
             if type(ctx.triggered[0]['value']) == bool:
@@ -149,7 +157,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
-            # patched_figure['data'][0]['name'] = f"Derivative Order {order}"
             patched_figure['data'][0]['line']['color'] = color
             patched_figure['layout']['title']['text'] = title
             patched_figure["layout"]["showlegend"] = False
@@ -158,8 +165,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return patched_figure
         
 
-    update_derivative_graph(1,"blue")
-    update_derivative_graph(2,"red")
+    update_derivative_graph(1,'#ff9222')
+    update_derivative_graph(2,'#3949ab')
     
     def modal_builder(name, link='lnk'):
         @app.callback(Output(f"mdl-{name}", "is_open"),
