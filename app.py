@@ -31,6 +31,7 @@ app = dash.Dash(__name__,
                 external_scripts=external_scripts,
                 meta_tags=[{"name": "viewport",
                             "content": "width=device-width, initial-scale=1"}],
+                # prevent_initial_callbacks='initial_duplicate')
                 prevent_initial_callbacks=True)
 
 

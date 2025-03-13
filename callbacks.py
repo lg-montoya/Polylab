@@ -3,7 +3,7 @@ import plotly.io as pio
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 from dash import Patch, callback_context, no_update
-from defaults import POLYNOMIALS, derivative_notation, slider_max
+from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours
 from factory import MyPolynomial
 
 x_values = np.linspace(-slider_max, slider_max, 400)
@@ -81,8 +81,9 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     def update_graph_from_sliders(a, b, c, d, theme_toggle):
         
         ctx = callback_context
+        patched_figure = Patch()
+        
         if type(ctx.triggered[0]['value']) == bool:
-            patched_figure = Patch()
             template = pio.templates[default_chart_theme]  if theme_toggle else pio.templates[other_chart_theme]
             patched_figure["layout"]["template"] = template
             return patched_figure
@@ -99,8 +100,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         d2y_values = MyPolynomial(d2y.coef).evaluate(x_values)
         
         
-        patched_figure = Patch()
-        
         patched_figure['data'][0]['x'] = x_values
         patched_figure['data'][1]['x'] = x_values    
         patched_figure['data'][2]['x'] = x_values    
@@ -113,13 +112,15 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         patched_figure['data'][1]['name'] = fr"${derivative_notation[1]}$"
         patched_figure['data'][2]['name'] = fr"${derivative_notation[2]}$"  
         
+        
         patched_figure['layout']['title']['text'] = title.replace("0.0 + ", "")
 
       
         return patched_figure
     
     
-    def update_derivative_graph(order, color):
+    # def update_derivative_graph(order, color):
+    def update_derivative_graph(order):
         @app.callback(
             Output(f"tab-0-graph-d{order}y", "figure", allow_duplicate=True),
             Input("slider_1_a", "value"),
@@ -127,22 +128,23 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             Input("slider_1_c", "value"),
             Input("slider_1_d", "value"),
             Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
-            # Input("tab-0-graph-y", "figure"),
             allow_duplicate=True
         )
-        # def inner_function(a, b, c, d, theme_toggle, patched_figure):
         def inner_function(a, b, c, d, theme_toggle):
-            
-            # trace_colors = patched_figure['data'][0].line.color
-            # trace_colors = [trace.line.color for trace in fig.data]
-            # print(trace_colors)
-            
             ctx = callback_context
+            patched_figure = Patch()
+            
             if type(ctx.triggered[0]['value']) == bool:
-                patched_figure = Patch()
-                template = pio.templates[default_chart_theme]  if theme_toggle else pio.templates[other_chart_theme]
+                if theme_toggle:
+                    template = pio.templates[default_chart_theme]
+                    patched_figure['data'][0]['line']['color'] = trace_colours['default_theme'][order]
+                else:
+                    template = pio.templates[other_chart_theme]
+                    patched_figure['data'][0]['line']['color'] = trace_colours['other_theme'][order]
+                    
                 patched_figure["layout"]["template"] = template
                 return patched_figure
+            
             
             coefficients = [a, b, c, d]
             coeffs = MyPolynomial(coefficients).derivative(order=order).coef
@@ -153,11 +155,12 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             derivative_str = " + ".join(terms).replace(" ","").replace("+0.0x^1","").replace("x^1","x").replace("+0.0x^2","")
             title = fr"${derivative_notation[order]}={derivative_str}$".replace("=0.0+", "=")
             
-            patched_figure = Patch()
             
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
-            patched_figure['data'][0]['line']['color'] = color
+            
+            patched_figure['data'][0]['line']['color'] = trace_colours['default_theme'][order]
+            
             patched_figure['layout']['title']['text'] = title
             patched_figure["layout"]["showlegend"] = False
 
@@ -165,8 +168,9 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return patched_figure
         
 
-    update_derivative_graph(1,'#ff9222')
-    update_derivative_graph(2,'#3949ab')
+    
+    update_derivative_graph(1)
+    update_derivative_graph(2)
     
     def modal_builder(name, link='lnk'):
         @app.callback(Output(f"mdl-{name}", "is_open"),

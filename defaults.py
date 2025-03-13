@@ -38,13 +38,13 @@ slider_default = {"min":-slider_max,
     
 
    vizro_dark ['#00b4ff', '#ff9222', '#3949ab', '#ff5267', '#08bdba', '#fdc935', '#689f38', '#976fd1', '#f781bf', '#52733e'] 
-   quartz ['#00b4ff', '#ff9222', '#3949ab', '#ff5267', '#08bdba', '#fdc935', '#689f38', '#976fd1', '#f781bf', '#52733e'] 
+   quartz [['#e72e84', '#f77f14', '#52e8b5', '#ffef47', '#21a4d3']]
 """
 
 
 
-trace_colours = {'default_theme':{1:'#00b4ff', 2:'#ff9222', 3:'#3949ab',},
-                 'other_theme':{1:[], 2:[], 3:[]},
+trace_colours = {'default_theme':{0:'#00b4ff', 1:'#ff9222', 2:'#3949ab',},
+                 'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'},
 }
 
 
