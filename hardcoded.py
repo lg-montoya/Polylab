@@ -4,18 +4,17 @@ ___
 When I first began studying polynomials and wanted to experiment[$^*$]
 (# "Rather than "wanted to experiment with" it was really more 
 "needed to complete the homework on"") with them,
-that process required many manual[$^*$](# "Typing numbers into a calculation is still manual.") calculations. The steps involved 
-looked something like:
+that process required many manual[$^*$](# "Typing numbers into a calculation is still manual.") 
+calculations. The steps involved resembled:
 
-1. Create a table with two rows: one for $x$ and another for $f(x)$.
-2. For each value of $x$ use a calculator to obtain its corresponding 
+1. Creating a table with two rows: one for $x$ and another for $f(x)$.
+2. For each value of $x$ using a calculator to obtain its corresponding 
  $f(x)$ value.
-3. Populate the above table with the calculated values.
-4. Obtain ruled paper and plot the coordinates $(x,f(x))$.
-5. Connect all these dots as smoothly as possible.  
-6. Change one of the coefficients in the polynomial, and[$^*$](# "Very deep breath ...") 
-repeat steps
-1-5 .
+3. Populating the table with the calculated values.
+4. Obtaining ruled paper and plotting the coordinates $(x,f(x))$.
+5. Connecting all these dots as smoothly as possible.  
+6. Changing one of the coefficients in the polynomial, and[$^*$](# "Very deep breath ...") 
+repeating steps 1-5 . 
 
 Drawing a quadratic using 7 points would require 42 mathematical operations in my 
 head[$^*$](# "21 additions, 14 multiplications, 7 squarings." ), and I'd spend 
@@ -94,7 +93,7 @@ you wish to explore. The highest order polynomial available is a cubic.
 They are disabled until a polynomial is selected from the dropdown.
 Each polynomial has a different set of coefficients whose values are
 adjusted by the sliders. The graphs (and their titles) will reflect the 
-coeffiecients' changes dynamically.
+coeffiecients' changes.
 
 **Legend**  
 Activate and deactivate the traces by single clicking on the legend.

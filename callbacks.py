@@ -10,7 +10,7 @@ x_values = np.linspace(-slider_max, slider_max, 400)
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):    
-    load_figure_template([default_chart_theme, other_chart_theme])
+    # load_figure_template([default_chart_theme, other_chart_theme])
 
     # Callback setting sliders' visibility and general equation.
     @app.callback(
@@ -120,8 +120,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
             
-            # SMALL BUG AROUND LINE BELOW
-            patched_figure['data'][0]['line']['color']=trace_colours['default_theme'][order]
+            if is_dark:
+                patched_figure['data'][0]['line']['color']=trace_colours['default_theme'][order]
+            else:
+                patched_figure['data'][0]['line']['color']=trace_colours['other_theme'][order]
             
             patched_figure['layout']['title']['text'] = title
             patched_figure["layout"]["showlegend"] = False

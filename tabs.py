@@ -9,8 +9,8 @@ from defaults import chart_default_theme, chart_other_theme, slider_default, tra
 from hardcoded import HISTORY
 from factory import my_slider
 
-# load_figure_template([chart_default_theme, chart_other_theme])
-load_figure_template([chart_default_theme])
+load_figure_template([chart_default_theme, chart_other_theme])
+# load_figure_template([chart_default_theme])
 
 empty_figure = go.Figure()
 empty_figure.update_layout(
