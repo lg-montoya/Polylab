@@ -10,7 +10,6 @@ x_values = np.linspace(-slider_max, slider_max, 400)
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):    
-    # load_figure_template([default_chart_theme, other_chart_theme])
 
     # Callback setting sliders' visibility and general equation.
     @app.callback(

@@ -1,9 +1,10 @@
 HISTORY = """
 #### Some history
 ___
-When I first began studying polynomials and wanted to experiment[$^*$]
-(# "Rather than "wanted to experiment with" it was really more 
-"needed to complete the homework on"") with them,
+When I first began studying polynomials and wanted to 
+experiment with them[$^*$]
+(# "Rather than "wanted to experiment with them" it was really more 
+"needed to complete the homework""), 
 that process required many manual[$^*$](# "Typing numbers into a calculation is still manual.") 
 calculations. The steps involved resembled:
 
@@ -33,8 +34,6 @@ Fortunately, the manual calculations can be avoided with the use of this dashboa
 can now focus on bending/twisting/shifting our polynomial by changing the coefficients.
 
 Enjoy
-
-
 """
 
 
@@ -113,7 +112,8 @@ Vias como *El Palo*, *Carabobo*, *Avenida Las Palmas* etc., se encuentran solo
  con su correspondiente Carrera, Diagonal, etc..
 
 **A LINE! REALLY?**  
-Sure why not. 
+Sure why not. Not the most exciting of polynomials, but it is a polynomial
+of degree 1.
 
 
 **CONTINUITY AND SMOOTHNESS FOR DERIVATIVENESS 

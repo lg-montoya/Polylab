@@ -10,7 +10,6 @@ from hardcoded import HISTORY
 from factory import my_slider
 
 load_figure_template([chart_default_theme, chart_other_theme])
-# load_figure_template([chart_default_theme])
 
 empty_figure = go.Figure()
 empty_figure.update_layout(
@@ -24,13 +23,9 @@ tab_0 = html.Div([
         dbc.Col([
             dcc.Markdown(HISTORY, mathjax=True),
             html.A(id='tabla-topologia'),
-            # html.H5("Información Geografica"),
-            html.Div([
-                # dbc.Button("Aceptar", outline=False, color="success", class_name="me-1", id='btn-aceptar'),
-                # dbc.Button("Rechazar", outline=False, color="danger", class_name="me-1", id='btn-rechazar'),
-                ])]
-        )])
-    ], className="mt-4")
+        ])
+    ])
+], className="mt-4")
 
 
 tab_1 = html.Div([
