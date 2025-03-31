@@ -5,8 +5,7 @@ from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_instructions
 import plotly.graph_objects as go
-from defaults import chart_default_theme, chart_other_theme, slider_default, trace_colours
-from hardcoded import HISTORY
+from defaults import chart_default_theme, chart_other_theme, slider_default
 from factory import my_slider
 
 load_figure_template([chart_default_theme, chart_other_theme])
@@ -18,17 +17,7 @@ empty_figure.update_layout(
 )
 
 
-tab_0 = html.Div([
-    dbc.Row([
-        dbc.Col([
-            dcc.Markdown(HISTORY, mathjax=True),
-            html.A(id='tabla-topologia'),
-        ])
-    ])
-], className="mt-4")
-
-
-tab_1 = html.Div([
+tab = html.Div([
             # ROW with just the instructions button
             dbc.Row([
                 dbc.Col([
@@ -97,20 +86,4 @@ tab_1 = html.Div([
                 
                 ]),
              
-        ], className="mt-4")
-
-tab_2 = html.Div(
-    dbc.Row([
-        dbc.Col(
-            [html.H4(f'Coming soon ...'),]
-        )
-    ], class_name="mt-4")
-)
-
-tab_3 = html.Div(
-    dbc.Row([
-        dbc.Col(
-            [html.H4(f'But first sinusoidals.'),]
-        )
-    ], class_name="mt-4")
-)
+], className="mt-4")
