@@ -19,8 +19,8 @@ def page_layout(default_theme, other_theme):
                     
                     dbc.Tab(id='tab-instruction', label='Introduction', children=[instructions.tab]),
                     dbc.Tab(id='tab-polynomials', label='Polynomials', children=[polynomials.tab]),
-                    dbc.Tab(id='tab-sinusoidals',  label='Sinusoidals', children=[sinusoidals.tab]),
-                    dbc.Tab(id='tab-linear-programming',  label='Linear Programming', children=[linear_programming.tab]),
+                    # dbc.Tab(id='tab-sinusoidals',  label='Sinusoidals', children=[sinusoidals.tab]),
+                    # dbc.Tab(id='tab-linear-programming',  label='Linear Programming', children=[linear_programming.tab]),
                     
             ],)
         ], class_name="mt-2 dbc"),

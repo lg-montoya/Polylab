@@ -1,9 +1,12 @@
-import plotly.graph_objs as go
 import numpy as np
 import plotly.io as pio
-from dash import dcc
-from defaults import slider_max
+import plotly.graph_objs as go
+import dash_bootstrap_components as dbc
+from dash import dcc, html
+from defaults import slider_default
 
+slider_min = slider_default["min"]
+slider_max = slider_default["max"]
 
 x_values = np.linspace(-slider_max, slider_max, 400)
 
@@ -103,11 +106,15 @@ class MyPolynomial:
         """
         return str(self.poly)
     
-def my_slider(min, max, id):
-    step = int(max/5)
-    slider = dcc.Slider(
-                updatemode='drag',disabled=True,id=id, min=min, max=max, 
-                marks={i: str(i) for i in range(min, max+1, step)}
-            )
+    
+def my_slider(id, label):
+    step = int(slider_max/5)
+    slider = [
+        dbc.Col(html.Div(dcc.Markdown(f"$$\\quad {label}$$", mathjax=True)), width=1),
+        dbc.Col(html.Div(dcc.Slider(
+            updatemode='drag', disabled=True, id=id, min=slider_min, max=slider_max,
+            marks={i: str(i) for i in range(slider_min, slider_max + 1, step)}
+        )), width=11, className='mb-3')
+    ]
     return slider
 
