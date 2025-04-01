@@ -137,15 +137,15 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     
     def modal_builder(name, link='lnk'):
         @app.callback(Output(f"mdl-{name}", "is_open"),
-                    [Input(f"{link}-mdl-{name}-o", "n_clicks"),
-                    Input(f"btn-mdl-{name}-q", "n_clicks")],
+                    [Input(f"{link}-mdl-{name}-open", "n_clicks"),
+                    Input(f"btn-mdl-{name}-close", "n_clicks")],
                     [State(f"mdl-{name}", "is_open")], )
         def function(n1, n2, is_open):
             if n1 or n2:
                 return not is_open
             return is_open
         
-    modal_builder('instructions', link='btn')
+    modal_builder('instructions-polynomials', link='btn')
     
  
 

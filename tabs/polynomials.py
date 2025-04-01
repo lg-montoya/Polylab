@@ -19,7 +19,7 @@ tab = html.Div([
             # ROW with just the instructions button
             dbc.Row([
                 dbc.Col([
-                    dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-o'),
+                    dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-polynomials-open'),
                     modal_instructions
                         ], class_name='mb-3'
                     )],

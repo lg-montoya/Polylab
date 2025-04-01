@@ -11,8 +11,8 @@ modal_instructions = dbc.Modal(
             dcc.Markdown(POLYNOMIAL_INSTRUCTIONS),
         ]),
         dbc.ModalFooter(
-            dbc.Button("Close", id="btn-mdl-instructions-q", class_name="ml-auto")
+            dbc.Button("Close", id="btn-mdl-instructions-polynomials-close", class_name="ml-auto")
         ),
     ],
-    id="mdl-instructions", scrollable=True,
+    id="mdl-instructions-polynomials", scrollable=True,
 )
