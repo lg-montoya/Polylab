@@ -1,6 +1,5 @@
 import dash_bootstrap_components as dbc
-from dash import html
-from dash import dcc
+from dash import html, dcc
 from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
 from modals import modal_plolynomial_instructions
@@ -35,12 +34,30 @@ tab = html.Div([
                     # Row for the sliders is contained in a card
                     dbc.Row(
                         html.Div(    
-                        dbc.Card([                               
-                           dbc.Row(my_slider("slider_1_a", "a"), className='mt-4'),
+                                 
+                        dbc.Card(
+                            # [dbc.Row(my_slider(f"slider_1_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']],
+                        
+                            dbc.CardBody(
+                                
+                            [                               
+                        #    dbc.Row(my_slider("slider_1_a", "a"), className='mt-4'),
+                           dbc.Row(my_slider("slider_1_a", "a")),
                            dbc.Row(my_slider("slider_1_b", "b")),
                            dbc.Row(my_slider("slider_1_c", "c")),
-                           dbc.Row(my_slider("slider_1_d", "d")),                       
-                        ], style={'width': '100%', 'height': '100%'})
+                           dbc.Row(my_slider("slider_1_d", "d"))
+                           ],
+                            ),
+                            
+                       
+                        
+                        
+                            
+
+                        color="primary", outline=True,
+                        # style={'width': '100%', 'height': '100%'}
+                        style={'padding': '0px'}
+                        )
                         )    
                     )], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
 

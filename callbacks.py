@@ -2,8 +2,10 @@ import numpy as np
 import plotly.io as pio
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO, load_figure_template
-from dash import Patch, callback_context, no_update
-from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours
+from dash import Patch, callback_context, no_update, dcc, html
+import dash_bootstrap_components as dbc
+from factory import my_slider
+from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours, SINUSOIDALS
 from factory import MyPolynomial
 
 x_values = np.linspace(-slider_max, slider_max, 400)
@@ -148,8 +150,9 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     modal_builder('instructions-polynomials', link='btn')
     modal_builder('instructions-sinusoidals', link='btn')
     
- 
-
-
-
-    
+    @app.callback(
+        Output("main-container", "fluid"),
+        Input("fluid-toggle", "value")
+    )
+    def toggle_fluid_mode(is_fluid):
+        return not is_fluid

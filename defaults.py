@@ -43,3 +43,17 @@ trace_colours = {'default_theme':{0:'#00b4ff', 1:'#ff9222', 2:'#3949ab'},
                  'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'}}
 
 
+SINUSOIDALS = {
+    'Sine':{
+        'default_coefficients':[0,1,0,0], 'general_form':r"$y=a + bsinc(x+d)$",
+        'available_sliders':[True, True, False, False]
+        },
+    'Cosine':{
+        'default_coefficients':[0,0,1,0], 'general_form':r"$y=a + bcosc(x+d)$",
+        'available_sliders':[True, True, True, False]
+        },
+    'Tangent':{
+        'default_coefficients':[0,0,0,1], 'general_form':r"$y=a + btanc(x+d)$",
+        'available_sliders':[True, True, True, True]
+        },
+    }
