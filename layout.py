@@ -15,8 +15,9 @@ def page_layout(default_theme, other_theme):
                                         icons={"left":"fa fa-sun", "right":"fa fa-cloud-moon"}, 
                                         switch_props={"value":True}), className="d-flex justify-content-end mt-4"),
                     dbc.Tabs(children=[                  
-                        dbc.Tab(id='tab-instruction', label='Introduction', children=[instructions.tab]),
+                        dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                         dbc.Tab(id='tab-polynomials', label='Polynomials', children=[polynomials.tab]),
+                        dbc.Tab(id='tab-instruction', label='Introduction', children=[instructions.tab]),
                     ], id='tab-group', class_name='nav-stack')
         ], class_name="mt-2 dbc"),
     ])

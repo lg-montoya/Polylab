@@ -17,7 +17,7 @@ import plotly.io as pio
     
 # def callback_wrapper(app):    
 #     @app.callback(
-#         Output("tab-0-graph-y", "figure", allow_duplicate=True),
+#         Output('polynomial-graph-y", "figure", allow_duplicate=True),
 #         Input("switch", "value"),
 #         allow_duplicate=True
 #     )
@@ -28,7 +28,7 @@ import plotly.io as pio
 #         return patched_figure
 
 #     @app.callback(
-#         Output("tab-0-graph-d1y", "figure", allow_duplicate=True),
+#         Output('polynomial-graph-d1y", "figure", allow_duplicate=True),
 #         Input("switch", "value"),
 #         allow_duplicate=True
 #     )
@@ -39,7 +39,7 @@ import plotly.io as pio
 #         return patched_figure
 
 #     @app.callback(
-#         Output("tab-0-graph-d2y", "figure", allow_duplicate=True),
+#         Output('polynomial-graph-d2y", "figure", allow_duplicate=True),
 #         Input("switch", "value"),
 #         allow_duplicate=True
 #     )

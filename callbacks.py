@@ -38,7 +38,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
 
     # Callback updating f(x) graph based on slider values.
     @app.callback(
-        Output("tab-0-graph-y", "figure", allow_duplicate=True),
+        Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Input("slider_1_a", "value"),
         Input("slider_1_b", "value"),
         Input("slider_1_c", "value"),
@@ -84,7 +84,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     
     def update_derivative_graph(order):
         @app.callback(
-            Output(f"tab-0-graph-d{order}y", "figure", allow_duplicate=True),
+            Output(f"polynomial-graph-d{order}y", "figure", allow_duplicate=True),
             Input("slider_1_a", "value"),
             Input("slider_1_b", "value"),
             Input("slider_1_c", "value"),
@@ -146,6 +146,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return is_open
         
     modal_builder('instructions-polynomials', link='btn')
+    modal_builder('instructions-sinusoidals', link='btn')
     
  
 
