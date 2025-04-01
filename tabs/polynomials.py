@@ -3,7 +3,7 @@ from dash import html
 from dash import dcc
 from defaults import POLYNOMIALS
 from dash_bootstrap_templates import load_figure_template
-from modals import modal_instructions
+from modals import modal_plolynomial_instructions
 import plotly.graph_objects as go
 from defaults import chart_default_theme, chart_other_theme, slider_default
 from factory import my_slider
@@ -20,7 +20,7 @@ tab = html.Div([
             dbc.Row([
                 dbc.Col([
                     dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-polynomials-open'),
-                    modal_instructions
+                    modal_plolynomial_instructions
                         ], class_name='mb-3'
                     )],
                 ),
@@ -36,10 +36,10 @@ tab = html.Div([
                     dbc.Row(
                         html.Div(    
                         dbc.Card([                               
-                           dbc.Row([*my_slider("slider_1_a", "a")], className='mt-4'),
-                           dbc.Row([*my_slider("slider_1_b", "b")]),
-                           dbc.Row([*my_slider("slider_1_c", "c")]),
-                           dbc.Row([*my_slider("slider_1_d", "d")]),                       
+                           dbc.Row(my_slider("slider_1_a", "a"), className='mt-4'),
+                           dbc.Row(my_slider("slider_1_b", "b")),
+                           dbc.Row(my_slider("slider_1_c", "c")),
+                           dbc.Row(my_slider("slider_1_d", "d")),                       
                         ], style={'width': '100%', 'height': '100%'})
                         )    
                     )], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
@@ -47,7 +47,7 @@ tab = html.Div([
                 
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-y', mathjax=True)))
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True)))
                     ], width=8, align='end'),
     
     
@@ -57,7 +57,7 @@ tab = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-d1y', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True)), )
                     ], width=8, class_name='mt-4'),
                 
                 ]),
@@ -67,7 +67,7 @@ tab = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='tab-0-graph-d2y', mathjax=True)), )
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True)), )
                     ], width=8, class_name='mt-4'),
                 
                 ]),
