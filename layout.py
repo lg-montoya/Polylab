@@ -16,9 +16,9 @@ def page_layout(default_theme, other_theme):
                                         switch_props={"value":True}), className="d-flex justify-content-end"),
                 
                 dbc.Tabs(children=[                  
-                    dbc.Tab(id='tab-polynomials', label='Polynomials', children=[polynomials.tab]),
-                    dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                     dbc.Tab(id='tab-instruction', label='Introduction', children=[instructions.tab]),
+                    dbc.Tab(id='tab-polynomials', label='Polynomials', children=[polynomials.tab]),
+                    # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack, mt-0')
         ], class_name="mt-2 dbc"),
     ])

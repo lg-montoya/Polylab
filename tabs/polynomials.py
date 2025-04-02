@@ -12,7 +12,7 @@ axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 
 empty_figure = go.Figure()
 empty_figure.update_layout(xaxis=axis, yaxis=axis,)
-
+dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
 
 tab = html.Div([
             # ROW with just the instructions button
@@ -23,53 +23,40 @@ tab = html.Div([
                         ], class_name='mb-3'
                     )],
                 ),
-            # ROW containing ALL the controls. This is subdivided itself into 2 columns. The first column has THREE rows.
+            
+            # ROW of controls and y=f(x) graph.
             dbc.Row([
+                # First column containing just controls
                 dbc.Col([
                     # Row for the dropdown menu
-                    dbc.Row(html.Div(dcc.Dropdown(id='dropdown_menu_1', options=[{'label': key, 'value': key} for key in POLYNOMIALS.keys()], 
+                    dbc.Row(
+                        html.Div(dcc.Dropdown(id='dropdown_menu_1', options=dropdown_polynomial_options, 
                                     clearable=False, placeholder='CHOOSE A POLYNOMIAL'))),
+                    
                     # Row for the general form of the polynomial in LaTeX
-                    dbc.Row(html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2')),
+                    dbc.Row(
+                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2')),
+                    
                     # Row for the sliders is contained in a card
                     dbc.Row(
-                        html.Div(    
-                                 
-                        dbc.Card(
-                            # [dbc.Row(my_slider(f"slider_1_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']],
-                        
-                            dbc.CardBody(
-                                
-                            [                               
-                        #    dbc.Row(my_slider("slider_1_a", "a"), className='mt-4'),
-                           dbc.Row(my_slider("slider_1_a", "a")),
-                           dbc.Row(my_slider("slider_1_b", "b")),
-                           dbc.Row(my_slider("slider_1_c", "c")),
-                           dbc.Row(my_slider("slider_1_d", "d"))
-                           ],
-                            ),
-                            
-                       
-                        
-                        
-                            
-
-                        color="primary", outline=True,
-                        # style={'width': '100%', 'height': '100%'}
-                        style={'padding': '0px'}
-                        )
+                        html.Div(                   
+                            dbc.Card(
+                                dbc.CardBody([
+                                    dbc.Row(my_slider(f"slider_1_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']
+                                ]),
+                            color="primary", outline=True, style={'padding': '0px'})
                         )    
                     )], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
 
-                
+                # Second column containing just the graph y=f(x)
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True)))
-                    ], width=8, align='end'),
-    
-    
+                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True))
+                    )
+                ], width=8, align='end')
             ]),
-            # ROW containing the second graph
+            
+            # ROW containing y=f'(x) graph
             dbc.Row([
                 dbc.Col(),
                 dbc.Col([
@@ -79,7 +66,7 @@ tab = html.Div([
                 
                 ]),
             
-            # ROW containing the third graph
+            # ROW containing y=f''(x) graph
             dbc.Row([
                 dbc.Col(),
                 dbc.Col([

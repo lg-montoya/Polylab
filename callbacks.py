@@ -148,7 +148,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return is_open
         
     modal_builder('instructions-polynomials', link='btn')
-    modal_builder('instructions-sinusoidals', link='btn')
+    # modal_builder('instructions-sinusoidals', link='btn')
     
     @app.callback(
         Output("main-container", "fluid"),
@@ -156,3 +156,17 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     )
     def toggle_fluid_mode(is_fluid):
         return not is_fluid
+
+    # @app.callback(
+    #     Output('dynamic-sinusoidal', 'children'),
+    #     Input('dynamic-add-sinusoidal-btn', 'n_clicks'),
+    # )
+    # def add_sinusoidal(n_clicks):
+    #     patched_children=Patch()
+        
+    #     dbc.Row(my_slider(id={'type': 'sinusoidal-dynamic-dropdown-a','index': n_clicks}, label="a"), className='mt-4'),
+    #     dbc.Row(my_slider(id={'type': 'sinusoidal-dynamic-dropdown-b','index': n_clicks}, label="b")),
+    #     dbc.Row(my_slider(id={'type': 'sinusoidal-dynamic-dropdown-c','index': n_clicks}, label="c")),
+    #     dbc.Row(my_slider(id={'type': 'sinusoidal-dynamic-dropdown-d','index': n_clicks}, label="d")),                       
+        
+    #     return patched_children

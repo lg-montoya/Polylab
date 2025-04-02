@@ -1,5 +1,5 @@
 HISTORY = """
-#### Some history
+#### Motivation
 ___
 When I first began studying polynomials and wanted to 
 experiment with them[$^*$]
@@ -33,7 +33,9 @@ again[$^*$](# "OK, there's one less term in the calculation, but still ... anoth
 Fortunately, the manual calculations can be avoided with the use of this dashboard. We
 can now focus on bending/twisting/shifting our polynomial by changing the coefficients.
 
-Enjoy
+Enjoy 
+
+( Dedicated to A & H ) 
 """
 
 
