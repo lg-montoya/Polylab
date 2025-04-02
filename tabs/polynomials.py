@@ -18,9 +18,12 @@ tab = html.Div([
             # ROW with just the instructions button
             dbc.Row([
                 dbc.Col([
-                    dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-polynomials-open'),
+                    html.Div(    
+                        dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-polynomials-open'),
+                        className="d-grid"
+                    ),
                     modal_plolynomial_instructions
-                        ], class_name='mb-3'
+                        ], class_name='mb-3', sm=4
                     )],
                 ),
             
@@ -28,32 +31,33 @@ tab = html.Div([
             dbc.Row([
                 # First column containing just controls
                 dbc.Col([
-                    # Row for the dropdown menu
-                    dbc.Row(
+                    dbc.Stack([
+                        # Dropdown menu
                         html.Div(dcc.Dropdown(id='dropdown_menu_1', options=dropdown_polynomial_options, 
-                                    clearable=False, placeholder='CHOOSE A POLYNOMIAL'))),
-                    
-                    # Row for the general form of the polynomial in LaTeX
-                    dbc.Row(
-                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2')),
-                    
-                    # Row for the sliders is contained in a card
-                    dbc.Row(
-                        html.Div(                   
+                                            clearable=False, placeholder='CHOOSE A POLYNOMIAL'), className="d-grid gap-2"),
+                        # General form of the polynomial in LaTeX
+                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2'),
+                        # Sliders contained in a card
+                        html.Div(
                             dbc.Card(
                                 dbc.CardBody([
                                     dbc.Row(my_slider(f"polynomial_slider_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']
                                 ]),
-                            color="primary", outline=True, style={'padding': '0px'})
-                        )    
-                    )], width=4, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}),
+                                color="primary", outline=True, style={'padding': '0px'}
+                            )
+                        )
+                    ], gap=3, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'})
+                    
+
+                    
+            ], style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}, sm=4),
 
                 # Second column containing just the graph y=f(x)
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True))
                     )
-                ], width=8, align='end')
+                ], align='end', sm=8,),
             ]),
             
             # ROW containing y=f'(x) graph
@@ -62,7 +66,7 @@ tab = html.Div([
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True)), )
-                    ], width=8, class_name='mt-4'),
+                    ], sm=8, class_name='mt-4'),
                 
                 ]),
             
@@ -72,8 +76,8 @@ tab = html.Div([
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True)), )
-                    ], width=8, class_name='mt-4'),
+                    ], sm=8, class_name='mt-4'),
                 
                 ]),
-             
+
 ], className="mt-4")
