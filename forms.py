@@ -9,6 +9,8 @@ fluid_mode_switch =  html.Span(
         dbc.Label(className="fa fa-laptop", html_for="fluid-toggle"),
     ]
 )
+
+# THIS IS THE ARRANGEMENT FOR THE HORIZONTAL ALIGNMENT OF THE TOGGLES
 # fluid_mode_switch =  html.Span(
 #     [
 #         dbc.Label(className="fa fa-mobile me-2", html_for="fluid-toggle"),
