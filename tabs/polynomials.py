@@ -17,24 +17,28 @@ empty_figure.update_layout(
     yaxis=axis,
     title={
         # 'x':0.05,
-        'y':0.875, 
+        'y':0.9, 
         'font':{'size': 15},
         'pad': {'t': 5, 'b': 0},
         },
-    # # legend={
-    # #     'x': 0.5,  # Position the legend on the far right
-    # #     'y': -0.12,  # Position the legend at the top
-    # #     'xanchor': 'center',  # Anchor the legend's left side to the x position
-    # #     'yanchor': 'top',  # Anchor the legend's top side to the y position
-    # #     'orientation': 'h',  # Horizontal orientation
-    # #     # 'bordercolor': 'black',  # Black border around the legend
-    # #     # 'borderwidth': 1,  # Border width in pixels
-    # # }  ,
+    legend={
+        'x': 1,  # Position the legend on the far right
+        'y': 1,  # Position the legend at the top
+        'xanchor': 'right',  # Anchor the legend's left side to the x position
+        'yanchor': 'top',  # Anchor the legend's top side to the y position
+        # 'orientation': 'h',  # Horizontal orientation
+        # 'bordercolor': 'black',  # Black border around the legend
+        # 'borderwidth': 1,  # Border width in pixels
+    }  ,
     margin={
-        'l': 25,  # Reduce left margin
+        'l': 22,  # Reduce left margin
         'r': 22,  # Reduce right margin
-        't': 90,  # Reduce top margin
-        'b': 30   # Reduce bottom margin
+        't': 85,  # Reduce top margin
+        'b': 20   # Reduce bottom margin
+        # 'l': 25,  # Reduce left margin
+        # 'r': 22,  # Reduce right margin
+        # 't': 90,  # Reduce top margin
+        # 'b': 30   # Reduce bottom margin
     }
     )
 
