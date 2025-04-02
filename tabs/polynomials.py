@@ -17,7 +17,7 @@ empty_figure.update_layout(
     yaxis=axis,
     # title={'x':0.05}
     title=
-    {'font': {'color': 'rgba(255, 255, 255, 0.8784313725)', 'size': 30},
+    {'font': {'color': 'rgba(255, 255, 255, 0.8784313725)', 'size': 15},
               'pad': {'b': 24, 'l': 24, 'r': 24, 't': 50},
               'x': 0,
               'xanchor': 'left',
