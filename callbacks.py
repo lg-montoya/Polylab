@@ -2,7 +2,7 @@ import numpy as np
 import plotly.io as pio
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO, load_figure_template
-from dash import Patch, callback_context, no_update, dcc, html
+from dash import Patch, callback_context, no_update, dcc, html, clientside_callback
 import dash_bootstrap_components as dbc
 from factory import my_slider
 from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours, SINUSOIDALS
@@ -11,7 +11,29 @@ from factory import MyPolynomial
 x_values = np.linspace(-slider_max, slider_max, 400)
 
 
-def callback_wrapper(app, default_chart_theme, other_chart_theme):    
+def callback_wrapper(app, default_chart_theme, other_chart_theme):
+    
+    app.clientside_callback(
+        """
+        function(is_fullscreen) {
+            const elem = document.documentElement;
+            if (is_fullscreen) {
+                if (!document.fullscreenElement) {
+                    elem.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable fullscreen mode: ${err.message}`);
+                    });
+                }
+            } else {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+            }
+            return is_fullscreen;  // Synchronize the switch value with the fullscreen state
+        }
+        """,
+        Output("fullscreen-toggle", "value"),
+        Input("fullscreen-toggle", "value"),
+    )    
 
     # Callback setting sliders' visibility and general equation.
     @app.callback(
