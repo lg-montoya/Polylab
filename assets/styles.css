@@ -11,3 +11,9 @@
 .modal-header-title {
     font-size: 1.1em;  /* Adjust the size as needed */
 }
+
+@media (max-width: 576px) {
+    .mt-sm-2-custom {
+        margin-top: 8px !important;
+    }
+}

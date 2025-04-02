@@ -14,6 +14,8 @@ empty_figure = go.Figure()
 empty_figure.update_layout(xaxis=axis, yaxis=axis,)
 dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
 
+flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
+
 tab = html.Div([
             # ROW with just the instructions button
             dbc.Row([
@@ -36,28 +38,25 @@ tab = html.Div([
                         html.Div(dcc.Dropdown(id='dropdown_menu_1', options=dropdown_polynomial_options, 
                                             clearable=False, placeholder='CHOOSE A POLYNOMIAL'), className="d-grid gap-2"),
                         # General form of the polynomial in LaTeX
-                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-2'),
+                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-3'),
                         # Sliders contained in a card
                         html.Div(
                             dbc.Card(
                                 dbc.CardBody([
                                     dbc.Row(my_slider(f"polynomial_slider_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']
                                 ]),
-                                color="primary", outline=True, style={'padding': '0px'}
-                            )
+                                color="primary", outline=True
+                            ),
                         )
-                    ], gap=3, style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'})
-                    
-
-                    
-            ], style={'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}, sm=4),
+                    ], style=flex_column_style),
+            ], style=flex_column_style, sm=4),
 
                 # Second column containing just the graph y=f(x)
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True))
                     )
-                ], align='end', sm=8,),
+                ], sm=8, className="mt-sm-2-custom"),
             ]),
             
             # ROW containing y=f'(x) graph
@@ -66,7 +65,7 @@ tab = html.Div([
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True)), )
-                    ], sm=8, class_name='mt-4'),
+                    ], sm=8, class_name='mt-2'),
                 
                 ]),
             
@@ -76,7 +75,7 @@ tab = html.Div([
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True)), )
-                    ], sm=8, class_name='mt-4'),
+                    ], sm=8, class_name='mt-2'),
                 
                 ]),
 

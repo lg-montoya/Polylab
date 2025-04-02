@@ -21,8 +21,8 @@ def page_layout(default_theme, other_theme):
                 html.Div([fluid_mode_switch, theme_switch], 
                          className="d-flex justify-content-end"),
                 dbc.Tabs([                  
-                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
+                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack')
             ], id='main-container', fluid=False, class_name="mt-3 dbc"
