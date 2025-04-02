@@ -37,7 +37,6 @@ trace_colours = {
     'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'}
 }
 
-
 SINUSOIDALS = {
     'Sine':{
         'default_coefficients':[0,1,0,0], 'general_form':r"$y=a + bsinc(x+d)$",
