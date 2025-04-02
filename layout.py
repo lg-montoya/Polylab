@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
 from dash import html
-from forms import fluid_mode_switch, fullscreen_toggle
+from forms import fluid_mode_switch
 from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
 
@@ -10,7 +10,7 @@ def page_layout(default_theme, other_theme):
             dbc.Container(id='main-container', fluid=False, children=[
                 # html.Div(fluid_mode_switch, className="d-flex justify-content-end"),
                 html.Div(
-                    [fullscreen_toggle, fluid_mode_switch, 
+                    [fluid_mode_switch, 
                      ThemeSwitchAIO(aio_id="theme", themes=[default_theme, other_theme], 
                     # [ThemeSwitchAIO(aio_id="theme", themes=[default_theme, other_theme], 
                                         icons={"left":"fa fa-sun me-1", "right":"fa fa-cloud-moon"}, 
