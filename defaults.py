@@ -23,27 +23,15 @@ GENERAL_FORM = r"$y=ax+b$"
 derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
 # derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
 
-
-# chart_default_theme = "vizro_dark"
+# Choose from 
+["quartz_dark", "vizro_dark", "vapor_dark", "vapor", "quartz"]
 chart_default_theme = "quartz_dark"
-# chart_default_theme = "vapor_dark"
-# chart_default_theme = "vapor"
-# chart_other_theme = "vapor"
 chart_other_theme = "quartz"
 
 slider_max=20
 slider_default={"min":-slider_max, "max":slider_max,}
 
 # OBTAIN VALUES BELOW FROM A CELL IN THE JUPYTER NOTEBOOK.
-"""
-    Default colouring of traces for following templates:
-    vapor ['#6829ad', '#e14b56', '#19f37f', '#f7c200', '#51a0f6']
-    vizro_dark ['#00b4ff', '#ff9222', '#3949ab', '#ff5267', '#08bdba', '#fdc935', '#689f38', '#976fd1', '#f781bf', '#52733e'] 
-    quartz [['#e72e84', '#f77f14', '#52e8b5', '#ffef47', '#21a4d3']]
-"""
-
-
-
 trace_colours = {
     'default_theme':{0: '#e72e84', 1: '#f77f14', 2: '#52e8b5', 3: '#ffef47', 4: '#21a4d3'},
     'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'}

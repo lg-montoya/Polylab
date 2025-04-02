@@ -9,11 +9,9 @@ FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 
 # page themes
 page_default_theme= dbc.themes.CYBORG
-# page_default_theme= dbc.themes.QUARTZ
 page_other_theme = dbc.themes.QUARTZ
 
 MATHJAX_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js?'
-
 
 external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                     {'type': 'text/javascript',
@@ -24,9 +22,6 @@ external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
 external_stylesheets = [page_default_theme, dbc_css, dbc.icons.FONT_AWESOME]
 
-
-
-
 app = dash.Dash(__name__,
                 external_stylesheets=external_stylesheets,
                 external_scripts=external_scripts,
@@ -35,15 +30,11 @@ app = dash.Dash(__name__,
                 # prevent_initial_callbacks='initial_duplicate')
                 prevent_initial_callbacks=True)
 
-
 server=app.server
 app.layout = page_layout(page_default_theme, page_other_theme)
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
-# callbacks_theme_toggle.clientside_callback
-# callbacks_theme_toggle.callback_wrapper(app)
 callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)
-
 
 
 if __name__ == '__main__':

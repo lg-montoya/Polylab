@@ -82,8 +82,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
       
         return patched_figure
     
-
-    
     def update_derivative_graph(order):
         @app.callback(
             Output(f"polynomial-graph-d{order}y", "figure", allow_duplicate=True),
@@ -132,8 +130,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             
             return patched_figure
         
-
-    
     update_derivative_graph(1)
     update_derivative_graph(2)
     

@@ -82,9 +82,6 @@ Enjoy
 
 # """
 
-
-
-
 POLYNOMIAL_INSTRUCTIONS = '''
 **Dropdown**  
 Begin by choosing from the dropdown the desired polynomial whose form and derivatives 

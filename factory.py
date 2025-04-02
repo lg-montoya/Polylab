@@ -114,8 +114,6 @@ def my_slider(id, label):
         dbc.Col(html.Div(dcc.Slider(
             updatemode='drag', disabled=True, id=id, min=slider_min, max=slider_max,
             marks={i: str(i) for i in range(slider_min, slider_max + 1, step)}
-        # )), width=11, className='mb-3')
-        # )),className='mb-2 mt-2', width=10)
         )),className='mb-2 mt-2')
         # )))
     ]
