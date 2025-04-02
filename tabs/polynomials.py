@@ -15,19 +15,27 @@ empty_figure = go.Figure()
 empty_figure.update_layout(
     xaxis=axis, 
     yaxis=axis,
-    # title={'x':0.05}
-    title=
-    {'font': {'color': 'rgba(255, 255, 255, 0.8784313725)', 'size': 15},
-              'pad': {'b': 24, 'l': 24, 'r': 24, 't': 50},
-              'x': 0,
-              'xanchor': 'left',
-              'xref': 'container',
-            #   'y': 0.95,
-              'y': 1,
-            #   'text': 'y=f(x)',
-              'yanchor': 'bottom',
-            #   'yref': 'container'},
-              'yref': 'paper'},
+    title={
+        # 'x':0.05,
+        'y':0.875, 
+        'font':{'size': 15},
+        'pad': {'t': 5, 'b': 0},
+        },
+    # # legend={
+    # #     'x': 0.5,  # Position the legend on the far right
+    # #     'y': -0.12,  # Position the legend at the top
+    # #     'xanchor': 'center',  # Anchor the legend's left side to the x position
+    # #     'yanchor': 'top',  # Anchor the legend's top side to the y position
+    # #     'orientation': 'h',  # Horizontal orientation
+    # #     # 'bordercolor': 'black',  # Black border around the legend
+    # #     # 'borderwidth': 1,  # Border width in pixels
+    # # }  ,
+    margin={
+        'l': 25,  # Reduce left margin
+        'r': 22,  # Reduce right margin
+        't': 90,  # Reduce top margin
+        'b': 30   # Reduce bottom margin
+    }
     )
 
 flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
@@ -37,11 +45,11 @@ tab = html.Div([
             dbc.Row([
                 dbc.Col([
                     html.Div(    
-                        dbc.Button("Instructions", color="info", outline=False,id='btn-mdl-instructions-polynomials-open'),
+                        dbc.Button("Instructions", color="primary", outline=False,id='btn-mdl-instructions-polynomials-open'),
                         className="d-grid"
                     ),
                     modal_plolynomial_instructions
-                        ], class_name='mb-3', sm=4
+                        ], class_name='mb-2', sm=2
                     )],
                 ),
             
@@ -52,7 +60,7 @@ tab = html.Div([
                     dbc.Stack([
                         # Dropdown menu
                         html.Div(dcc.Dropdown(id='dropdown_menu_1', options=dropdown_polynomial_options, 
-                                            clearable=False, placeholder='CHOOSE A POLYNOMIAL'), className="d-grid gap-2"),
+                                            clearable=False, placeholder='CHOOSE A POLYNOMIAL'), className="d-grid"),
                         # General form of the polynomial in LaTeX
                         html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-3'),
                         # Sliders contained in a card

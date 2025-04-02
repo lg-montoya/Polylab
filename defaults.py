@@ -24,8 +24,11 @@ derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
 # derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
 
 
-chart_default_theme = "vizro_dark"
+# chart_default_theme = "vizro_dark"
+chart_default_theme = "quartz_dark"
+# chart_default_theme = "vapor_dark"
 # chart_default_theme = "vapor"
+# chart_other_theme = "vapor"
 chart_other_theme = "quartz"
 
 slider_max=20
