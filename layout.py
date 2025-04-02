@@ -18,7 +18,7 @@ def page_layout(default_theme, other_theme):
                     dbc.Tab(id='tab-introduction', label='Introduction', children=[introduction.tab]),
                     dbc.Tab(id='tab-polynomials', label='Polynomials', children=[polynomials.tab]),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
-                ], id='tab-group', class_name='nav-stack, mt-0')
-        ], class_name="mt-2 dbc"),
+                ], id='tab-group', class_name='nav-stack')
+        ], class_name="mt-3 dbc"),
     ])
     return layout
