@@ -24,8 +24,8 @@ derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
 # derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
 
 
-# chart_default_theme = "vizro_dark"
-chart_default_theme = "vapor"
+chart_default_theme = "vizro_dark"
+# chart_default_theme = "vapor"
 chart_other_theme = "quartz"
 
 slider_max=20
@@ -42,8 +42,8 @@ slider_default={"min":-slider_max, "max":slider_max,}
 
 
 trace_colours = {
-    # 'default_theme':{0:'#00b4ff', 1:'#ff9222', 2:'#3949ab'},
-    'default_theme':{0:'#6829ad', 1:'#e14b56', 2:'#19f37f'},
+    'default_theme':{0:'#00b4ff', 1:'#ff9222', 2:'#3949ab'},
+    # 'default_theme':{0:'#6829ad', 1:'#e14b56', 2:'#19f37f'},
     'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'}
 }
 

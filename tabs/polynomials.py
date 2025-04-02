@@ -9,10 +9,26 @@ from factory import my_slider
 
 load_figure_template([chart_default_theme, chart_other_theme])
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
+dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
 
 empty_figure = go.Figure()
-empty_figure.update_layout(xaxis=axis, yaxis=axis,)
-dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
+empty_figure.update_layout(
+    xaxis=axis, 
+    yaxis=axis,
+    # title={'x':0.05}
+    title=
+    {'font': {'color': 'rgba(255, 255, 255, 0.8784313725)', 'size': 30},
+              'pad': {'b': 24, 'l': 24, 'r': 24, 't': 50},
+              'x': 0,
+              'xanchor': 'left',
+              'xref': 'container',
+            #   'y': 0.95,
+              'y': 1,
+            #   'text': 'y=f(x)',
+              'yanchor': 'bottom',
+            #   'yref': 'container'},
+              'yref': 'paper'},
+    )
 
 flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
 
