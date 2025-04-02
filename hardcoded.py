@@ -1,4 +1,4 @@
-HISTORY = """
+MOTIVATION = """
 #### Motivation
 ___
 When I first began studying polynomials and wanted to 
@@ -39,8 +39,8 @@ Enjoy
 """
 
 
-# DISCLAIMER_TITLE = """
-# #### Some history and background
+# MOTIVATION = """
+# #### MOTIVATION
 # ___
 # When I first began studying polynomials and wanted to experiment[$^1$](# "Rather than "wanted to experiment with" it was really more 
 # "needed to complete the homework on"") with them,

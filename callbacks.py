@@ -16,10 +16,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     # Callback setting sliders' visibility and general equation.
     @app.callback(
         Output("eq_1", "children"),
-        Output("slider_1_a", "disabled"),
-        Output("slider_1_b", "disabled"),
-        Output("slider_1_c", "disabled"),
-        Output("slider_1_d", "disabled"),
+        Output("polynomial_slider_a", "disabled"),
+        Output("polynomial_slider_b", "disabled"),
+        Output("polynomial_slider_c", "disabled"),
+        Output("polynomial_slider_d", "disabled"),
         Input("dropdown_menu_1", "value"))
     def update_(chosen_polynomial):
         general_form = POLYNOMIALS[chosen_polynomial]['general_form'] 
@@ -29,10 +29,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     
     # Callback initialising slider values.
     @app.callback(
-        Output("slider_1_a", "value"),
-        Output("slider_1_b", "value"),
-        Output("slider_1_c", "value"),
-        Output("slider_1_d", "value"),
+        Output("polynomial_slider_a", "value"),
+        Output("polynomial_slider_b", "value"),
+        Output("polynomial_slider_c", "value"),
+        Output("polynomial_slider_d", "value"),
         Input("dropdown_menu_1", "value"))
     def set_default_graphs(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['default_coefficients']
@@ -41,10 +41,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     # Callback updating f(x) graph based on slider values.
     @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
-        Input("slider_1_a", "value"),
-        Input("slider_1_b", "value"),
-        Input("slider_1_c", "value"),
-        Input("slider_1_d", "value"),
+        Input("polynomial_slider_a", "value"),
+        Input("polynomial_slider_b", "value"),
+        Input("polynomial_slider_c", "value"),
+        Input("polynomial_slider_d", "value"),
         Input(ThemeSwitchAIO.ids.switch("theme"), "value"))
     def update_graph_from_sliders(a, b, c, d, is_dark):
         
@@ -87,10 +87,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     def update_derivative_graph(order):
         @app.callback(
             Output(f"polynomial-graph-d{order}y", "figure", allow_duplicate=True),
-            Input("slider_1_a", "value"),
-            Input("slider_1_b", "value"),
-            Input("slider_1_c", "value"),
-            Input("slider_1_d", "value"),
+            Input("polynomial_slider_a", "value"),
+            Input("polynomial_slider_b", "value"),
+            Input("polynomial_slider_c", "value"),
+            Input("polynomial_slider_d", "value"),
             Input(ThemeSwitchAIO.ids.switch("theme"), "value"))
         def inner_function(a, b, c, d, is_dark):
             ctx = callback_context

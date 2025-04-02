@@ -42,7 +42,7 @@ tab = html.Div([
                         html.Div(                   
                             dbc.Card(
                                 dbc.CardBody([
-                                    dbc.Row(my_slider(f"slider_1_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']
+                                    dbc.Row(my_slider(f"polynomial_slider_{i}", f"{i}")) for i in ['a', 'b', 'c', 'd']
                                 ]),
                             color="primary", outline=True, style={'padding': '0px'})
                         )    
