@@ -5,7 +5,9 @@ from dash_bootstrap_templates import ThemeSwitchAIO
 from dash import Patch, callback_context, no_update, dcc, html
 import dash_bootstrap_components as dbc
 from factory import my_slider
-from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours, SINUSOIDALS
+from defaults.cosmetics import  trace_colours
+from defaults.dash_components import slider_max
+from defaults.mathematics import derivative_notation, POLYNOMIALS, SINUSOIDALS
 from factory import MyPolynomial
 
 x_values = np.linspace(-slider_max, slider_max, 400)

@@ -1,7 +1,7 @@
 import dash_bootstrap_components as dbc
 from dash import html
 from modals import modal_sinusoidal_instructions
-from defaults import SINUSOIDALS
+from defaults.mathematics import SINUSOIDALS
 
 
 tab = html.Div([

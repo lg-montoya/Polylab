@@ -1,34 +1,14 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from defaults import POLYNOMIALS
+from defaults.dash_components import slider_default, dropdown_polynomial_options
+# BELOW import is for figure_template loading
+import defaults.cosmetics
+from defaults.chart_elements import empty_figure
 from modals import modal_plolynomial_instructions
-import plotly.graph_objects as go
-from defaults import slider_default
 from factory import my_slider
 
-axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
-dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
 
-empty_figure = go.Figure()
-empty_figure.update_layout(
-    xaxis=axis, 
-    yaxis=axis,
-    title={
-        'y': 0.9, 
-        'font': {'size': 15},
-        'pad': {'t': 5, 'b': 0},
-        },
-    legend={
-        'x': 1,
-        'y': 1,
-        'xanchor': 'right',  
-        'yanchor': 'top',  
-    },
-    margin={
-        'l': 22, 'r': 22,  
-        't': 85, 'b': 20   
-    }
-)
+axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 
 flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
 

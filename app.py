@@ -3,13 +3,13 @@ import dash_bootstrap_components as dbc
 from layout import app_layout 
 import callbacks
 import os
-from defaults import chart_default_theme, chart_other_theme
+from defaults.cosmetics import (
+    chart_default_theme, chart_other_theme, 
+    page_default_theme, page_other_theme
+    )
 
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
 
-# page themes
-page_default_theme= dbc.themes.CYBORG
-page_other_theme = dbc.themes.QUARTZ
 
 MATHJAX_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/MathJax.js?'
 
@@ -35,7 +35,6 @@ app.layout = app_layout(page_default_theme, page_other_theme)
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)
-
 
 if __name__ == '__main__':
     if FLASK_DEBUG == 'development':

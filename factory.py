@@ -1,9 +1,8 @@
 import numpy as np
-import plotly.io as pio
 import plotly.graph_objs as go
 import dash_bootstrap_components as dbc
 from dash import dcc, html
-from defaults import slider_default
+from defaults.dash_components import slider_default
 
 slider_min = slider_default["min"]
 slider_max = slider_default["max"]
