@@ -19,11 +19,9 @@ tab = html.Div([
                     html.Div(    
                         dbc.Button("Instructions", color="primary", outline=False,id='btn-mdl-instructions-polynomials-open'),
                         className="d-grid"
-                    ),
-                    modal_plolynomial_instructions
-                        ], class_name='mb-2', sm=2
-                    )],
-                ),
+                    )
+                ],class_name='mb-2', sm=2)
+            ]),
             
             # ROW of controls and y=f(x) graph.
             dbc.Row([
@@ -71,8 +69,9 @@ tab = html.Div([
                 dbc.Col([
                     html.Div(
                         dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True)), )
-                    ], sm=8, class_name='mt-2'),
-                
-                ]),
+                    ], sm=8, class_name='mt-2'),    
+            ]),
+            
+            modal_plolynomial_instructions
 
 ], className="mt-4")

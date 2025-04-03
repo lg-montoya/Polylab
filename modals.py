@@ -6,7 +6,7 @@ from hardcoded import POLYNOMIAL_INSTRUCTIONS, SINUSOIDAL_INSTRUCTIONS
 # Layout for modal on "Instructions" button.
 modal_plolynomial_instructions = dbc.Modal(
     [
-        dbc.ModalHeader("Instructions"),
+        dbc.ModalHeader(dbc.ModalTitle("Instructions")),
         dbc.ModalBody(children=[
             dcc.Markdown(POLYNOMIAL_INSTRUCTIONS),
         ]),
@@ -14,7 +14,7 @@ modal_plolynomial_instructions = dbc.Modal(
             dbc.Button("Close", id="btn-mdl-instructions-polynomials-close", class_name="ml-auto")
         ),
     ],
-    id="mdl-instructions-polynomials", scrollable=True,
+    id="mdl-instructions-polynomials", scrollable=True, centered=True,
 )
 
 modal_sinusoidal_instructions = dbc.Modal(
