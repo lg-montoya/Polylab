@@ -1,13 +1,11 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from defaults import POLYNOMIALS
-from dash_bootstrap_templates import load_figure_template
 from modals import modal_plolynomial_instructions
 import plotly.graph_objects as go
-from defaults import chart_default_theme, chart_other_theme, slider_default
+from defaults import slider_default
 from factory import my_slider
 
-load_figure_template([chart_default_theme, chart_other_theme])
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]
 
@@ -16,31 +14,21 @@ empty_figure.update_layout(
     xaxis=axis, 
     yaxis=axis,
     title={
-        # 'x':0.05,
-        'y':0.9, 
-        'font':{'size': 15},
+        'y': 0.9, 
+        'font': {'size': 15},
         'pad': {'t': 5, 'b': 0},
         },
     legend={
-        'x': 1,  # Position the legend on the far right
-        'y': 1,  # Position the legend at the top
-        'xanchor': 'right',  # Anchor the legend's left side to the x position
-        'yanchor': 'top',  # Anchor the legend's top side to the y position
-        # 'orientation': 'h',  # Horizontal orientation
-        # 'bordercolor': 'black',  # Black border around the legend
-        # 'borderwidth': 1,  # Border width in pixels
-    }  ,
+        'x': 1,
+        'y': 1,
+        'xanchor': 'right',  
+        'yanchor': 'top',  
+    },
     margin={
-        'l': 22,  # Reduce left margin
-        'r': 22,  # Reduce right margin
-        't': 85,  # Reduce top margin
-        'b': 20   # Reduce bottom margin
-        # 'l': 25,  # Reduce left margin
-        # 'r': 22,  # Reduce right margin
-        # 't': 90,  # Reduce top margin
-        # 'b': 30   # Reduce bottom margin
+        'l': 22, 'r': 22,  
+        't': 85, 'b': 20   
     }
-    )
+)
 
 flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
 

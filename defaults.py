@@ -1,3 +1,6 @@
+import plotly.io as pio
+from dash_bootstrap_templates import load_figure_template
+
 POLYNOMIALS = {
     'constant':{
         'default_coefficients':[1,0,0,0], 'general_form':r"$y=a$",
@@ -31,10 +34,14 @@ chart_other_theme = "quartz"
 slider_max=20
 slider_default={"min":-slider_max, "max":slider_max,}
 
-# OBTAIN VALUES BELOW FROM A CELL IN THE JUPYTER NOTEBOOK.
+
+load_figure_template([chart_default_theme, chart_other_theme])
+chart_other_theme_colours = list(pio.templates[chart_other_theme]["layout"]["colorway"])
+chart_default_theme_colours = list(pio.templates[chart_default_theme]["layout"]["colorway"])
+
 trace_colours = {
-    'default_theme':{0: '#e72e84', 1: '#f77f14', 2: '#52e8b5', 3: '#ffef47', 4: '#21a4d3'},
-    'other_theme':{0:'#e72e84', 1:'#f77f14', 2:'#52e8b5'}
+    'default_theme':{i:j for i,j in enumerate(chart_default_theme_colours)},
+    'other_theme': {i:j for i,j in enumerate(chart_other_theme_colours)}
 }
 
 SINUSOIDALS = {

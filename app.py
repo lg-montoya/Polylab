@@ -1,6 +1,6 @@
 import dash
 import dash_bootstrap_components as dbc
-from layout import page_layout 
+from layout import app_layout 
 import callbacks
 import os
 from defaults import chart_default_theme, chart_other_theme
@@ -31,7 +31,7 @@ app = dash.Dash(__name__,
                 prevent_initial_callbacks=True)
 
 server=app.server
-app.layout = page_layout(page_default_theme, page_other_theme)
+app.layout = app_layout(page_default_theme, page_other_theme)
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)

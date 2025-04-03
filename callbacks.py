@@ -1,8 +1,8 @@
 import numpy as np
 import plotly.io as pio
 from dash.dependencies import Input, Output, State
-from dash_bootstrap_templates import ThemeSwitchAIO, load_figure_template
-from dash import Patch, callback_context, no_update, dcc, html, clientside_callback
+from dash_bootstrap_templates import ThemeSwitchAIO
+from dash import Patch, callback_context, no_update, dcc, html
 import dash_bootstrap_components as dbc
 from factory import my_slider
 from defaults import POLYNOMIALS, derivative_notation, slider_max, trace_colours, SINUSOIDALS

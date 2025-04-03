@@ -5,8 +5,7 @@ from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
 
 
-
-def page_layout(default_theme, other_theme):
+def app_layout(default_theme, other_theme):
     
     theme_switch = ThemeSwitchAIO(
         aio_id = "theme", 
