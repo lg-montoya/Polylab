@@ -97,9 +97,11 @@ coeffiecients' changes.
 Activate and deactivate the traces by single clicking on the legend.
 Double-click a trace to isolate it.
 
-**Theme-toggle**  
-Choose the dashboard's skin at the top right: Fluffy marshmallow
- unicorn or Witch-king of Angmar.
+**Toggles**  
+There are two toggles at the top right. The first toggle increases 
+the width of app if viewed in landscape mode. The second toggle 
+changes the skin of the app: colourful marshmallows or 
+Witch-king of Angmar.
 '''
 
 POLYNOMIAL_ABOUT = '''
