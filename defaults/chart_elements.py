@@ -21,5 +21,16 @@ empty_figure.update_layout(
     margin={
         'l': 22, 'r': 22,  
         't': 85, 'b': 20   
-    }
+    },
+    hovermode='closest',
+    newshape=dict(
+        line=dict(
+            color='yellow',  # Change this to any color you want
+            width=3
+        )
+    ),
+    modebar=dict(
+        add=['drawline', 'drawopenpath', 'eraseshape'],
+    ),
 )
+

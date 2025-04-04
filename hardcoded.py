@@ -97,6 +97,11 @@ coeffiecients' changes.
 Activate and deactivate the traces by single clicking on the legend.
 Double-click a trace to isolate it.
 
+**Chart controls**  
+At the top right of each chart are a set of controls for the
+user to manipulate the chart. Hover over each icon to see its
+functionality.
+
 **Toggles**  
 There are two toggles at the top right. The first toggle increases 
 the width of app if viewed in landscape mode. The second toggle 
