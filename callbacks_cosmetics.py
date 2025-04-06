@@ -6,29 +6,37 @@ from defaults.cosmetics import trace_colours
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
-    
-        # Update grid-lines based on toggle    
+
         @app.callback(
-            Output("polynomial-graph-y", "figure", allow_duplicate=True),
-            Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
-            Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-            Input("gridlines-toggle", "value")
+        Output("polynomial-graph-y", "figure", allow_duplicate=True),
+        Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
+        Output("polynomial-graph-d2y", "figure", allow_duplicate=True),
+        Input("gridlines-radio", "value")  # Listen to the radio items' value
         )
-        def update_gridlines(is_higher_grid):
+        def update_gridlines(selected_value):
+            # Create patches for the figures
             patched_figures = [Patch() for _ in range(3)]
-            if is_higher_grid:
-                for figure in patched_figures:
-                    # figure["layout"]["xaxis"]["showgrid"]= True
-                    # figure["layout"]["yaxis"]["showgrid"]= True
-                    figure["layout"]["xaxis"]["dtick"]= 1
-                    figure["layout"]["yaxis"]["dtick"]= 1                 
-            else:
-                for figure in patched_figures:
-                    # figure["layout"]["xaxis"]["showgrid"]= False
-                    # figure["layout"]["yaxis"]["showgrid"]= False
-                    figure["layout"]["xaxis"]["dtick"]= 0
-                    figure["layout"]["yaxis"]["dtick"]= 0
-            return patched_figures     
+
+            # Case selection based on the radio items' value
+            match selected_value:
+                case "blank":
+                    for figure in patched_figures:
+                        figure["layout"]["xaxis"]["showgrid"] = False
+                        figure["layout"]["yaxis"]["showgrid"] = False
+                case "few_gridlines":
+                    for figure in patched_figures:
+                        figure["layout"]["xaxis"]["dtick"] = 0
+                        figure["layout"]["yaxis"]["dtick"] = 0
+                        figure["layout"]["xaxis"]["showgrid"] = True
+                        figure["layout"]["yaxis"]["showgrid"] = True
+                case "more_gridlines":
+                    for figure in patched_figures:
+                        figure["layout"]["xaxis"]["dtick"] = 1
+                        figure["layout"]["yaxis"]["dtick"] = 1
+                        figure["layout"]["xaxis"]["showgrid"] = True
+                        figure["layout"]["yaxis"]["showgrid"] = True
+
+            return patched_figures
 
 
         # Update fluid-mode based on toggle
