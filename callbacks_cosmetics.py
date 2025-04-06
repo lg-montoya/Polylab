@@ -5,19 +5,38 @@ import plotly.io as pio
 from defaults.cosmetics import trace_colours
 
 
-
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
+    
+        # Update grid-lines based on toggle    
+        @app.callback(
+            Output("polynomial-graph-y", "figure", allow_duplicate=True),
+            Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
+            Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
+            Input("gridlines-toggle", "value")
+        )
+        def update_gridlines(is_higher_grid):
+            patched_figures = [Patch() for _ in range(3)]
+            if is_higher_grid:
+                for figure in patched_figures:
+                    figure["layout"]["xaxis"]["showgrid"]= True
+                    figure["layout"]["yaxis"]["showgrid"]= True
+            else:
+                for figure in patched_figures:
+                    figure["layout"]["xaxis"]["showgrid"]= False
+                    figure["layout"]["yaxis"]["showgrid"]= False
+            return patched_figures     
+
 
         # Update fluid-mode based on toggle
         @app.callback(
-        Output("main-container", "fluid"),
-        Input("fluid-toggle", "value")
+            Output("main-container", "fluid"),
+            Input("fluid-toggle", "value")
         )
         def toggle_fluid_mode(is_fluid):
             return not is_fluid
 
 
-        # Update trace theme based on toggle
+        # Update trace colors based on toggle
         @app.callback(
             Output("polynomial-graph-y", "figure", allow_duplicate=True),
             Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
@@ -49,4 +68,4 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                 
             return patch_figure, *patched_figures
         
-        @app.call
+        
