@@ -18,12 +18,16 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             patched_figures = [Patch() for _ in range(3)]
             if is_higher_grid:
                 for figure in patched_figures:
-                    figure["layout"]["xaxis"]["showgrid"]= True
-                    figure["layout"]["yaxis"]["showgrid"]= True
+                    # figure["layout"]["xaxis"]["showgrid"]= True
+                    # figure["layout"]["yaxis"]["showgrid"]= True
+                    figure["layout"]["xaxis"]["dtick"]= 1
+                    figure["layout"]["yaxis"]["dtick"]= 1                 
             else:
                 for figure in patched_figures:
-                    figure["layout"]["xaxis"]["showgrid"]= False
-                    figure["layout"]["yaxis"]["showgrid"]= False
+                    # figure["layout"]["xaxis"]["showgrid"]= False
+                    # figure["layout"]["yaxis"]["showgrid"]= False
+                    figure["layout"]["xaxis"]["dtick"]= 0
+                    figure["layout"]["yaxis"]["dtick"]= 0
             return patched_figures     
 
 

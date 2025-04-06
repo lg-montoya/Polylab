@@ -6,22 +6,21 @@ axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 empty_figure = go.Figure(
     layout={
         "xaxis": {
-            "showgrid": False,  # Enable gridlines for the x-axis
-            "dtick": 1,  # Set tick spacing to 1
+            "showgrid": True,  # Enable gridlines for the x-axis
+            "dtick": 0,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
             "zerolinewidth": 1,
-            "zerolinecolor":'rgba(255, 255, 255, 0.35)'
-            
-            
+            "zerolinecolor":'rgba(255, 255, 255, 0.35)',
+            "ticklen":5,     
         },
         "yaxis": {
-            "showgrid": False,  # Enable gridlines for the y-axis
-            "dtick": 1,  # Set tick spacing to 1
+            "showgrid": True,  # Enable gridlines for the y-axis
+            "dtick": 0,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
             "zerolinewidth": 1,
-            "zerolinecolor":'rgba(255, 255, 255, 0.35)'
+            "zerolinecolor":'rgba(255, 255, 255, 0.35)',
+            "ticklen":5, 
         },
-       
     }
 )
 empty_figure.update_layout(
