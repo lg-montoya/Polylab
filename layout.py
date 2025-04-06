@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
-from forms import fluid_mode_switch, gridlines_switch, gridlines_radio
+from forms import fluid_mode_switch, gridlines_radio
 from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
 
@@ -22,8 +22,7 @@ def app_layout(default_theme, other_theme):
                 html.Div([
                     dbc.Card([
                         dbc.Container([
-                            gridlines_radio,
-                            # gridlines_switch, 
+                            gridlines_radio, 
                             fluid_mode_switch, 
                             theme_switch
                         ], className="d-flex flex-row flex-nowrap align-items-center gap-3 mt-1")
@@ -31,8 +30,8 @@ def app_layout(default_theme, other_theme):
                 ], className="d-flex justify-content-end mb-2"),
                 
                 dbc.Tabs([                  
-                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
+                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack')
                 
