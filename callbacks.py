@@ -1,7 +1,7 @@
 import numpy as np
-import plotly.io as pio
+# import plotly.io as pio
 from dash.dependencies import Input, Output, State, ALL
-from dash_bootstrap_templates import ThemeSwitchAIO
+# from dash_bootstrap_templates import ThemeSwitchAIO
 from dash import Patch
 from defaults.cosmetics import  trace_colours
 from defaults.dash_components import slider_max
@@ -11,15 +11,15 @@ from factory import MyPolynomial
 
 x_values = np.linspace(-slider_max, slider_max, 400)
 
-def callback_wrapper(app, default_chart_theme, other_chart_theme):  
+def callback_wrapper(app):  
 
+    # 
     @app.callback(
         Output("eq_1", "children"),
         Input("dropdown_menu_1", "value")
         )
     def display_general_polynomial_form(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['general_form']
-    
     
     @app.callback(
         Output({"type": "polynomial_slider", "name": ALL}, "disabled"),
@@ -31,39 +31,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         available_sliders = [not i for i in POLYNOMIALS[chosen_polynomial]['available_sliders']]
         default_coefficient_values = POLYNOMIALS[chosen_polynomial]['default_coefficients']
         return available_sliders, default_coefficient_values
-        
-    
-    # Update trace theme.
-    @app.callback(
-        Output("polynomial-graph-y", "figure", allow_duplicate=True),
-        Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
-        Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-        Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
-    )
-    def update_graph_from_sliders(is_dark):
-        patch_figure = Patch()
-        patched_figures = [Patch() for _ in range(2)]
-
-        patch_figure["layout"]["template"] = (pio.templates[default_chart_theme] 
-                                              if is_dark else pio.templates[other_chart_theme])    
-         
-        i=1
-        if is_dark:
-            for figure in patched_figures:
-                # figure["layout"]["xaxis"]["showgrid"]= False
-                # figure["layout"]["yaxis"]["showgrid"]= False
-                figure["layout"]["template"] = pio.templates[default_chart_theme]
-                figure['data'][0]['line']['color']=trace_colours['default_theme'][i]
-                i+=1
-        else:
-            for figure in patched_figures:
-                # figure["layout"]["xaxis"]["showgrid"]= True
-                # figure["layout"]["yaxis"]["showgrid"]= True
-                figure["layout"]["template"] = pio.templates[other_chart_theme]
-                figure['data'][0]['line']['color']=trace_colours['other_theme'][i]
-                i+=1 
-            
-        return patch_figure, *patched_figures
     
     
     # Update f(x) graph based on slider values.
@@ -147,12 +114,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
     modal_builder('instructions-polynomials', link='btn')
     # modal_builder('instructions-sinusoidals', link='btn')
     
-    @app.callback(
-        Output("main-container", "fluid"),
-        Input("fluid-toggle", "value")
-    )
-    def toggle_fluid_mode(is_fluid):
-        return not is_fluid
+    
 
     # # @app.callback(
     # #     Output('dynamic-sinusoidal', 'children'),

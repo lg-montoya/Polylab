@@ -7,6 +7,8 @@ from defaults.cosmetics import (
     chart_default_theme, chart_other_theme, 
     page_default_theme, page_other_theme
     )
+import callbacks_cosmetics
+
 
 # Determine if production or development environment
 FLASK_DEBUG = os.environ.get('FLASK_DEBUG')
@@ -35,7 +37,8 @@ app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # Load the layout and callbacks
 app.layout = app_layout(page_default_theme, page_other_theme)
-callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)
+callbacks.callback_wrapper(app)
+callbacks_cosmetics.callback_wrapper(app, chart_default_theme, chart_other_theme)
 
 # Set the server to run in production or development mode
 if __name__ == '__main__':
