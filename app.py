@@ -40,7 +40,6 @@ callbacks.callback_wrapper(app, chart_default_theme, chart_other_theme)
 # Set the server to run in production or development mode
 if __name__ == '__main__':
     if FLASK_DEBUG == 'development':
-        # app.run_server(debug=True, threaded=True, dev_tools_hot_reload=True, port=8080)
-        app.run_server(debug=True, threaded=True, dev_tools_hot_reload=True)
+        app.run_server(debug=True, threaded=True, dev_tools_hot_reload=True, port=8080)
     elif FLASK_DEBUG == 'production':
         app.run_server(debug=False)

@@ -3,7 +3,24 @@ from .dash_components import slider_default
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 
-empty_figure = go.Figure()
+empty_figure = go.Figure(
+    layout={
+        "xaxis": {
+            "showgrid": True,  # Enable gridlines for the x-axis
+            "dtick": 1,  # Set tick spacing to 1
+            "zeroline": True,  # Show the zero line
+            "zerolinewidth": 3,
+            
+        },
+        "yaxis": {
+            "showgrid": True,  # Enable gridlines for the y-axis
+            "dtick": 1,  # Set tick spacing to 1
+            "zeroline": True,  # Show the zero line
+            "zerolinewidth": 3,
+        },
+       
+    }
+)
 empty_figure.update_layout(
     xaxis=axis, 
     yaxis=axis,
