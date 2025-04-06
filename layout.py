@@ -23,8 +23,8 @@ def app_layout(default_theme, other_theme):
                 html.Div(theme_switch, className="d-flex justify-content-end"), 
  
                 dbc.Tabs([                  
-                    dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
                     dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
+                    dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack')
                 

@@ -9,14 +9,17 @@ empty_figure = go.Figure(
             "showgrid": True,  # Enable gridlines for the x-axis
             "dtick": 1,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
-            "zerolinewidth": 3,
+            "zerolinewidth": 1,
+            "zerolinecolor":'rgba(255, 255, 255, 0.35)'
+            
             
         },
         "yaxis": {
             "showgrid": True,  # Enable gridlines for the y-axis
             "dtick": 1,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
-            "zerolinewidth": 3,
+            "zerolinewidth": 1,
+            "zerolinecolor":'rgba(255, 255, 255, 0.35)'
         },
        
     }
