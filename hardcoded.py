@@ -65,6 +65,13 @@ changes the skin of the app: colourful marshmallows or
 Witch-king of Angmar.
 '''
 
+WARNING_GRIDLINES = '''
+A graph contains an axis whose range is too large. Displaying gridlines at such
+granularity will pollute the graph.
+'''
+
+
+
 POLYNOMIAL_ABOUT = '''
 **COEFFICIENT ORDERING**  
 El formulario le ayuda localisar los (casa)lotes dentro del municipio de

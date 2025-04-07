@@ -11,13 +11,14 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d2y", "figure", allow_duplicate=True),
+        Output("gridlines", "data"),
         Input("gridlines-radio", "value"),
         State("polynomial-graph-y", "figure"),
         State("polynomial-graph-d1y", "figure"),
         State("polynomial-graph-d2y", "figure"),
         prevent_initial_call=True
         )
-        def update_gridlines(selected_value,fig_y, fig_d1y, fig_d2y):
+        def update_gridlines(selected_value, fig_y, fig_d1y, fig_d2y):
             # Create patches for the figures
             patched_figures = [Patch() for _ in range(3)]
             current_figs = [fig_y, fig_d1y, fig_d2y]
@@ -28,6 +29,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                 y_range = fig.get("layout", {}).get("yaxis", {}).get("range", None)
                 small_range.append(max(x_range[1], y_range[1]) < 25)
 
+            has_large_range=False
             
             # Case selection based on the radio items' value
             match selected_value:
@@ -45,12 +47,28 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                         figure["layout"]["yaxis"]["showgrid"] = True
                 case "more_gridlines":
                     for figure, is_small_range in zip(patched_figures, small_range):
-                        figure["layout"]["xaxis"]["dtick"] = 1 if is_small_range else 0
-                        figure["layout"]["yaxis"]["dtick"] = 1 if is_small_range else 0
+                        dtick = 1 if is_small_range else 0
+                        figure["layout"]["xaxis"]["dtick"] = dtick
+                        figure["layout"]["yaxis"]["dtick"] = dtick
                         figure["layout"]["xaxis"]["showgrid"] = True 
                         figure["layout"]["yaxis"]["showgrid"] = True
+                    
+                    has_large_range = not all(small_range)
+            
+            return *patched_figures, has_large_range
+        
+        # ...existing code...
 
-            return patched_figures
+        @app.callback(
+            Output("mdl-gridlines", "is_open"),
+            Input("gridlines", "data"),
+            prevent_initial_call=True
+        )
+        def show_gridlines_modal(has_large_range):
+            """Launch modal when gridlines store indicates large range"""
+            return True if has_large_range else False
+
+        # ...existing code...
 
 
         # Update fluid-mode based on toggle

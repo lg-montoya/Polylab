@@ -3,7 +3,7 @@ from dash import html, dcc
 from forms import fluid_mode_switch, gridlines_radio
 from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
-
+from modals import modal_gridlines
 
 def app_layout(default_theme, other_theme):
     
@@ -15,6 +15,7 @@ def app_layout(default_theme, other_theme):
         )
     
     layout = html.Div([
+        dcc.Store(id='gridlines', storage_type='memory'),
         dbc.Container(
             children=[                
                 html.Div([
@@ -39,7 +40,9 @@ def app_layout(default_theme, other_theme):
                     dbc.Tab(introduction.tab, tab_id='tab-introduction', label='Introduction'),
                     dbc.Tab(polynomials.tab, tab_id='tab-polynomials', label='Polynomials'),
                     # dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
-                ], id='tab-group', class_name='nav-stack', active_tab='tab-polynomials')
+                ], id='tab-group', class_name='nav-stack', active_tab='tab-polynomials'),
+                
+                modal_gridlines
                 
             ], id='main-container', fluid=False, class_name="mt-3 dbc"
         )

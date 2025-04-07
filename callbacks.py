@@ -1,7 +1,5 @@
 import numpy as np
-# import plotly.io as pio
 from dash.dependencies import Input, Output, State, ALL
-# from dash_bootstrap_templates import ThemeSwitchAIO
 from dash import Patch
 from defaults.cosmetics import  trace_colours
 from defaults.dash_components import slider_max
