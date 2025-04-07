@@ -34,7 +34,7 @@ def app_layout(default_theme, other_theme):
                                 "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
                                 }
                              ), 
-                ], className="d-flex justify-content-end mb-2"),
+                ], className="d-flex justify-content-center justify-content-sm-end mb-2"),
                 
                 dbc.Tabs([                  
                     dbc.Tab(introduction.tab, tab_id='tab-introduction', label='Introduction'),
