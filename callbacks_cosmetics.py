@@ -65,15 +65,11 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             i=1
             if is_dark:
                 for figure in patched_figures:
-                    # figure["layout"]["xaxis"]["showgrid"]= False
-                    # figure["layout"]["yaxis"]["showgrid"]= False
                     figure["layout"]["template"] = pio.templates[default_chart_theme]
                     figure['data'][0]['line']['color']=trace_colours['default_theme'][i]
                     i+=1
             else:
                 for figure in patched_figures:
-                    # figure["layout"]["xaxis"]["showgrid"]= True
-                    # figure["layout"]["yaxis"]["showgrid"]= True
                     figure["layout"]["template"] = pio.templates[other_chart_theme]
                     figure['data'][0]['line']['color']=trace_colours['other_theme'][i]
                     i+=1 

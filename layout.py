@@ -16,9 +16,7 @@ def app_layout(default_theme, other_theme):
     
     layout = html.Div([
         dbc.Container(
-            children=[
-                # html.Div([gridlines_switch, fluid_mode_switch, theme_switch], className="d-flex justify-content-end align-items-center gap-4"),
-                            
+            children=[                
                 html.Div([
                     dbc.Card([
                         dbc.Container([
@@ -30,8 +28,8 @@ def app_layout(default_theme, other_theme):
                 ], className="d-flex justify-content-end mb-2"),
                 
                 dbc.Tabs([                  
-                    dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
                     dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
+                    dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack')
                 

@@ -56,8 +56,10 @@ At the top right of each chart are a set of controls for the
 user to manipulate the chart. Hover over each icon to see its
 functionality.
 
-**Toggles**  
-There are two toggles at the top right. The first toggle increases 
+**Other Controls**  
+Choose amongst the different amount of grid-lines to display on your graphs.
+
+There are also two toggles at the top right. The first toggle increases 
 the width of app if viewed in landscape mode. The second toggle 
 changes the skin of the app: colourful marshmallows or 
 Witch-king of Angmar.
