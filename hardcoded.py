@@ -57,7 +57,9 @@ user to manipulate the chart. Hover over each icon to see its
 functionality.
 
 **Other Controls**  
-Choose amongst the different amount of grid-lines to display on your graphs.
+Vary the amount of grid-lines to display on your graphs. If the range
+on any of the axes is too large, the grid-lines granularity will not
+be increased.
 
 There are also two toggles at the top right. The first toggle increases 
 the width of app if viewed in landscape mode. The second toggle 
