@@ -36,10 +36,10 @@ def app_layout(default_theme, other_theme):
                 ], className="d-flex justify-content-end mb-2"),
                 
                 dbc.Tabs([                  
-                    dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
-                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
-                    # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
-                ], id='tab-group', class_name='nav-stack')
+                    dbc.Tab(introduction.tab, tab_id='tab-introduction', label='Introduction'),
+                    dbc.Tab(polynomials.tab, tab_id='tab-polynomials', label='Polynomials'),
+                    # dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
+                ], id='tab-group', class_name='nav-stack', active_tab='tab-polynomials')
                 
             ], id='main-container', fluid=False, class_name="mt-3 dbc"
         )

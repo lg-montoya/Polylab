@@ -6,7 +6,7 @@ gridlines_radio = html.Div(
                 {'label': html.Span([html.I(className="fa-solid fa-square ms-1 me-2")]), 'value': 'blank'},
                 {'label': html.Span([html.I(className="fa fa-table-cells-large ms-1 me-2"), ""]), 'value': 'few_gridlines'},
                 {'label': html.Span([html.I(className="fa fa-table-cells ms-1 me-1"), ""]), 'value': 'more_gridlines'}
-                ],value='few_gridlines', inline=True, 
+                ],value='blank', inline=True, 
         ),
         style={
         "padding": "5px",  # Add padding around the radio items
