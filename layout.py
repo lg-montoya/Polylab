@@ -24,7 +24,15 @@ def app_layout(default_theme, other_theme):
                             fluid_mode_switch, 
                             theme_switch
                         ], className="d-flex flex-row flex-nowrap align-items-center gap-3 mt-1")
-                    ]), 
+                    ],
+                             color="primary", 
+                            outline=True,
+                            style={
+                                "border": "1px solid #007bff",  # Custom border color
+                                "border-radius": "2px",  # Smooth rounded corners
+                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
+                                }
+                             ), 
                 ], className="d-flex justify-content-end mb-2"),
                 
                 dbc.Tabs([                  

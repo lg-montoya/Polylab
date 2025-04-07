@@ -48,18 +48,46 @@ tab = html.Div([
                 # Second column containing just the graph y=f(x)
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True))
+                        dbc.Card(
+                            dbc.CardBody(
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True),
+                                style={"padding": "0"}
+                            ),
+                            color="primary", 
+                            outline=True,
+                            style={
+                                "border": "1px solid #007bff",  # Custom border color
+                                "border-radius": "2px",  # Smooth rounded corners
+                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
+                                }
+                        )
                     )
-                ], sm=8, className="mt-sm-2-custom"),
+                ], 
+                sm=8, className="mt-sm-2-custom"),
             ]),
             
             # ROW containing y=f'(x) graph
             dbc.Row([
                 dbc.Col(),
                 dbc.Col([
+                    
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True)), )
-                    ], sm=8, class_name='mt-2'),
+                        dbc.Card(
+                            dbc.CardBody(
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True),
+                                style={"padding": "0"}
+                            ),
+                            color="primary", 
+                            outline=True,
+                            style={
+                                "border": "1px solid #007bff",  # Custom border color
+                                "border-radius": "2px",  # Smooth rounded corners
+                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
+                                }
+                        )
+                    )
+                    ], 
+                    sm=8, class_name='mt-2'),
                 
                 ]),
             
@@ -68,8 +96,22 @@ tab = html.Div([
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True)), )
-                    ], sm=8, class_name='mt-2'),    
+                        dbc.Card(
+                            dbc.CardBody(
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True),
+                                style={"padding": "0"}
+                            ),
+                            color="primary", 
+                            outline=True,
+                            style={
+                                "border": "1px solid #007bff",  # Custom border color
+                                "border-radius": "2px",  # Smooth rounded corners
+                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
+                                }
+                        )
+                    )
+                ],
+                sm=8, class_name='mt-2'),    
             ]),
             
             modal_plolynomial_instructions
