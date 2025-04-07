@@ -21,6 +21,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             match selected_value:
                 case "blank":
                     for figure in patched_figures:
+                        figure["layout"]["xaxis"]["dtick"] = 0
+                        figure["layout"]["yaxis"]["dtick"] = 0
                         figure["layout"]["xaxis"]["showgrid"] = False
                         figure["layout"]["yaxis"]["showgrid"] = False
                 case "few_gridlines":
