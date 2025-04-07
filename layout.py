@@ -36,8 +36,8 @@ def app_layout(default_theme, other_theme):
                 ], className="d-flex justify-content-end mb-2"),
                 
                 dbc.Tabs([                  
-                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     dbc.Tab(introduction.tab, id='tab-introduction', label='Introduction'),
+                    dbc.Tab(polynomials.tab, id='tab-polynomials', label='Polynomials'),
                     # dbc.Tab(id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack')
                 
