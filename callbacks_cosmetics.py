@@ -1,5 +1,5 @@
 from dash import Patch
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
 from defaults.cosmetics import trace_colours
@@ -11,12 +11,24 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d2y", "figure", allow_duplicate=True),
-        Input("gridlines-radio", "value")  # Listen to the radio items' value
+        Input("gridlines-radio", "value"),
+        State("polynomial-graph-y", "figure"),
+        State("polynomial-graph-d1y", "figure"),
+        State("polynomial-graph-d2y", "figure"),
+        prevent_initial_call=True
         )
-        def update_gridlines(selected_value):
+        def update_gridlines(selected_value,fig_y, fig_d1y, fig_d2y):
             # Create patches for the figures
             patched_figures = [Patch() for _ in range(3)]
+            current_figs = [fig_y, fig_d1y, fig_d2y]
+            
+            small_range=[]
+            for fig in current_figs:
+                x_range = fig.get("layout", {}).get("xaxis", {}).get("range", None)
+                y_range = fig.get("layout", {}).get("yaxis", {}).get("range", None)
+                small_range.append(max(x_range[1], y_range[1]) < 25)
 
+            
             # Case selection based on the radio items' value
             match selected_value:
                 case "blank":
@@ -32,10 +44,10 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                         figure["layout"]["xaxis"]["showgrid"] = True
                         figure["layout"]["yaxis"]["showgrid"] = True
                 case "more_gridlines":
-                    for figure in patched_figures:
-                        figure["layout"]["xaxis"]["dtick"] = 1
-                        figure["layout"]["yaxis"]["dtick"] = 1
-                        figure["layout"]["xaxis"]["showgrid"] = True
+                    for figure, is_small_range in zip(patched_figures, small_range):
+                        figure["layout"]["xaxis"]["dtick"] = 1 if is_small_range else 0
+                        figure["layout"]["yaxis"]["dtick"] = 1 if is_small_range else 0
+                        figure["layout"]["xaxis"]["showgrid"] = True 
                         figure["layout"]["yaxis"]["showgrid"] = True
 
             return patched_figures
