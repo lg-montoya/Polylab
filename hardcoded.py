@@ -66,8 +66,9 @@ Witch-king of Angmar.
 '''
 
 WARNING_GRIDLINES = '''
-A graph contains an axis whose range is too large. Displaying gridlines at such
-granularity will pollute the graph.
+A graph has an axis whose range is too large. Displaying gridlines at such
+granularity will pollute the graph. Gridlines will not be increased for
+that graph.
 '''
 
 
