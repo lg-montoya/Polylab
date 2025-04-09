@@ -12,7 +12,7 @@ gridlines_radio = html.Div(
         "padding": "5px",  # Add padding around the radio items
         "borderRadius": "5px",  # Rounded corners
         "display": "inline-block"  # Ensures the container behaves like an inline element
-    }, className='ml-1 mt-0 mb-1'
+    }, className='ml-1 mt-0'
 )
 
 fluid_mode_switch = html.Span([

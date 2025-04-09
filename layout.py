@@ -24,7 +24,8 @@ def app_layout(default_theme, other_theme):
                             gridlines_radio, 
                             fluid_mode_switch, 
                             theme_switch
-                        ], className="d-flex flex-row flex-nowrap align-items-center gap-2 mt-1")
+                        # EXTREME CARE: Any gap > 2 and it will not render properly on android                                
+                        ], className="d-flex flex-row flex-nowrap align-items-center gap-2 mt-1") 
                     ],
                              color="primary", 
                             outline=True,
@@ -33,7 +34,7 @@ def app_layout(default_theme, other_theme):
                                 "border-radius": "2px",  # Smooth rounded corners
                                 "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
                                 }
-                             ), 
+                             ),     
                 ], className="d-flex justify-content-center justify-content-sm-end mb-2"),
                 
                 dbc.Tabs([                  
