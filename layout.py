@@ -24,7 +24,7 @@ def app_layout(default_theme, other_theme):
                             gridlines_radio, 
                             fluid_mode_switch, 
                             theme_switch
-                        ], className="d-flex flex-row flex-nowrap align-items-center gap-3 mt-1")
+                        ], className="d-flex flex-row flex-nowrap align-items-center gap-2 mt-1")
                     ],
                              color="primary", 
                             outline=True,
