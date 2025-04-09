@@ -50,7 +50,7 @@ tab = html.Div([
                     html.Div(
                         dbc.Card(
                             dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True),
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True, config={'scrollZoom': False}),
                                 style={"padding": "0"}
                             ),
                             color="primary", 
@@ -74,7 +74,8 @@ tab = html.Div([
                     html.Div(
                         dbc.Card(
                             dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True),
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True,
+                                          config={'scrollZoom': False}),
                                 style={"padding": "0"}
                             ),
                             color="primary", 
@@ -98,7 +99,7 @@ tab = html.Div([
                     html.Div(
                         dbc.Card(
                             dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True),
+                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True, config={'scrollZoom': False}),
                                 style={"padding": "0"}
                             ),
                             color="primary", 
