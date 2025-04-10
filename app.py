@@ -33,6 +33,7 @@ app = dash.Dash(__name__,
                 prevent_initial_callbacks=True,
                 title = 'Maths Lab')
 server=app.server
+app._favicon="faviconH.png"
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # Load the layout and callbacks
