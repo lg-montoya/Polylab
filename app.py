@@ -30,8 +30,8 @@ app = dash.Dash(__name__,
                 external_scripts=external_scripts,
                 meta_tags=[{"name": "viewport",
                             "content": "width=device-width, initial-scale=1"}],
-                title="Maths Lab",
-                prevent_initial_callbacks=True)
+                prevent_initial_callbacks=True,
+                title = 'Maths Lab')
 server=app.server
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
