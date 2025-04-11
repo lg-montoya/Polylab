@@ -40,7 +40,7 @@ def app_layout(default_theme, other_theme):
                 dbc.Tabs([                  
                     dbc.Tab(introduction.tab, tab_id='tab-introduction', label='Introduction'),
                     dbc.Tab(polynomials.tab, tab_id='tab-polynomials', label='Polynomials'),
-                    # dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
+                    dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack', active_tab='tab-polynomials'),
                 
                 modal_gridlines

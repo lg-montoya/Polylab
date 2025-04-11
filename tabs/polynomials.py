@@ -51,15 +51,10 @@ tab = html.Div([
                         dbc.Card(
                             dbc.CardBody(
                                 dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True, config={'scrollZoom': False}),
-                                style={"padding": "0"}
+                                style={"padding": "2px"}
                             ),
                             color="primary", 
                             outline=True,
-                            style={
-                                "border": "1px solid #007bff",  # Custom border color
-                                "border-radius": "2px",  # Smooth rounded corners
-                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
-                                }
                         )
                     )
                 ], 
@@ -76,15 +71,10 @@ tab = html.Div([
                             dbc.CardBody(
                                 dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True,
                                           config={'scrollZoom': False}),
-                                style={"padding": "0"}
+                                style={"padding": "2px"}
                             ),
                             color="primary", 
                             outline=True,
-                            style={
-                                "border": "1px solid #007bff",  # Custom border color
-                                "border-radius": "2px",  # Smooth rounded corners
-                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
-                                }
                         )
                     )
                     ], 
@@ -100,15 +90,10 @@ tab = html.Div([
                         dbc.Card(
                             dbc.CardBody(
                                 dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True, config={'scrollZoom': False}),
-                                style={"padding": "0"}
+                                style={"padding": "2px"}
                             ),
                             color="primary", 
                             outline=True,
-                            style={
-                                "border": "1px solid #007bff",  # Custom border color
-                                "border-radius": "2px",  # Smooth rounded corners
-                                "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
-                                }
                         )
                     )
                 ],
