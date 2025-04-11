@@ -2,7 +2,7 @@ from dash import Patch
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
-from defaults.cosmetics import trace_colours
+from defaults.cosmetics import trace_colours, graph_background_colours
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
@@ -107,5 +107,22 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                     i+=1 
                 
             return patch_figure, *patched_figures
+        
+        @app.callback(
+            Output("slider_div", "style"),
+            Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+        )
+        def update_slider_div_background(is_dark):
+            # Select the appropriate background color
+            bg_color = graph_background_colours["default_theme"] if is_dark else graph_background_colours["other_theme"]
+
+            # Return updated style
+            return {
+                "border": "1px solid var(--bs-primary)",
+                "borderRadius": "6px",
+                "overflow": "hidden",
+                "padding": "12px",
+                "background": bg_color,  # Dynamically set background color
+            }
         
         

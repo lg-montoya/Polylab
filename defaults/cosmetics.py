@@ -18,3 +18,9 @@ trace_colours = {
     'default_theme':{index:color_code for index, color_code in enumerate(chart_default_theme_colours)},
     'other_theme': {index:color_code for index, color_code in enumerate(chart_other_theme_colours)}
 }
+
+# Extract background colors from the themes
+graph_background_colours = {
+    "default_theme": pio.templates[chart_default_theme]["layout"]["paper_bgcolor"],
+    "other_theme": pio.templates[chart_other_theme]["layout"]["paper_bgcolor"]
+}

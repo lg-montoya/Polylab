@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 from dash import html, dcc
 from defaults.dash_components import slider_default, dropdown_polynomial_options
 # BELOW import is for figure_template loading
-import defaults.cosmetics
+from defaults.cosmetics import graph_background_colours
 from defaults.chart_elements import empty_figure
 from modals import modal_plolynomial_instructions
 from factory import my_slider
@@ -28,39 +28,29 @@ tab = html.Div([
                 # First column containing just controls
                 dbc.Col([
                     dbc.Stack([
+                        
                         # Dropdown menu
                         html.Div(dcc.Dropdown(id='dropdown_menu_1', options=dropdown_polynomial_options, 
                                             clearable=False, placeholder='CHOOSE A POLYNOMIAL'), className="d-grid"),
+                        
                         # General form of the polynomial in LaTeX
-                        html.Div(dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), style={"textAlign": "center"}, className='mt-3'),
-                        # Sliders contained in a card
                         html.Div(
-                            dbc.Card(
-                                dbc.CardBody([
-                                    dbc.Row(
-                                        my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
-                                            for i in ['a', 'b', 'c', 'd']
-                                ]
-                                    ),
-                                # color="primary", outline=True
-                            ),
-                            
-                                # [
-                                #     dbc.Row(my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
-                                #     for i in ['a', 'b', 'c', 'd']
-                                # ],
-                                
-                                
-                                style={
-                                    
+                            dcc.Markdown("&nbsp;", mathjax=True, id='eq_1'), 
+                            style={"textAlign": "center"}, className='mt-3'
+                        ),
+                        
+                        # Sliders
+                        html.Div([
+                            dbc.Row(my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
+                            for i in ['a', 'b', 'c', 'd']
+                            ],        
+                            style={        
                                 "border": "1px solid var(--bs-primary)",
                                 "borderRadius": "6px", 
                                 "overflow": "hidden",
-                                # "background": "var(--bs-primary)"
-                            },
-                            className=''
-                                 
-                        
+                                # "padding": "1px",
+                                "background": graph_background_colours["default_theme"],
+                                }, id="slider_div"                        
                         )
                     ], style=flex_column_style),
             ], style=flex_column_style, sm=4),
