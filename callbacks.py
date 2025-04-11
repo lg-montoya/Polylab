@@ -76,6 +76,8 @@ def callback_wrapper(app):
             patched_figure = Patch()
             
             coeffs = MyPolynomial(coefficients).derivative(order=order).coef
+            # Remove erronous precision in poly.deriv.
+            coeffs = [round(i, 3) for i in coeffs]
             poly = MyPolynomial(coeffs)
             
             # Update the title
