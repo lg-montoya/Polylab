@@ -37,11 +37,30 @@ tab = html.Div([
                         html.Div(
                             dbc.Card(
                                 dbc.CardBody([
-                                    dbc.Row(my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
-                                    for i in ['a', 'b', 'c', 'd']
-                                ]),
-                                color="primary", outline=True
+                                    dbc.Row(
+                                        my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
+                                            for i in ['a', 'b', 'c', 'd']
+                                ]
+                                    ),
+                                # color="primary", outline=True
                             ),
+                            
+                                # [
+                                #     dbc.Row(my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
+                                #     for i in ['a', 'b', 'c', 'd']
+                                # ],
+                                
+                                
+                                style={
+                                    
+                                "border": "1px solid var(--bs-primary)",
+                                "borderRadius": "6px", 
+                                "overflow": "hidden",
+                                # "background": "var(--bs-primary)"
+                            },
+                            className=''
+                                 
+                        
                         )
                     ], style=flex_column_style),
             ], style=flex_column_style, sm=4),

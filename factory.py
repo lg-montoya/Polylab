@@ -74,13 +74,16 @@ class MyPolynomial:
 
 def my_slider(id, label):
     step = int(slider_max/5)
-    slider = [
-        dbc.Col(html.Div(dcc.Markdown(f"$$\\quad {label}$$", mathjax=True)), width=1),
+    slider = dbc.Row([
+        dbc.Col(html.Div(dcc.Markdown(f"$$\\quad {label}$$", mathjax=True)), 
+                width="auto",
+                className="d-flex align-items-center"  # Align label vertically with the slider
+                ),
         dbc.Col(html.Div(dcc.Slider(
             updatemode='drag', disabled=True, id=id, min=slider_min, max=slider_max,
             marks={i: str(i) for i in range(slider_min, slider_max + 1, step)}
-        )),className='mb-2 mt-2')
-        # )))
-    ]
+        ), className='w-100'), width=True)
+        
+    ], className='g-2')
     return slider
 
