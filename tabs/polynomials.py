@@ -46,60 +46,63 @@ tab = html.Div([
             ], style=flex_column_style, sm=4),
 
                 # Second column containing just the graph y=f(x)
-                dbc.Col([
+                dbc.Col(
                     html.Div(
-                        dbc.Card(
-                            dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-y', mathjax=True, config={'scrollZoom': False}),
-                                style={"padding": "2px"}
-                            ),
-                            color="primary", 
-                            outline=True,
-                        )
-                    )
-                ], 
-                sm=8, className="mt-sm-2-custom"),
+                        dcc.Graph(
+                            figure=empty_figure, 
+                            id='polynomial-graph-y', 
+                            mathjax=True, 
+                            config={'scrollZoom': False},
+                            style={
+                                "border": "1px solid var(--bs-primary)",
+                                "borderRadius": "6px", 
+                                "overflow": "hidden"
+                            } 
+                        ) 
+                    ), sm=8, className="mt-sm-2-custom"
+                ),
             ]),
             
             # ROW containing y=f'(x) graph
             dbc.Row([
-                dbc.Col(),
-                dbc.Col([
-                    
+                # All rows are two columns. Hence empty column below. Fix?
+                dbc.Col(), 
+                dbc.Col(
                     html.Div(
-                        dbc.Card(
-                            dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d1y', mathjax=True,
-                                          config={'scrollZoom': False}),
-                                style={"padding": "2px"}
-                            ),
-                            color="primary", 
-                            outline=True,
+                        dcc.Graph(
+                            figure=empty_figure, 
+                            id='polynomial-graph-d1y', 
+                            mathjax=True, 
+                            config={'scrollZoom': False},
+                            style={
+                                "border": "1px solid var(--bs-primary)",
+                                "borderRadius": "6px", 
+                                "overflow": "hidden"
+                            } 
                         )
-                    )
-                    ], 
-                    sm=8, class_name='mt-2'),
-                
-                ]),
+                    ), sm=8, class_name='mt-2'),
+            ]),
             
             # ROW containing y=f''(x) graph
             dbc.Row([
+                # All rows are two columns. Hence empty column below. Fix?
                 dbc.Col(),
                 dbc.Col([
                     html.Div(
-                        dbc.Card(
-                            dbc.CardBody(
-                                dcc.Graph(figure=empty_figure, id='polynomial-graph-d2y', mathjax=True, config={'scrollZoom': False}),
-                                style={"padding": "2px"}
-                            ),
-                            color="primary", 
-                            outline=True,
+                        dcc.Graph(
+                            figure=empty_figure, 
+                            id='polynomial-graph-d2y', 
+                            mathjax=True, 
+                            config={'scrollZoom': False},
+                            style={
+                                "border": "1px solid var(--bs-primary)",
+                                "borderRadius": "6px", 
+                                "overflow": "hidden"
+                            } 
                         )
                     )
-                ],
-                sm=8, class_name='mt-2'),    
+                ],sm=8, class_name='mt-2'),    
             ]),
-            
             modal_plolynomial_instructions
 
 ], className="mt-4")
