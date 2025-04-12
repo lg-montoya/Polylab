@@ -27,7 +27,7 @@ def app_layout(default_theme, other_theme):
                           
                         html.Div(
                             [gridlines_radio, fluid_mode_switch, theme_switch],
-                            className="d-flex flex-row align-items-center justify-content-end gap-3 mb-2",
+                            className="d-flex flex-row align-items-center justify-content-end gap-2 mb-2",
                             style={        
                                 "border": "1px solid var(--bs-primary)",
                                 "borderRadius": "6px", 
