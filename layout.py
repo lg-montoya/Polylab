@@ -20,14 +20,13 @@ def app_layout(default_theme, other_theme):
     layout = html.Div([
         dcc.Store(id='gridlines', storage_type='memory'),
         dbc.Container(
-            children=[     
-                      dbc.Row(dbc.Col(
-
-# className="d-flex flex-wrap flex-row justify-content-center justify-md-start align-items-center gap-3 mt-1 mb-2"                          
-                          
+            children=[    
+                # ROW containing app controls    
+                dbc.Row(
+                    dbc.Col( 
                         html.Div(
-                            [gridlines_radio, fluid_mode_switch, theme_switch],
-                            className="d-flex flex-row align-items-center justify-content-end gap-2 mb-2",
+                            children=[gridlines_radio, fluid_mode_switch, theme_switch],
+                            className="d-flex flex-row align-items-center gap-2 mb-2",
                             style={        
                                 "border": "1px solid var(--bs-primary)",
                                 "borderRadius": "6px", 
@@ -36,33 +35,11 @@ def app_layout(default_theme, other_theme):
                                 "padding": "0rem 0.5rem"
                             },
                             id="app-controls-div"
+                        ),
+                        className="d-flex justify-content-center justify-content-sm-end"       
                         )
-
-
-                                
-                          )),           
-                
-                
-                
-                # html.Div([
-                #     dbc.Card([
-                #         dbc.Container([
-                #             gridlines_radio, 
-                #             fluid_mode_switch, 
-                #             theme_switch
-                #         # EXTREME CARE: Any gap > 2 and it will not render properly on android                                
-                #         ], className="d-flex flex-row flex-nowrap align-items-center gap-2 mt-1") 
-                #     ],
-                #              color="primary", 
-                #             outline=True,
-                #             style={
-                #                 "border": "1px solid #007bff",  # Custom border color
-                #                 "border-radius": "2px",  # Smooth rounded corners
-                #                 "box-shadow": "0 0 5px rgba(0, 0, 0, 0.1)"  # Optional: Add a subtle shadow
-                #                 }
-                #              ),     
-                # ], className="d-flex justify-content-center justify-content-sm-end mb-2"),
-                
+                ),           
+                # ROW containing the tabs
                 dbc.Tabs([                  
                     dbc.Tab(introduction.tab, tab_id='tab-introduction', label='Introduction'),
                     dbc.Tab(polynomials.tab, tab_id='tab-polynomials', label='Polynomials'),
