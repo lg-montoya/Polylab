@@ -8,12 +8,14 @@ from defaults.cosmetics import graph_background_colours
 
 def app_layout(default_theme, other_theme):
     
-    theme_switch = ThemeSwitchAIO(
+    theme_switch = html.Span(ThemeSwitchAIO(
         aio_id = "theme", 
         themes = [default_theme, other_theme], 
         icons = {"left":"fa fa-sun", "right":"fa fa-cloud-moon"}, 
         switch_props = {"value":True},
-        )
+        ),
+        style={"marginTop": "3px"}
+    )
     
     layout = html.Div([
         dcc.Store(id='gridlines', storage_type='memory'),
