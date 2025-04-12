@@ -108,21 +108,23 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                 
             return patch_figure, *patched_figures
         
+        # Change background of html.divs based on theme
         @app.callback(
             Output("slider_div", "style"),
+            Output("app-controls-div", "style"),
             Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
         )
         def update_slider_div_background(is_dark):
             # Select the appropriate background color
             bg_color = graph_background_colours["default_theme"] if is_dark else graph_background_colours["other_theme"]
 
-            # Return updated style
-            return {
+            updated_style = {
                 "border": "1px solid var(--bs-primary)",
                 "borderRadius": "6px",
                 "overflow": "hidden",
-                "padding": "12px",
+                # "padding": "12px",
                 "background": bg_color,  # Dynamically set background color
             }
+            return updated_style, updated_style
         
         

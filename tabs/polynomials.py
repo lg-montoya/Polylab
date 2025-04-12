@@ -48,7 +48,6 @@ tab = html.Div([
                                 "border": "1px solid var(--bs-primary)",
                                 "borderRadius": "6px", 
                                 "overflow": "hidden",
-                                # "padding": "1px",
                                 "background": graph_background_colours["default_theme"],
                                 }, id="slider_div"                        
                         )
