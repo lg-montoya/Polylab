@@ -1,8 +1,9 @@
-from dash import Patch
+from dash import Patch, clientside_callback, set_props
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
-from defaults.cosmetics import trace_colours, graph_background_colours
+from defaults.cosmetics import (trace_colours, graph_background_colours,
+                                page_default_theme, page_other_theme)
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
@@ -57,8 +58,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             
             return *patched_figures, has_large_range
         
-        # ...existing code...
-
+        
+        # Open modal warning when too many gridlines will be rendered
         @app.callback(
             Output("mdl-gridlines", "is_open"),
             Input("gridlines", "data"),
@@ -67,8 +68,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         def show_gridlines_modal(has_large_range):
             """Launch modal when gridlines store indicates large range"""
             return True if has_large_range else False
-
-        # ...existing code...
 
 
         # Update fluid-mode based on toggle
@@ -85,7 +84,8 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             Output("polynomial-graph-y", "figure", allow_duplicate=True),
             Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
             Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-            Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            Input("theme-toggle", "value")
         )
         def update_graph_from_sliders(is_dark):
             patch_figure = Patch()
@@ -111,10 +111,11 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         # Change background of html.divs based on theme
         @app.callback(
             Output("slider_div", "style"),
-            Output("app-controls-div", "style"),
-            Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            # Output("app-controls-div", "style"),
+            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            Input("theme-toggle", "value")
         )
-        def update_slider_div_background(is_dark):
+        def update_slider_background(is_dark):
             # Select the appropriate background color
             bg_color = graph_background_colours["default_theme"] if is_dark else graph_background_colours["other_theme"]
 
@@ -122,9 +123,41 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                 "border": "1px solid var(--bs-primary)",
                 "borderRadius": "6px",
                 "overflow": "hidden",
-                # "padding": "12px",
                 "background": bg_color,  # Dynamically set background color
             }
-            return updated_style, updated_style
+            # set_props("slider_div",{'style':{'background':bg_color}})
+            return updated_style
+             
+        
+         # Change background of html.divs based on theme
+        @app.callback(
+            # Output("slider_div", "style"),
+            Output("app-controls-div", "style"),
+            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
+            Input("theme-toggle", "value")
+        )
+        def update_contlros_background(is_dark):
+            # Select the appropriate background color
+            bg_color = graph_background_colours["default_theme"] if is_dark else graph_background_colours["other_theme"]
+
+            updated_style = {
+                "border": "1px solid var(--bs-primary)",
+                "borderRadius": "6px",
+                "overflow": "hidden",
+                "background": bg_color,  # Dynamically set background color
+                "padding": "0.5rem",
+                "margin": "0rem"
+            }
+            # set_props("slider_div",{'style':{'background':bg_color}})
+            return updated_style
         
         
+        
+        
+        @app.callback(
+        Output("dynamic-stylesheet", "href"),
+        Input("theme-toggle", "value")  # Assuming theme-toggle is a switch for light/dark mode
+        )
+        def update_stylesheet(is_dark):
+            # Return the appropriate stylesheet based on the toggle value
+            return page_default_theme if is_dark else page_other_theme

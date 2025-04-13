@@ -6,7 +6,7 @@ import plotly.io as pio
 # clientside_callback(
 #     """ 
 #     (switchOn) => {
-#        document.documentElement.setAttribute('data-bs-theme', switchOn ? 'dark' : 'light');  
+#        document.documentElement.setAttribute('data-bs-theme', switchOn ? 'dark' : 'quartz');  
 #        return window.dash_clientside.no_update
 #     }
 #     """,
