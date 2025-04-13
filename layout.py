@@ -4,8 +4,10 @@ from forms import fluid_mode_switch, gridlines_radio, theme_mode_switch
 from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
 from modals import modal_gridlines
-from defaults.cosmetics import graph_background_colours
+from defaults.cosmetics import graph_background_colours, APP_THEMES
 
+
+DEFAULT_THEME = "default_theme"
 
 def app_layout(default_theme, other_theme):
     
@@ -20,12 +22,14 @@ def app_layout(default_theme, other_theme):
     )
     
     layout = html.Div([
-        dcc.Location(id="url", refresh=True),
+        # App-wide variable for grid-lines granularity setting
         dcc.Store(id='gridlines', storage_type='memory'),
-        
-        
+        # App-wide variable for current App theme setting
+        dcc.Store(id="theme-store", data=DEFAULT_THEME),
         # Link to dynamically update the stylesheet
-        html.Link(id="dynamic-stylesheet", rel="stylesheet", href="/assets/default.css"),
+        html.Link(id="theme-link", rel="stylesheet", href=APP_THEMES[DEFAULT_THEME]),
+
+        # dbc wrapper for the app.
         dbc.Container(
             children=[    
                 # ROW containing app controls    

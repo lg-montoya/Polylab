@@ -5,7 +5,14 @@ import plotly.io as pio
 page_default_theme= dbc.themes.CYBORG
 page_other_theme = dbc.themes.QUARTZ
 
-# Choose from 
+
+APP_THEMES = {
+    "default_theme": page_default_theme,
+    "other_theme": page_other_theme
+}
+
+
+# Choose plotly template themes from 
 ["quartz_dark", "vizro_dark", "vapor_dark", "vapor", "quartz"]
 chart_default_theme = "quartz_dark"
 chart_other_theme = "quartz"

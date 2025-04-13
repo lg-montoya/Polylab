@@ -3,11 +3,36 @@ from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
 from defaults.cosmetics import (trace_colours, graph_background_colours,
-                                page_default_theme, page_other_theme)
+                                page_default_theme, page_other_theme, APP_THEMES)
+
+ 
+theme_js_dict = ",\n        ".join([f'"{k}": "{v}"' for k, v in APP_THEMES.items()])
+
+clientside_callback_code = f"""
+function(theme) {{
+    const urls = {{
+        {theme_js_dict}
+    }};
+
+    const linkTag = document.getElementById("theme-link");
+    if (linkTag && urls[theme]) {{
+        linkTag.href = urls[theme];
+    }}
+    return window.dash_clientside.no_update;
+}}
+"""
+
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
 
+        # Register clientside callback
+        clientside_callback(
+            clientside_callback_code,
+            Output("theme-link", "href"),
+            Input("theme-store", "data")
+        )
+        
         @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
@@ -131,9 +156,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         
          # Change background of html.divs based on theme
         @app.callback(
-            # Output("slider_div", "style"),
             Output("app-controls-div", "style"),
-            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
             Input("theme-toggle", "value")
         )
         def update_contlros_background(is_dark):
@@ -152,12 +175,23 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return updated_style
         
         
-        
-        
+        # Update theme in store
         @app.callback(
-        Output("dynamic-stylesheet", "href"),
-        Input("theme-toggle", "value")  # Assuming theme-toggle is a switch for light/dark mode
+            Output("theme-store", "data"),
+            Input("theme-toggle", "value"),
         )
-        def update_stylesheet(is_dark):
-            # Return the appropriate stylesheet based on the toggle value
-            return page_default_theme if is_dark else page_other_theme
+        def update_theme_store(is_dark):
+            return "default_theme" if is_dark else "other_theme"
+        
+        
+        
+        
+        # @app.callback(
+        # Output("dynamic-stylesheet", "href"),
+        # Input("theme-toggle", "value")  # Assuming theme-toggle is a switch for light/dark mode
+        # )
+        # def update_stylesheet(is_dark):
+        #     # Return the appropriate stylesheet based on the toggle value
+        #     return page_default_theme if is_dark else page_other_theme
+        
+        

@@ -21,7 +21,7 @@ gridlines_radio = html.Div(
 fluid_mode_switch = html.Span([
         dbc.Label(className="fa fa-mobile me-1", html_for="fluid-toggle"),
         dbc.Switch(id="fluid-toggle", value=True, className="d-inline-block", persistence=False),
-        dbc.Label(className="fa fa-laptop", html_for="fluid-toggle"),
+        dbc.Label(align='center',className="fa fa-laptop", html_for="fluid-toggle"),
 ],style={"marginTop": "3px"})
 
 
