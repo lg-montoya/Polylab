@@ -25,7 +25,7 @@ def app_layout(default_theme, other_theme):
         # App-wide variable for grid-lines granularity setting
         dcc.Store(id='gridlines', storage_type='memory'),
         # App-wide variable for current App theme setting
-        dcc.Store(id="theme-store", data=DEFAULT_THEME),
+        dcc.Store(id="theme-store", data=DEFAULT_THEME, storage_type="local"),
         # Link to dynamically update the stylesheet
         html.Link(id="theme-link", rel="stylesheet", href=APP_THEMES[DEFAULT_THEME]),
 
