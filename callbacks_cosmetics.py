@@ -1,4 +1,4 @@
-from dash import Patch, clientside_callback, set_props
+from dash import Patch, clientside_callback, set_props, ctx
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
@@ -21,7 +21,6 @@ function(theme) {{
     return window.dash_clientside.no_update;
 }}
 """
-
 
 
 def callback_wrapper(app, default_chart_theme, other_chart_theme):  
@@ -175,14 +174,41 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             return updated_style
         
         
-        # Update theme in store
+        # # Update theme in store
+        # @app.callback(
+        #     Output("theme-store", "data"),
+        #     Input("theme-toggle", "value"),
+        # )
+        # def update_theme_store(is_dark):
+        #     return "default_theme" if is_dark else "other_theme"
+        
+        
+        # # Update toggle based on store
+        # @app.callback(
+        #     Output("theme-toggle", "value"),
+        #     Input("theme-store", "data"),
+        # )
+        # def update_theme_store(theme_store):
+        #     return True if theme_store=="default_theme" else False
+        
         @app.callback(
+            Output("theme-toggle", "value"),
             Output("theme-store", "data"),
             Input("theme-toggle", "value"),
+            Input("theme-store", "data"),
+            # prevent_initial_call=True
         )
-        def update_theme_store(is_dark):
-            return "default_theme" if is_dark else "other_theme"
-        
+        def sync_theme_toggle_and_store(toggle_value, store_data):
+            trigger = ctx.triggered_id
+
+            if trigger == "theme-toggle":
+                # User toggled theme manually
+                new_store = "default_theme" if toggle_value else "other_theme"
+                return toggle_value, new_store
+            elif trigger == "theme-store":
+                # Theme store was updated elsewhere (like from localStorage)
+                new_toggle = True if store_data == "default_theme" else False
+                return new_toggle, store_data
         
         
         
@@ -194,4 +220,4 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
         #     # Return the appropriate stylesheet based on the toggle value
         #     return page_default_theme if is_dark else page_other_theme
         
-        
+

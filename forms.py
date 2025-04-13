@@ -28,11 +28,7 @@ fluid_mode_switch = html.Span([
 
 # Theme toggle group
 theme_mode_switch = html.Div([
-        # dbc.Label(DashIconify(icon="emojione:unicorn-face", flip='horizontal', width=16, className='me-1', style={"marginBottom": "2px"}), html_for="theme-toggle"),
         dbc.Label(DashIconify(icon="fluent-emoji-flat:unicorn", flip='horizontal', width=17, className='me-1', style={"marginBottom": "2px"}), html_for="theme-toggle"),
         dbc.Switch(id="theme-toggle", value=True, className="d-inline-block", persistence=False),
-        # dbc.Label(DashIconify(icon="mdi:ninja", width=18), html_for="theme-toggle"),
         dbc.Label(DashIconify(icon="fa6-solid:user-ninja", width=15, style={"marginBottom": "3px"}), html_for="theme-toggle"),
-        # dbc.Label(DashIconify(icon="game-icons:ninja-heroic-stance", width=24, style={"marginBottom": "5px"}), html_for="theme-toggle"),
-        # dbc.Label(DashIconify(icon="game-icons:ninja-head", width=18), html_for="theme-toggle"),
 ],style={"marginTop": "8px"})
