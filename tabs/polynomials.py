@@ -66,17 +66,17 @@ tab = html.Div([
                                 "border": "1px solid var(--bs-primary)",
                                 "borderRadius": "6px", 
                                 "overflow": "hidden"
-                            } 
+                            },
                         ) 
-                    ), sm=8, className="mt-sm-2-custom"
+                    ), sm=8, className="mt-sm-2-custom",
                 ),
             ]),
             
-            # ROW containing y=f'(x) graph
+            # ROW containing y=f''(x) graph
             dbc.Row([
                 # All rows are two columns. Hence empty column below. Fix?
-                dbc.Col(), 
-                dbc.Col(
+                dbc.Col(),
+                dbc.Col([
                     html.Div(
                         dcc.Graph(
                             figure=empty_figure, 
@@ -89,7 +89,8 @@ tab = html.Div([
                                 "overflow": "hidden"
                             } 
                         )
-                    ), sm=8, class_name='mt-2'),
+                    )
+                ],sm=8, class_name='mt-2'),    
             ]),
             
             # ROW containing y=f''(x) graph
