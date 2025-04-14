@@ -9,11 +9,11 @@ from defaults.cosmetics import graph_background_colours, APP_THEMES
 
 DEFAULT_THEME = "default_theme"
 
-def app_layout(default_theme, other_theme):
+def app_layout(app_themes):
     
     theme_switch = html.Span(ThemeSwitchAIO(
         aio_id = "theme", 
-        themes = [default_theme, other_theme], 
+        themes = list(app_themes.values()), 
         icons = {"left":"fa fa-sun", "right":"fa fa-cloud-moon"}, 
         switch_props = {"value":True},
         ),

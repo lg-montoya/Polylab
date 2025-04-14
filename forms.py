@@ -10,11 +10,10 @@ gridlines_radio = html.Div(
                 {'label': html.Span([html.I(className="fa fa-table-cells ms-1 me-1"), ""]), 'value': 'more_gridlines'}
                 ],value='blank', inline=True, 
         ),
-        style={
-        "padding": "5px",  # Add padding around the radio items
-        "borderRadius": "5px",  # Rounded corners
-        "display": "inline-block"  # Ensures the container behaves like an inline element
-    }
+        style={"padding": "5px",  # Add padding around the radio items
+               "borderRadius": "5px",  # Rounded corners
+                "display": "inline-block"  # Ensures the container behaves like an inline element
+        }
 )
 
 # Fluid toggle group

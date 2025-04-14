@@ -3,7 +3,7 @@ from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
 from defaults.cosmetics import (trace_colours, graph_background_colours,
-                                page_default_theme, page_other_theme, APP_THEMES)
+                                APP_THEMES)
 
  
 theme_js_dict = ",\n        ".join([f'"{k}": "{v}"' for k, v in APP_THEMES.items()])
@@ -23,7 +23,7 @@ function(theme) {{
 """
 
 
-def callback_wrapper(app, default_chart_theme, other_chart_theme):  
+def callback_wrapper(app, chart_default_theme, chart_other_theme):  
 
         # Register clientside callback
         clientside_callback(
@@ -115,18 +115,18 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             patch_figure = Patch()
             patched_figures = [Patch() for _ in range(2)]
 
-            patch_figure["layout"]["template"] = (pio.templates[default_chart_theme] 
-                                                if is_dark else pio.templates[other_chart_theme])    
+            patch_figure["layout"]["template"] = (pio.templates[chart_default_theme] 
+                                                if is_dark else pio.templates[chart_other_theme])    
             
             i=1
             if is_dark:
                 for figure in patched_figures:
-                    figure["layout"]["template"] = pio.templates[default_chart_theme]
+                    figure["layout"]["template"] = pio.templates[chart_default_theme]
                     figure['data'][0]['line']['color']=trace_colours['default_theme'][i]
                     i+=1
             else:
                 for figure in patched_figures:
-                    figure["layout"]["template"] = pio.templates[other_chart_theme]
+                    figure["layout"]["template"] = pio.templates[chart_other_theme]
                     figure['data'][0]['line']['color']=trace_colours['other_theme'][i]
                     i+=1 
                 
@@ -173,23 +173,7 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
             # set_props("slider_div",{'style':{'background':bg_color}})
             return updated_style
         
-        
-        # # Update theme in store
-        # @app.callback(
-        #     Output("theme-store", "data"),
-        #     Input("theme-toggle", "value"),
-        # )
-        # def update_theme_store(is_dark):
-        #     return "default_theme" if is_dark else "other_theme"
-        
-        
-        # # Update toggle based on store
-        # @app.callback(
-        #     Output("theme-toggle", "value"),
-        #     Input("theme-store", "data"),
-        # )
-        # def update_theme_store(theme_store):
-        #     return True if theme_store=="default_theme" else False
+  
         
         @app.callback(
             Output("theme-toggle", "value"),
@@ -210,14 +194,6 @@ def callback_wrapper(app, default_chart_theme, other_chart_theme):
                 new_toggle = True if store_data == "default_theme" else False
                 return new_toggle, store_data
         
-        
-        
-        # @app.callback(
-        # Output("dynamic-stylesheet", "href"),
-        # Input("theme-toggle", "value")  # Assuming theme-toggle is a switch for light/dark mode
-        # )
-        # def update_stylesheet(is_dark):
-        #     # Return the appropriate stylesheet based on the toggle value
-        #     return page_default_theme if is_dark else page_other_theme
+
         
 

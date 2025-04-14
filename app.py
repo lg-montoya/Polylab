@@ -3,10 +3,8 @@ import os
 import dash_bootstrap_components as dbc
 from layout import app_layout 
 import callbacks
-from defaults.cosmetics import (
-    chart_default_theme, chart_other_theme, 
-    page_default_theme, page_other_theme
-    )
+from defaults.cosmetics import APP_THEMES, chart_default_theme, chart_other_theme
+    
 import callbacks_cosmetics
 
 
@@ -22,7 +20,8 @@ external_scripts = ['https://polyfill.io/v3/polyfill.min.js?features=es6',
                      },
                     ]
 dbc_css = "https://cdn.jsdelivr.net/gh/AnnMarieW/dash-bootstrap-templates/dbc.min.css"
-external_stylesheets = [page_default_theme, dbc_css, dbc.icons.FONT_AWESOME]
+external_stylesheets = [APP_THEMES["default_theme"], dbc_css, dbc.icons.FONT_AWESOME]
+
 
 # Initialize the app
 app = dash.Dash(__name__,
@@ -37,7 +36,7 @@ app._favicon="faviconH.png"
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # Load the layout and callbacks
-app.layout = app_layout(page_default_theme, page_other_theme)
+app.layout = app_layout(APP_THEMES)
 callbacks.callback_wrapper(app)
 callbacks_cosmetics.callback_wrapper(app, chart_default_theme, chart_other_theme)
 
