@@ -16,7 +16,7 @@ MODAL_POLYNOMIAL_INSTRUCTIONS = dbc.Modal([
 ],id="mdl-instructions-polynomials", scrollable=True, centered=True,)
 
 # Sinusoidals Instructions modal
-modal_sinusoidal_instructions = dbc.Modal(
+MODAL_SINUSOIDAL_INSTRUCTIONS = dbc.Modal(
     [
         dbc.ModalHeader("Instructions"),
         dbc.ModalBody(children=[
@@ -30,7 +30,7 @@ modal_sinusoidal_instructions = dbc.Modal(
 )
 
 # Gridlines Warning modal
-modal_gridlines = dbc.Modal(
+MODAL_GRIDLINES = dbc.Modal(
     [
         dbc.ModalHeader("Range Warning"),
         dbc.ModalBody(children=[

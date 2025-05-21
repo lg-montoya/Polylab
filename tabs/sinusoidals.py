@@ -1,6 +1,6 @@
 import dash_bootstrap_components as dbc
 from dash import html
-from modals import modal_sinusoidal_instructions
+from modals import MODAL_SINUSOIDAL_INSTRUCTIONS
 from defaults.mathematics import SINUSOIDALS
 
 
@@ -14,7 +14,7 @@ tab = html.Div([
                     ],
                     className="d-grid gap-2 d-md-flex justify-content-md-start",    
                     ),
-                    modal_sinusoidal_instructions,
+                    MODAL_SINUSOIDAL_INSTRUCTIONS,
                 ], class_name='mb-3')
             ]),
             

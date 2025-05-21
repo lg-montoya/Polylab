@@ -3,7 +3,7 @@ from dash import html, dcc
 from forms import fluid_mode_switch, gridlines_radio, theme_mode_switch
 from dash_bootstrap_templates import ThemeSwitchAIO
 from tabs import introduction, polynomials, sinusoidals, linear_programming
-from modals import modal_gridlines
+from modals import MODAL_GRIDLINES
 from defaults.cosmetics import graph_background_colours, APP_THEMES
 
 
@@ -60,7 +60,7 @@ def app_layout(app_themes):
                     # dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
                 ], id='tab-group', class_name='nav-stack', active_tab='tab-polynomials'),
                 
-                modal_gridlines
+                MODAL_GRIDLINES
                 
             ], id='main-container', fluid=False, class_name="mt-3 dbc"
         )
