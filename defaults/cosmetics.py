@@ -5,6 +5,12 @@ import plotly.io as pio
 default_theme_cdn= dbc.themes.CYBORG
 other_theme_cdn = dbc.themes.QUARTZ
 
+STYLE_GRAPH_BORDER = {
+    "border": "1px solid var(--bs-primary)",
+    "borderRadius": "6px", 
+    "overflow": "hidden"
+} 
+
 
 APP_THEMES = {
     "default_theme": default_theme_cdn,

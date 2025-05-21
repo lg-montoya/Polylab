@@ -6,6 +6,7 @@ from defaults.cosmetics import graph_background_colours
 from defaults.chart_elements import empty_figure
 from modals import modal_plolynomial_instructions
 from factory import my_slider
+from defaults.cosmetics import STYLE_GRAPH_BORDER
 
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
@@ -44,12 +45,11 @@ tab = html.Div([
                             dbc.Row(my_slider({"type": "polynomial_slider", "name": f"{i}"}, f"{i}")) 
                             for i in ['a', 'b', 'c', 'd']
                             ],        
-                            style={        
-                                "border": "1px solid var(--bs-primary)",
-                                "borderRadius": "6px", 
-                                "overflow": "hidden",
+                            style={
+                                **STYLE_GRAPH_BORDER,
                                 "background": graph_background_colours["default_theme"],
-                                }, id="slider_div"                        
+                                },
+                            id="slider_div"                        
                         )
                     ], style=flex_column_style),
             ], style=flex_column_style, sm=4),
@@ -62,11 +62,7 @@ tab = html.Div([
                             id='polynomial-graph-y', 
                             mathjax=True, 
                             config={'scrollZoom': False},
-                            style={
-                                "border": "1px solid var(--bs-primary)",
-                                "borderRadius": "6px", 
-                                "overflow": "hidden"
-                            },
+                            style=STYLE_GRAPH_BORDER,
                         ) 
                     ), sm=8, className="mt-sm-2-custom",
                 ),
@@ -83,11 +79,7 @@ tab = html.Div([
                             id='polynomial-graph-d1y', 
                             mathjax=True, 
                             config={'scrollZoom': False},
-                            style={
-                                "border": "1px solid var(--bs-primary)",
-                                "borderRadius": "6px", 
-                                "overflow": "hidden"
-                            } 
+                            style=STYLE_GRAPH_BORDER,
                         )
                     )
                 ],sm=8, class_name='mt-2'),    
@@ -104,11 +96,7 @@ tab = html.Div([
                             id='polynomial-graph-d2y', 
                             mathjax=True, 
                             config={'scrollZoom': False},
-                            style={
-                                "border": "1px solid var(--bs-primary)",
-                                "borderRadius": "6px", 
-                                "overflow": "hidden"
-                            } 
+                            style=STYLE_GRAPH_BORDER,
                         )
                     )
                 ],sm=8, class_name='mt-2'),    
