@@ -4,7 +4,7 @@ from defaults.dash_components import slider_default, dropdown_polynomial_options
 # BELOW import is for figure_template loading
 from defaults.cosmetics import graph_background_colours
 from defaults.chart_elements import empty_figure
-from modals import modal_plolynomial_instructions
+from modals import MODAL_POLYNOMIAL_INSTRUCTIONS
 from factory import my_slider
 from defaults.cosmetics import STYLE_GRAPH_BORDER
 
@@ -101,6 +101,7 @@ tab = html.Div([
                     )
                 ],sm=8, class_name='mt-2'),    
             ]),
-            modal_plolynomial_instructions
+            
+            MODAL_POLYNOMIAL_INSTRUCTIONS
 
 ], className="mt-4")

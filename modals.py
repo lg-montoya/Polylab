@@ -4,8 +4,7 @@ from dash import dcc
 from hardcoded import POLYNOMIAL_INSTRUCTIONS, SINUSOIDAL_INSTRUCTIONS, WARNING_GRIDLINES
 
 # Polynomial Instructions modal
-modal_plolynomial_instructions = dbc.Modal([
-    
+MODAL_POLYNOMIAL_INSTRUCTIONS = dbc.Modal([
         dbc.ModalHeader(dbc.ModalTitle("Instructions")),
         dbc.ModalBody(children=[
             dcc.Markdown(POLYNOMIAL_INSTRUCTIONS),
