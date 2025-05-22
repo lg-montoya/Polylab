@@ -3,6 +3,8 @@ import plotly.graph_objs as go
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 from defaults.dash_components import slider_default
+from defaults.cosmetics import STYLE_GRAPH_BORDER
+from defaults.chart_elements import empty_figure
 
 
 slider_min = slider_default["min"]
@@ -87,3 +89,19 @@ def my_slider(id, label):
     ], className='g-2')
     return slider
 
+
+def graph_generator(id: str, class_name: str):
+    my_graph = dbc.Col(
+                    html.Div(
+                        dcc.Graph(
+                            figure=empty_figure, 
+                            id=id,
+                            mathjax=True, 
+                            config={'scrollZoom': False},
+                            style=STYLE_GRAPH_BORDER
+                        )
+                    ),
+                    sm=8,
+                    className=class_name 
+                )
+    return my_graph

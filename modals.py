@@ -16,8 +16,7 @@ MODAL_POLYNOMIAL_INSTRUCTIONS = dbc.Modal([
 ],id="mdl-instructions-polynomials", scrollable=True, centered=True,)
 
 # Sinusoidals Instructions modal
-MODAL_SINUSOIDAL_INSTRUCTIONS = dbc.Modal(
-    [
+MODAL_SINUSOIDAL_INSTRUCTIONS = dbc.Modal([
         dbc.ModalHeader("Instructions"),
         dbc.ModalBody(children=[
             dcc.Markdown(SINUSOIDAL_INSTRUCTIONS),

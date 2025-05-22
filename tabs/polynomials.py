@@ -3,14 +3,12 @@ from dash import html, dcc
 from defaults.dash_components import slider_default, dropdown_polynomial_options
 # BELOW import is for figure_template loading
 from defaults.cosmetics import graph_background_colours
-from defaults.chart_elements import empty_figure
 from modals import MODAL_POLYNOMIAL_INSTRUCTIONS
-from factory import my_slider
+from factory import my_slider, graph_generator
 from defaults.cosmetics import STYLE_GRAPH_BORDER
 
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
-
 flex_column_style = {'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'space-between'}
 
 tab = html.Div([
@@ -24,7 +22,7 @@ tab = html.Div([
                 ],class_name='mb-2', sm=2)
             ]),
             
-            # ROW of controls and y=f(x) graph.
+            # 1st ROW of controls and y=f(x) graph.
             dbc.Row([
                 # First column containing just controls
                 dbc.Col([
@@ -55,52 +53,18 @@ tab = html.Div([
             ], style=flex_column_style, sm=4),
 
                 # Second column containing just the graph y=f(x)
-                dbc.Col(
-                    html.Div(
-                        dcc.Graph(
-                            figure=empty_figure, 
-                            id='polynomial-graph-y', 
-                            mathjax=True, 
-                            config={'scrollZoom': False},
-                            style=STYLE_GRAPH_BORDER,
-                        ) 
-                    ), sm=8, className="mt-sm-2-custom",
-                ),
-            ]),
+                graph_generator(id='polynomial-graph-y', class_name="mt-sm-2-custom"),
+        ]),
             
-            # ROW containing y=f''(x) graph
-            dbc.Row([
-                # All rows are two columns. Hence empty column below. Fix?
-                dbc.Col(),
-                dbc.Col([
-                    html.Div(
-                        dcc.Graph(
-                            figure=empty_figure, 
-                            id='polynomial-graph-d1y', 
-                            mathjax=True, 
-                            config={'scrollZoom': False},
-                            style=STYLE_GRAPH_BORDER,
-                        )
-                    )
-                ],sm=8, class_name='mt-2'),    
-            ]),
+            # 2nd ROW containing y=f'(x) graph
+            dbc.Row(      
+                graph_generator(id='polynomial-graph-d1y', class_name="mt-2 ms-auto")
+            ),
             
-            # ROW containing y=f''(x) graph
-            dbc.Row([
-                # All rows are two columns. Hence empty column below. Fix?
-                dbc.Col(),
-                dbc.Col([
-                    html.Div(
-                        dcc.Graph(
-                            figure=empty_figure, 
-                            id='polynomial-graph-d2y', 
-                            mathjax=True, 
-                            config={'scrollZoom': False},
-                            style=STYLE_GRAPH_BORDER,
-                        )
-                    )
-                ],sm=8, class_name='mt-2'),    
-            ]),
+            # 3rd ROW containing y=f''(x) graph
+            dbc.Row(
+                graph_generator(id='polynomial-graph-d2y', class_name="mt-2 ms-auto")  
+            ),
             
             MODAL_POLYNOMIAL_INSTRUCTIONS
 
