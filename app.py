@@ -30,9 +30,9 @@ app = dash.Dash(__name__,
                             "content": "width=device-width, initial-scale=1"}],
                 prevent_initial_callbacks=True,
                 title = 'Maths Lab')
-# server=app.server
+server=app.server
 app._favicon="faviconH.png"
-# app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
+app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # Load the layout and callbacks
 app.layout = app_layout(APP_THEMES)
