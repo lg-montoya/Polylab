@@ -4,7 +4,6 @@ import dash_bootstrap_components as dbc
 from layout import app_layout 
 import callbacks
 from defaults.cosmetics import APP_THEMES, chart_default_theme, chart_other_theme
-    
 import callbacks_cosmetics
 
 
@@ -31,18 +30,17 @@ app = dash.Dash(__name__,
                             "content": "width=device-width, initial-scale=1"}],
                 prevent_initial_callbacks=True,
                 title = 'Maths Lab')
-server=app.server
+# server=app.server
 app._favicon="faviconH.png"
-app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
+# app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
 # Load the layout and callbacks
 app.layout = app_layout(APP_THEMES)
 callbacks.callback_wrapper(app)
-callbacks_cosmetics.callback_wrapper(app, chart_default_theme, chart_other_theme)
-
-# Set the server to run in production or development mode
+callbacks_cosmetics.callback_wrapper(app, chart_default_theme, chart_other_theme)# Set the server to run in production or development mode
 if __name__ == '__main__':
     if FLASK_DEBUG == 'development':
         app.run(debug=True, threaded=True, dev_tools_hot_reload=True, port=8080)
+        # app.run(debug=False)
     elif FLASK_DEBUG == 'production':
         app.run(debug=False)
