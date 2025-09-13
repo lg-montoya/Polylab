@@ -1,17 +1,21 @@
+'''
+Module containing (Non-cosmetic) Callbacks for the polynomial graphing app.
+'''
 import numpy as np
 from dash.dependencies import Input, Output, State, ALL
 from dash import Patch
 from defaults.cosmetics import  trace_colours
-from defaults.dash_components import slider_max
+from defaults.dash_components import SLIDER_MAX
 from defaults.mathematics import derivative_notation, POLYNOMIALS, SINUSOIDALS
 from factory import MyPolynomial
 
 
-x_values = np.linspace(-slider_max, slider_max, 400)
+x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
 
+# Wrapper function to register callbacks
 def callback_wrapper(app):  
 
-    # Update general form of equation based on dropdown
+    # Update general form of equation based on polynomial-dropdown selection
     @app.callback(
         Output("eq_1", "children"),
         Input("dropdown_menu_1", "value")
@@ -19,7 +23,7 @@ def callback_wrapper(app):
     def display_general_polynomial_form(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]['general_form']
     
-    # Update visibility and default slider values based on dropdown
+    # Update visibility and default slider values based on polynomial-dropdown selection.
     @app.callback(
         Output({"type": "polynomial_slider", "name": ALL}, "disabled"),
         Output({"type": "polynomial_slider", "name": ALL}, "value"),
@@ -65,17 +69,17 @@ def callback_wrapper(app):
         return patched_figure
     
    
-    # Update derivative graphs based on slider values.
-    def update_derivative_graph(order):
+    # Update f'(x) and f''(x) graphs based on slider values.
+    def update_derivative_graph(derivative_order):
         @app.callback(
-            Output(f"polynomial-graph-d{order}y", "figure", allow_duplicate=True),    
+            Output(f"polynomial-graph-d{derivative_order}y", "figure", allow_duplicate=True),    
             Input({"type": "polynomial_slider", "name": ALL}, "value"),
             )
         def inner_function(coefficients):
             
             patched_figure = Patch()
             
-            coeffs = MyPolynomial(coefficients).derivative(order=order).coef
+            coeffs = MyPolynomial(coefficients).derivative(order=derivative_order).coef
             # Remove erronous precision in poly.deriv.
             coeffs = [round(i, 3) for i in coeffs]
             poly = MyPolynomial(coeffs)
@@ -83,7 +87,7 @@ def callback_wrapper(app):
             # Update the title
             terms = [f"{coeff}x^{i}" if i > 0 else f"{coeff}" for i, coeff in enumerate(coeffs)]
             derivative_str = " + ".join(terms).replace(" ","").replace("+0.0x^1","").replace("x^1","x").replace("+0.0x^2","")
-            title = fr"${derivative_notation[order]}={derivative_str}$".replace("=0.0+", "=")
+            title = fr"${derivative_notation[derivative_order]}={derivative_str}$".replace("=0.0+", "=")
             
             patched_figure['data'][0]['x'] = x_values
             patched_figure['data'][0]['y'] = poly.evaluate(x_values)
@@ -93,7 +97,7 @@ def callback_wrapper(app):
             patched_figure["layout"]["showlegend"] = False
             
             # Always start on the default theme trace colour
-            patched_figure['data'][0]['line']['color']=trace_colours['default_theme'][order]
+            patched_figure['data'][0]['line']['color']=trace_colours['default_theme'][derivative_order]
 
             
             return patched_figure
@@ -112,10 +116,12 @@ def callback_wrapper(app):
             return is_open
         
     modal_builder('instructions-polynomials', link='btn')
+    
+    
+    
+    
     # modal_builder('instructions-sinusoidals', link='btn')
     
-    
-
     # # @app.callback(
     # #     Output('dynamic-sinusoidal', 'children'),
     # #     Input('dynamic-add-sinusoidal-btn', 'n_clicks'),

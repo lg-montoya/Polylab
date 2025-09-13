@@ -91,6 +91,7 @@ def my_slider(id, label):
 
 
 def graph_generator(id: str, class_name: str):
+    
     my_graph = dbc.Col(
                     html.Div(
                         dcc.Graph(

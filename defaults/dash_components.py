@@ -1,6 +1,6 @@
 from .mathematics import POLYNOMIALS
 
 
-slider_max=10
-slider_default={"min":-slider_max, "max":slider_max,}
+SLIDER_MAX=10 # (absolute) Maximum value for sliders
+slider_default={"min":-SLIDER_MAX, "max":SLIDER_MAX,}
 dropdown_polynomial_options = [{'label': key, 'value': key} for key in POLYNOMIALS.keys()]

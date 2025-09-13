@@ -3,10 +3,11 @@ from .dash_components import slider_default
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 
+# Empty figure template for displaying a blank chart
 empty_figure = go.Figure(
     layout={
         "xaxis": {
-            "showgrid": False,  # Enable gridlines for the x-axis
+            "showgrid": False,  # Disable gridlines for the x-axis
             "dtick": 0,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
             "zerolinewidth": 1,
@@ -14,7 +15,7 @@ empty_figure = go.Figure(
             "ticklen":5,     
         },
         "yaxis": {
-            "showgrid": False,  # Enable gridlines for the y-axis
+            "showgrid": False,  # Disable gridlines for the y-axis
             "dtick": 0,  # Set tick spacing to 1
             "zeroline": True,  # Show the zero line
             "zerolinewidth": 1,
@@ -23,6 +24,8 @@ empty_figure = go.Figure(
         },
     }
 )
+
+# Update the layout of the empty figure
 empty_figure.update_layout(
     xaxis=axis, 
     yaxis=axis,

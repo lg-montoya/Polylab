@@ -1,7 +1,7 @@
 import dash
 import os
 import dash_bootstrap_components as dbc
-from layout import app_layout 
+from layout import app_layout
 import callbacks
 from defaults.cosmetics import APP_THEMES, chart_default_theme, chart_other_theme
 import callbacks_cosmetics

@@ -1,6 +1,7 @@
+# Below are three different ways to represent derivatives in chart titles.
 # derivative_notation={1:"f'(x)", 2:"f''(x)"}
-derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
-# derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
+# derivative_notation={1:fr"\frac{{dy}}{{dx}}", 2:fr"\frac{{d^2y}}{{dx^2}}"}
+derivative_notation={1:fr"dy/dx", 2:fr"d^2y/dx^2"}
 
 POLYNOMIALS = {
     'constant':{

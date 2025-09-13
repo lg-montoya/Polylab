@@ -1,13 +1,16 @@
+'''
+Module containing callbacks related to the cosmetics of the app, 
+such as theme switching, gridlines, and fluid mode.
+'''
 from dash import Patch, clientside_callback, set_props, ctx
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
-from defaults.cosmetics import (trace_colours, graph_background_colours,
-                                APP_THEMES)
+from defaults.cosmetics import trace_colours, graph_background_colours, APP_THEMES
 
  
+ # Allow instant theme switching in the browser without a round-trip to the server.
 theme_js_dict = ",\n        ".join([f'"{k}": "{v}"' for k, v in APP_THEMES.items()])
-
 clientside_callback_code = f"""
 function(theme) {{
     const urls = {{
@@ -21,17 +24,18 @@ function(theme) {{
     return window.dash_clientside.no_update;
 }}
 """
+graph_background_colours
+# Wrapper function to register callbacks
+def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:  
 
-
-def callback_wrapper(app, chart_default_theme, chart_other_theme):  
-
-        # Register clientside callback
+        # Allow instant theme switching in the browser without a round-trip to the server.
         clientside_callback(
             clientside_callback_code,
             Output("theme-link", "href"),
             Input("theme-store", "data")
         )
-        
+        # Callback to update the gridlines of the graphs based on 
+        # the gridlines radio button selection.
         @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
@@ -43,7 +47,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
         State("polynomial-graph-d2y", "figure"),
         prevent_initial_call=True
         )
-        def update_gridlines(selected_value, fig_y, fig_d1y, fig_d2y):
+        def update_gridlines(gridline_amount, fig_y, fig_d1y, fig_d2y):
             # Create patches for the figures
             patched_figures = [Patch() for _ in range(3)]
             current_figs = [fig_y, fig_d1y, fig_d2y]
@@ -56,9 +60,9 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
 
             has_large_range=False
             
-            # Case selection based on the radio items' value
-            match selected_value:
-                case "blank":
+            # Determine amount of gridlines based on the selected option
+            match gridline_amount:
+                case "none":
                     for figure in patched_figures:
                         figure["layout"]["xaxis"]["dtick"] = 0
                         figure["layout"]["yaxis"]["dtick"] = 0
@@ -94,7 +98,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
             return True if has_large_range else False
 
 
-        # Update fluid-mode based on toggle
+        # Update fluid-mode (affects app width) based on toggle
         @app.callback(
             Output("main-container", "fluid"),
             Input("fluid-toggle", "value")
@@ -103,40 +107,37 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
             return not is_fluid
 
 
-        # Update trace colors based on toggle
+        # Update trace (graph lines) colours based on toggle
         @app.callback(
             Output("polynomial-graph-y", "figure", allow_duplicate=True),
             Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
             Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
             Input("theme-toggle", "value")
         )
         def update_graph_from_sliders(is_dark):
-            patch_figure = Patch()
-            patched_figures = [Patch() for _ in range(2)]
+            patch_function_figure = Patch()
+            patched_derivative_figures = [Patch() for _ in range(2)]
 
-            patch_figure["layout"]["template"] = (pio.templates[chart_default_theme] 
+            patch_function_figure["layout"]["template"] = (pio.templates[chart_default_theme] 
                                                 if is_dark else pio.templates[chart_other_theme])    
             
             i=1
             if is_dark:
-                for figure in patched_figures:
+                for figure in patched_derivative_figures:
                     figure["layout"]["template"] = pio.templates[chart_default_theme]
                     figure['data'][0]['line']['color']=trace_colours['default_theme'][i]
                     i+=1
             else:
-                for figure in patched_figures:
+                for figure in patched_derivative_figures:
                     figure["layout"]["template"] = pio.templates[chart_other_theme]
                     figure['data'][0]['line']['color']=trace_colours['other_theme'][i]
                     i+=1 
                 
-            return patch_figure, *patched_figures
+            return patch_function_figure, *patched_derivative_figures
         
-        # Change background of html.divs based on theme
+        # Change background of sliders based on theme
         @app.callback(
             Output("slider_div", "style"),
-            # Output("app-controls-div", "style"),
-            # Input(ThemeSwitchAIO.ids.switch("theme"), "value"),
             Input("theme-toggle", "value")
         )
         def update_slider_background(is_dark):
@@ -149,18 +150,20 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
                 "overflow": "hidden",
                 "background": bg_color,  # Dynamically set background color
             }
-            # set_props("slider_div",{'style':{'background':bg_color}})
             return updated_style
              
         
-         # Change background of html.divs based on theme
+         # Change background of cosmetics-controls-components based on theme
         @app.callback(
             Output("app-controls-div", "style"),
-            Input("theme-toggle", "value")
+            Input("theme-toggle", "value"),
         )
         def update_contlros_background(is_dark):
-            # Select the appropriate background color
-            bg_color = graph_background_colours["default_theme"] if is_dark else graph_background_colours["other_theme"]
+            # Select the appropriate background color depending on the theme
+            if is_dark: 
+                bg_color = graph_background_colours["default_theme"]
+            else:
+                bg_color = graph_background_colours["other_theme"]
 
             updated_style = {
                 "border": "1px solid var(--bs-primary)",
@@ -170,17 +173,15 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
                 "padding": "0.5rem",
                 "margin": "0rem"
             }
-            # set_props("slider_div",{'style':{'background':bg_color}})
             return updated_style
         
   
-        
+        # NO clue why this was needed, but it is used to sync the theme toggle with the theme store.
         @app.callback(
             Output("theme-toggle", "value"),
             Output("theme-store", "data"),
             Input("theme-toggle", "value"),
             Input("theme-store", "data"),
-            # prevent_initial_call=True
         )
         def sync_theme_toggle_and_store(toggle_value, store_data):
             trigger = ctx.triggered_id
@@ -190,7 +191,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme):
                 new_store = "default_theme" if toggle_value else "other_theme"
                 return toggle_value, new_store
             elif trigger == "theme-store":
-                # Theme store was updated elsewhere (like from localStorage)
+                # Theme store was updated elsewhere (e.g. from localStorage)
                 new_toggle = True if store_data == "default_theme" else False
                 return new_toggle, store_data
         
