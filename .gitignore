@@ -398,3 +398,11 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Virtual Environments
+.env/
+.venv/
+venv_313_7/
+
+#Other
+.ropeproject/
