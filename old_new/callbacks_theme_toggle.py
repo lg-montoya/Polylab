@@ -4,9 +4,9 @@ import plotly.io as pio
 
 
 # clientside_callback(
-#     """ 
+#     """
 #     (switchOn) => {
-#        document.documentElement.setAttribute('data-bs-theme', switchOn ? 'dark' : 'quartz');  
+#        document.documentElement.setAttribute('data-bs-theme', switchOn ? 'dark' : 'quartz');
 #        return window.dash_clientside.no_update
 #     }
 #     """,
@@ -14,8 +14,8 @@ import plotly.io as pio
 #     Input("switch", "value"),
 # )
 
-    
-# def callback_wrapper(app):    
+
+# def callback_wrapper(app):
 #     @app.callback(
 #         Output('polynomial-graph-y", "figure", allow_duplicate=True),
 #         Input("switch", "value"),

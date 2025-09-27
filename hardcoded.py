@@ -36,7 +36,7 @@ Enjoy
 ( Dedicated to A & H ) 
 """
 
-POLYNOMIAL_INSTRUCTIONS = '''
+POLYNOMIAL_INSTRUCTIONS = """
 **Dropdown**  
 Begin by choosing from the dropdown the desired polynomial whose form and derivatives 
 you wish to explore. The highest order polynomial available is a cubic.
@@ -65,17 +65,16 @@ There are also two toggles at the top right. The first toggle increases
 the width of app if viewed in landscape mode. The second toggle 
 changes the skin of the app: colourful marshmallows or 
 Witch-king of Angmar.
-'''
+"""
 
-WARNING_GRIDLINES = '''
+WARNING_GRIDLINES = """
 A graph has an axis whose range is too large. Displaying gridlines at such
 granularity will pollute the graph. Gridlines will not be increased for
 that graph.
-'''
+"""
 
 
-
-POLYNOMIAL_ABOUT = '''
+POLYNOMIAL_ABOUT = """
 **COEFFICIENT ORDERING**  
 El formulario le ayuda localisar los (casa)lotes dentro del municipio de
  Medellín. *Buscar* sera habilitado solo cuando todos los campos esten llenos.
@@ -100,9 +99,9 @@ La exactitud de los valores en la tabla mejora cuando el lote esta
 **A constant**  
 Active y desactive capas con el widget de capas al lado superior-derecho del
  mapa. Flote sobre cualquier frontera para ver su valor.
-'''
+"""
 
-SINUSOIDAL_INSTRUCTIONS = '''
+SINUSOIDAL_INSTRUCTIONS = """
 **Add Graphs**  
 Click the "+" button to add a new graph with controls. A maximum of
 3 graphs is allowed.
@@ -124,6 +123,4 @@ Double-click a trace to isolate it.
 **Theme-toggle**  
 Choose the dashboard's skin at the top right: Fluffy marshmallow
  unicorn or Witch-king of Angmar.
-'''
-
-
+"""

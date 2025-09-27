@@ -3,9 +3,14 @@ from dash import html
 
 
 tab = html.Div(
-    dbc.Row([
-        dbc.Col(
-            [html.H4(f'But first sinusoidals.'),]
-        )
-    ], class_name="mt-4")
+    dbc.Row(
+        [
+            dbc.Col(
+                [
+                    html.H4(f"But first sinusoidals."),
+                ]
+            )
+        ],
+        class_name="mt-4",
+    )
 )

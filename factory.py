@@ -15,14 +15,16 @@ x_values = np.linspace(-slider_max, slider_max, 400)
 class MyPolynomial:
     def __init__(self, coefficients):
         self.coefficients = coefficients
-        self.poly = np.polynomial.Polynomial(coefficients)  # Create a NumPy polynomial object
+        self.poly = np.polynomial.Polynomial(
+            coefficients
+        )  # Create a NumPy polynomial object
 
     def evaluate(self, x):
-        return self.poly(x)    
-    
+        return self.poly(x)
+
     def derivative(self, order=1):
         return self.poly.deriv(m=order)
-    
+
     def update_figure_title(self, a, b, c, d):
         # Rule 1: When all coefficients are zero, return f(x) = 0
         if a == 0 and b == 0 and c == 0 and d == 0:
@@ -60,49 +62,62 @@ class MyPolynomial:
                 terms.append(f"{'+' if d > 0 else ''}{d}x^3")
 
         # Rule 3: If only one term exists, include its sign only if negative
-        if len(terms) == 1 and terms[0][0] != '-':
-            terms[0] = terms[0].lstrip('+')
+        if len(terms) == 1 and terms[0][0] != "-":
+            terms[0] = terms[0].lstrip("+")
 
         # Combine terms into the polynomial string
-        return fr"$y={''.join(terms).lstrip('+')}$"
-
+        return rf"$y={''.join(terms).lstrip('+')}$"
 
     def __str__(self):
         """
         Return a human-readable string for the polynomial.
         """
         return str(self.poly)
-    
+
 
 def my_slider(id, label):
-    step = int(slider_max/5)
-    slider = dbc.Row([
-        dbc.Col(html.Div(dcc.Markdown(f"$$\\quad {label}$$", mathjax=True)), 
+    step = int(slider_max / 5)
+    slider = dbc.Row(
+        [
+            dbc.Col(
+                html.Div(dcc.Markdown(f"$$\\quad {label}$$", mathjax=True)),
                 width="auto",
-                className="d-flex align-items-center"  # Align label vertically with the slider
+                className="d-flex align-items-center",  # Align label vertically with the slider
+            ),
+            dbc.Col(
+                html.Div(
+                    dcc.Slider(
+                        updatemode="drag",
+                        disabled=True,
+                        id=id,
+                        min=slider_min,
+                        max=slider_max,
+                        marks={
+                            i: str(i) for i in range(slider_min, slider_max + 1, step)
+                        },
+                    ),
+                    className="w-100",
                 ),
-        dbc.Col(html.Div(dcc.Slider(
-            updatemode='drag', disabled=True, id=id, min=slider_min, max=slider_max,
-            marks={i: str(i) for i in range(slider_min, slider_max + 1, step)}
-        ), className='w-100'), width=True)
-        
-    ], className='g-2')
+                width=True,
+            ),
+        ],
+        className="g-2",
+    )
     return slider
 
 
 def graph_generator(id: str, class_name: str):
-    
     my_graph = dbc.Col(
-                    html.Div(
-                        dcc.Graph(
-                            figure=empty_figure, 
-                            id=id,
-                            mathjax=True, 
-                            config={'scrollZoom': False},
-                            style=STYLE_GRAPH_BORDER
-                        )
-                    ),
-                    sm=8,
-                    className=class_name 
-                )
+        html.Div(
+            dcc.Graph(
+                figure=empty_figure,
+                id=id,
+                mathjax=True,
+                config={"scrollZoom": False},
+                style=STYLE_GRAPH_BORDER,
+            )
+        ),
+        sm=8,
+        className=class_name,
+    )
     return my_graph

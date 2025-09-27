@@ -1,4 +1,3 @@
-
 # THIS IS THE ARRANGEMENT FOR THE HORIZONTAL ALIGNMENT OF THE TOGGLES
 # fluid_mode_switch =  html.Span(
 #     [
