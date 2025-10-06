@@ -7,7 +7,6 @@ from defaults.cosmetics import graph_background_colours
 from modals import MODAL_POLYNOMIAL_INSTRUCTIONS
 from factory import my_slider, graph_generator
 from defaults.cosmetics import STYLE_GRAPH_BORDER
-import dash_daq as daq
 
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)

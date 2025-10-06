@@ -75,7 +75,10 @@ def app_layout(app_themes):
                                 tab_id="tab-polynomials",
                                 label="Polynomials",
                             ),
-                            # dbc.Tab(tab_id='tab-sinusoidals', label='Sinusoidals', children=[sinusoidals.tab]),
+                            dbc.Tab(
+                                sinusoidals.tab,
+                                tab_id='tab-sinusoidals', 
+                                label='Sinusoidals', ),
                         ],
                         id="tab-group",
                         class_name="nav-stack",
