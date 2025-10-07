@@ -64,6 +64,9 @@ def callback_wrapper(app):
         patched_figure["data"][0]["name"] = rf"$y$"
         patched_figure["data"][1]["name"] = rf"${derivative_notation[1]}$"
         patched_figure["data"][2]["name"] = rf"${derivative_notation[2]}$"
+        # Disable visitibility of derivatives traces by default
+        patched_figure["data"][1]["visible"] = "legendonly"
+        patched_figure["data"][2]["visible"] = "legendonly"
 
         patched_figure["layout"]["title"]["text"] = title.replace("0.0 + ", "")
 
