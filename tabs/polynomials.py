@@ -26,7 +26,7 @@ tab = html.Div(
                         html.Div(
                             dbc.Button(
                                 "Instructions",
-                                color="primary",
+                                color="info",
                                 outline=False,
                                 id="btn-mdl-instructions-polynomials-open",
                             ),
