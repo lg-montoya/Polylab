@@ -57,7 +57,9 @@ def callback_wrapper(app):
     import numpy as np
     from defaults.dash_components import SLIDER_MAX
     
-    x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
+    # Create x values, avoiding x = 0 to prevent division by zero
+    x_negative = np.linspace(-SLIDER_MAX, -0.001, 200)
+    x_positive = np.linspace(0.001, SLIDER_MAX, 200)
     
     @app.callback(
         Output("hyperbolae-graph", "figure", allow_duplicate=True),
@@ -70,11 +72,7 @@ def callback_wrapper(app):
         if not coefficients or len(coefficients) < 2:
             return patched_figure
         
-        a, b = coefficients[0], coefficients[1]
-        
-        # Create x values, avoiding x = 0 to prevent division by zero
-        x_negative = np.linspace(-SLIDER_MAX, -0.1, 200)
-        x_positive = np.linspace(0.1, SLIDER_MAX, 200)
+        a, b, = coefficients
         
         # Vectorized calculation: y = a + b/x
         y_negative = a + b / x_negative

@@ -41,8 +41,10 @@ def callback_wrapper(app):
     @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Input({"type": "polynomial_slider", "name": ALL}, "value"),
+        State("polynomial-graph-y", "figure"),
+        prevent_initial_call=True,
     )
-    def update_graph_from_sliders(coefficients):
+    def update_graph_from_sliders(coefficients, current_figure):
         patched_figure = Patch()
 
         y = MyPolynomial(coefficients)
@@ -54,6 +56,13 @@ def callback_wrapper(app):
         d1y_values = MyPolynomial(d1y.coef).evaluate(x_values)
         d2y_values = MyPolynomial(d2y.coef).evaluate(x_values)
 
+        # Preserve current visibility state
+        current_visibility = {}
+        if current_figure and "data" in current_figure:
+            for i, trace in enumerate(current_figure["data"]):
+                if i < 3:  # Only for our 3 traces
+                    current_visibility[i] = trace.get("visible", True)
+
         for i in range(3):
             patched_figure["data"][i]["x"] = x_values
 
@@ -64,13 +73,22 @@ def callback_wrapper(app):
         patched_figure["data"][0]["name"] = rf"$y$"
         patched_figure["data"][1]["name"] = rf"${derivative_notation[1]}$"
         patched_figure["data"][2]["name"] = rf"${derivative_notation[2]}$"
-        # Disable visitibility of derivatives traces by default
-        patched_figure["data"][1]["visible"] = "legendonly"
-        patched_figure["data"][2]["visible"] = "legendonly"
+        
+        # Only set initial visibility if no current state exists
+        if not current_visibility:
+            # Initial state: main function visible, derivatives hidden
+            patched_figure["data"][1]["visible"] = "legendonly"
+            patched_figure["data"][2]["visible"] = "legendonly"
+        else:
+            # Preserve existing visibility state
+            for i in range(3):
+                if i in current_visibility:
+                    patched_figure["data"][i]["visible"] = current_visibility[i]
 
         patched_figure["layout"]["title"]["text"] = title.replace("0.0 + ", "")
 
         return patched_figure
+
 
     # Update f'(x) and f''(x) graphs based on slider values.
     def update_derivative_graph(derivative_order):

@@ -3,7 +3,7 @@ Module containing callbacks related to the cosmetics of the app,
 such as theme switching, gridlines, and fluid mode.
 """
 
-from dash import Patch, clientside_callback, set_props, ctx
+from dash import Patch, clientside_callback, ctx
 from dash.dependencies import Input, Output, State
 from dash_bootstrap_templates import ThemeSwitchAIO
 import plotly.io as pio
@@ -106,17 +106,32 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
     def toggle_fluid_mode(is_fluid):
         return not is_fluid
 
+
+    @app.callback(
+        Output("hyperbolae-graph", "figure", allow_duplicate=True),
+        Input("theme-toggle", "value")
+    )
+    def update_graph_theme(is_dark):
+        patched_figure = Patch()
+        if is_dark:
+            patched_figure["layout"]["template"] = pio.templates[chart_default_theme]
+            patched_figure["data"][0]["line"]["color"] = trace_colours["default_theme"][0]
+        else:
+            patched_figure["layout"]["template"] = pio.templates[chart_other_theme]
+            patched_figure["data"][0]["line"]["color"] = trace_colours["other_theme"][0]
+        return patched_figure
+
     # Update trace (graph lines) colours based on toggle
     @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-        Output(f"hyperbolae-graph", "figure", allow_duplicate=True),
+        # Output(f"hyperbolae-graph", "figure", allow_duplicate=True),
         Input("theme-toggle", "value"),
     )
     def update_trace_colors(is_dark):
         patch_function_figure = Patch()
-        patched_derivative_figures = [Patch() for _ in range(3)]
+        patched_derivative_figures = [Patch() for _ in range(2)]
 
         patch_function_figure["layout"]["template"] = (
             pio.templates[chart_default_theme]
