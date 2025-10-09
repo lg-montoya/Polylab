@@ -44,18 +44,20 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d2y", "figure", allow_duplicate=True),
         Output("hyperbolae-graph", "figure", allow_duplicate=True),
+        Output("sinusoidals-graph", "figure", allow_duplicate=True),
         Output("gridlines", "data"),
         Input("gridlines-radio", "value"),
         State("polynomial-graph-y", "figure"),
         State("polynomial-graph-d1y", "figure"),
         State("polynomial-graph-d2y", "figure"),
         State("hyperbolae-graph", "figure"),
+        State("sinusoidals-graph", "figure"),
         prevent_initial_call=True,
     )
-    def update_gridlines(gridline_amount, fig_y, fig_d1y, fig_d2y, fig_hyperbolae):
+    def update_gridlines(gridline_amount, fig_y, fig_d1y, fig_d2y, fig_hyperbolae, fig_sins):
         # Create patches for the figures
-        patched_figures = [Patch() for _ in range(4)]
-        current_figs = [fig_y, fig_d1y, fig_d2y, fig_hyperbolae]
+        patched_figures = [Patch() for _ in range(5)]
+        current_figs = [fig_y, fig_d1y, fig_d2y, fig_hyperbolae, fig_sins]
 
         small_range = []
         for fig in current_figs:
@@ -106,27 +108,31 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
     def toggle_fluid_mode(is_fluid):
         return not is_fluid
 
-
     @app.callback(
-        Output("hyperbolae-graph", "figure", allow_duplicate=True),
-        Input("theme-toggle", "value")
+    Output("hyperbolae-graph", "figure", allow_duplicate=True),
+    Output("sinusoidals-graph", "figure", allow_duplicate=True),
+    Input("theme-toggle", "value")
     )
     def update_graph_theme(is_dark):
-        patched_figure = Patch()
+    # Create list of patches matching number of outputs
+        patched_figures = [Patch() for _ in range(2)]
+        
         if is_dark:
-            patched_figure["layout"]["template"] = pio.templates[chart_default_theme]
-            patched_figure["data"][0]["line"]["color"] = trace_colours["default_theme"][0]
+            for figure in patched_figures:
+                figure["layout"]["template"] = pio.templates[chart_default_theme]
+                figure["data"][0]["line"]["color"] = trace_colours["default_theme"]
         else:
-            patched_figure["layout"]["template"] = pio.templates[chart_other_theme]
-            patched_figure["data"][0]["line"]["color"] = trace_colours["other_theme"][0]
-        return patched_figure
+            for figure in patched_figures:
+                figure["layout"]["template"] = pio.templates[chart_other_theme]
+                figure["data"][0]["line"]["color"] = trace_colours["other_theme"]
+        
+        return patched_figures
 
     # Update trace (graph lines) colours based on toggle
     @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
-        # Output(f"hyperbolae-graph", "figure", allow_duplicate=True),
         Input("theme-toggle", "value"),
     )
     def update_trace_colors(is_dark):
@@ -157,6 +163,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
     @app.callback(
         Output("slider_polynomials_div", "style"),
         Output("slider_hyperbolae_div", "style"), 
+        Output("slider_sinusoidals_div", "style"), 
         Input("theme-toggle", "value")
     )
     def update_slider_background(is_dark):
@@ -173,7 +180,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
             "overflow": "hidden",
             "background": bg_color,  # Dynamically set background color
         }
-        return [updated_style]*2
+        return [updated_style]*3
 
     # Change background of cosmetics-controls-components based on theme
     @app.callback(

@@ -101,28 +101,13 @@ Active y desactive capas con el widget de capas al lado superior-derecho del
  mapa. Flote sobre cualquier frontera para ver su valor.
 """
 
-SINUSOIDAL_INSTRUCTIONS = """
+SINUSOIDALS_INSTRUCTIONS = """
 **Add Graphs**  
 Click the "+" button to add a new graph with controls. A maximum of
 3 graphs is allowed.
 
-**Dropdown**  
-From the dropdown choose the desired polynomial whose form and derivatives 
-you wish to explore. The highest order polynomial available is a cubic.
+**SINUSOIDALS**  
 
-**Sliders**  
-They are disabled until a polynomial is selected from the dropdown.
-Each polynomial has a different set of coefficients whose values are
-adjusted by the sliders. The graphs (and their titles) will reflect the 
-coeffiecients' changes.
-
-**Legend**  
-Activate and deactivate the traces by single clicking on the legend.
-Double-click a trace to isolate it.
-
-**Theme-toggle**  
-Choose the dashboard's skin at the top right: Fluffy marshmallow
- unicorn or Witch-king of Angmar.
 """
 
 HYPERBOLAE_INSTRUCTIONS = """

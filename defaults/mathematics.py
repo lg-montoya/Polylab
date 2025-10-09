@@ -27,32 +27,28 @@ POLYNOMIALS = {
         "available_sliders": [True, True, True, True],
     },
 }
-HYPERBOLAE = {
-    "Sine": {
-        "default_coefficients": [0, 1],
-        "general_form": rf"$y=a + \frac{{b}}{{x}})$",
-        "available_sliders": [True, True],
-    },
-}
 
 
 SINUSOIDALS = {
     "Sine": {
-        "default_coefficients": [0, 1, 0, 0],
-        "general_form": r"$y=a + bsinc(x)$",
-        "available_sliders": [True, True, False, False],
+        "default_coefficients": [0, 1, 1],
+        "general_form": rf"$$\Large y=a + bsin(cx)$$",
+        "available_sliders": [True, True, True],
         "function": np.sin,
+        "function_name": "sin",
     },
     "Cosine": {
-        "default_coefficients": [0, 0, 1, 0],
-        "general_form": r"$y=a + bcosc(x+d)$",
-        "available_sliders": [True, True, True, False],
+        "default_coefficients": [0, 1, 1],
+        "general_form": rf"$$\Large y=a + bcos(cx)$$",
+        "available_sliders": [True, True, True],
         "function": np.cos,
+        "function_name": "cos",
     },
     "Tangent": {
-        "default_coefficients": [0, 0, 0, 1],
-        "general_form": r"$y=a + btanc(x+d)$",
-        "available_sliders": [True, True, True, True],
+        "default_coefficients": [0, 1, 1],
+        "general_form": rf"$$\Large y=a + btan(cx)$$",
+        "available_sliders": [True, True, True],
         "function": np.tan,
+        "function_name": "tan",
     },
 }

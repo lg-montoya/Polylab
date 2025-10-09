@@ -2,9 +2,15 @@
 Module containing (Non-cosmetic) Callbacks for the hyperbolae graphing app.
 """
 
+import numpy as np
 from dash.dependencies import Input, Output, ALL
 from dash import Patch
+from defaults.dash_components import SLIDER_MAX
 
+
+# Create x values, avoiding x = 0 to prevent division by zero
+x_negative = np.linspace(-SLIDER_MAX, -0.001, 200)
+x_positive = np.linspace(0.001, SLIDER_MAX, 200)
 
 def callback_wrapper(app):
     # Update hyperbolae equation based on slider values
@@ -53,13 +59,6 @@ def callback_wrapper(app):
             equation = "0"
         
         return rf"$$\Large y={equation}$$"
-    
-    import numpy as np
-    from defaults.dash_components import SLIDER_MAX
-    
-    # Create x values, avoiding x = 0 to prevent division by zero
-    x_negative = np.linspace(-SLIDER_MAX, -0.001, 200)
-    x_positive = np.linspace(0.001, SLIDER_MAX, 200)
     
     @app.callback(
         Output("hyperbolae-graph", "figure", allow_duplicate=True),

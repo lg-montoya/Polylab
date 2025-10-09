@@ -1,8 +1,8 @@
 import dash_bootstrap_components as dbc
 from dash import html, dcc
 from factory import graph_generator, my_slider
-from modals import MODAL_HYPERBOLAE_INSTRUCTIONS
-from defaults.dash_components import slider_default
+from modals import MODAL_SINUSOIDALS_INSTRUCTIONS
+from defaults.dash_components import slider_default, dropdown_sinusoidals_options
 from defaults.cosmetics import graph_background_colours, STYLE_GRAPH_BORDER
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
@@ -26,18 +26,17 @@ tab = html.Div(
                                     "Instructions",
                                     color="info",
                                     outline=False,
-                                    # id="btn-mdl-instructions-hyperbolae-open",
+                                    id="btn-mdl-instructions-sinusoidals-open",
                                 ),
                                 # dbc.Button(
                                 #     "+",
                                 #     color="secondary",
-                                #     id="dynamic-add-sinusoidal-btn",
+                                #     id="dynamic-add-sinusoidals-btn",
                                 #     className="me-md-2",
                                 # ),
                             ],
                             className="d-grid gap-2 d-md-flex justify-content-md-start",
                         ),
-                        
                     ],
                     class_name="mb-2",
                     sm=2,
@@ -54,25 +53,20 @@ tab = html.Div(
                         dbc.Stack(
                             [
                                 # Dropdown menu
-                                # html.Div(
-                                #     dcc.Dropdown(
-                                #         id="dropdown_hyperbolae",
-                                #         options=dropdown_hyperbolae_options,
-                                #         clearable=False,
-                                #         placeholder="CHOOSE A POLYNOMIAL",
-                                #     ),
-                                #     className="d-grid",
-                                # ),
-                                # General form of the polynomial in LaTeX
                                 html.Div(
-                                    dcc.Markdown(
-                                        rf"$$\Large y=a + \dfrac{{b}}{{x}}$$", 
-                                        mathjax=True, 
-                                        # id="equation_hyperbolae",
+                                    dcc.Dropdown(
+                                        id="dropdown_sinusoidals",
+                                        options=dropdown_sinusoidals_options,
+                                        clearable=False,
+                                        placeholder="CHOOSE A SINUSOIDAL",
                                     ),
-
-                                    className="d-flex align-items-center justify-content-center",
-
+                                    className="d-grid",
+                                ),
+                                # General form of the sinusoidal in LaTeX
+                                html.Div(
+                                    dcc.Markdown("&nbsp;", mathjax=True, id="equation_sinusoidals"),
+                                    style={"textAlign": "center"},
+                                    className="mt-3",
                                 ),
                                 # Sliders
                                 html.Div(
@@ -80,13 +74,13 @@ tab = html.Div(
                                         dbc.Row(
                                             my_slider(
                                                 {
-                                                    "type": "hyperbolae_slider",
+                                                    "type": "sinusoidals_slider",
                                                     "name": f"{i}",
                                                 },
                                                 f"{i}",
                                             )
                                         )
-                                        for i in ["a", "b",]
+                                        for i in ["a", "b", "c"]
                                     ],
                                     style={
                                         **STYLE_GRAPH_BORDER,
@@ -94,7 +88,7 @@ tab = html.Div(
                                             "default_theme"
                                         ],
                                     },
-                                    # id="slider_hyperbolae_div",
+                                    id="slider_sinusoidals_div",
                                 ),
                             ],
                             style=flex_column_style,
@@ -104,12 +98,11 @@ tab = html.Div(
                     sm=4,
                 ),
                 # Second column containing just the graph y=f(x)
-                # graph_generator(id="hyperbolae-graph-1", class_name="mt-sm-2-custom"),
+                graph_generator(id="sinusoidals-graph", class_name="mt-sm-2-custom"),
             ]
         ),
         
-        
-        MODAL_HYPERBOLAE_INSTRUCTIONS,
+        MODAL_SINUSOIDALS_INSTRUCTIONS,
     ],
     className="mt-4",
 )

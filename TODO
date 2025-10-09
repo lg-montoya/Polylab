@@ -7,7 +7,7 @@ p = additional maths book
 
 - Exponential y = ab^x + c P619 
 
-- trigonometric: y = asinbx + c (cos and tan too) (p203)
+- trigonometric: y = a + bincx (cos and tan too) (p203)
 - Graphs of the form y = kexp(nx) + a and y = kln(ax+b) when n, k, a, b are integers (p119)
 - |f(x)| where f(x) is
     - linear (a + bx) (p12)
@@ -15,7 +15,7 @@ p = additional maths book
     - cubic k(x-a)(x-b)(x-c) (p83)
 - |f(x)| for f trigonometric (p211)
 - circles (x-a)^2 + (y-b)^2 = r^2
-- y = ax^n for n = +-1/2
+- y = ax^n for n = +-1/2 P613
 
 - For regions shading try the example in https://stackoverflow.com/questions/69331683/how-to-fill-in-the-area-below-trendline-in-plotly-express-scatterplot
 
@@ -24,7 +24,7 @@ STATISTICS
 - Correlations? P533
 - Histogram, quantiles, CFD: Generate some data (height?) 100 integers between some range. 
   Then bin then. Then create histogram. Display table and allow student to increase count 
-  in some of the bins (in the table represetation (will have a + or minus). Then see the
+  in some of the bins in the table represetation (will have a + or minus). Then see the
   histogram and cdf reflect the changes in real time. Also see if Q1 and Q3 change.
   And the mode and the mean, etc? 
 
