@@ -75,8 +75,16 @@ class MyPolynomial:
         return str(self.poly)
 
 
-def my_slider(id, label):
+def my_slider(id, label, disabled=True):
     step = int(slider_max / 5)
+    
+    # Enable hyperbolae sliders by default and set initial values
+    if id.get("type") == "hyperboalae_slider":
+        disabled = False
+        initial_value = 0 if id.get("name") == "a" else 1 if id.get("name") == "b" else 0
+    else:
+        initial_value = 0
+    
     slider = dbc.Row(
         [
             dbc.Col(
@@ -88,10 +96,11 @@ def my_slider(id, label):
                 html.Div(
                     dcc.Slider(
                         updatemode="drag",
-                        disabled=True,
+                        disabled=disabled,
                         id=id,
                         min=slider_min,
                         max=slider_max,
+                        value=initial_value,
                         marks={
                             i: str(i) for i in range(slider_min, slider_max + 1, step)
                         },

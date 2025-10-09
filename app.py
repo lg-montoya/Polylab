@@ -2,7 +2,7 @@ import dash
 import os
 import dash_bootstrap_components as dbc
 from layout import app_layout
-from callbacks import cosmetics, polynomials
+from callbacks import cosmetics, polynomials, hyperbolae
 from defaults.cosmetics import APP_THEMES, chart_default_theme, chart_other_theme
 
 
@@ -40,6 +40,7 @@ app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 app.layout = app_layout(APP_THEMES)
 # Initialize callbacks
 polynomials.callback_wrapper(app)
+hyperbolae.callback_wrapper(app)
 cosmetics.callback_wrapper(
     app, chart_default_theme, chart_other_theme
 )  

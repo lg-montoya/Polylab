@@ -70,6 +70,7 @@ tab = html.Div(
                                                     "name": f"{i}",
                                                 },
                                                 f"{i}",
+                                                disabled=False
                                             )
                                         )
                                         for i in ["a", "b",]
@@ -99,3 +100,4 @@ tab = html.Div(
     ],
     className="mt-4",
 )
+
