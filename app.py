@@ -2,9 +2,8 @@ import dash
 import os
 import dash_bootstrap_components as dbc
 from layout import app_layout
-import callbacks
+from callbacks import cosmetics, polynomials
 from defaults.cosmetics import APP_THEMES, chart_default_theme, chart_other_theme
-import callbacks_cosmetics
 
 
 # Determine if production or development environment
@@ -37,12 +36,15 @@ server = app.server
 app._favicon = "faviconH.png"
 app.scripts.config.serve_locally = True  # Needed for Dash DAQ components
 
-# Load the layout and callbacks
+# Initialise layout 
 app.layout = app_layout(APP_THEMES)
-callbacks.callback_wrapper(app)
-callbacks_cosmetics.callback_wrapper(
+# Initialize callbacks
+polynomials.callback_wrapper(app)
+cosmetics.callback_wrapper(
     app, chart_default_theme, chart_other_theme
-)  # Set the server to run in production or development mode
+)  
+
+# Set the server to run in production or development mode
 if __name__ == "__main__":
     if FLASK_DEBUG == "development":
         app.run(debug=True, threaded=True, dev_tools_hot_reload=True, port=8080)

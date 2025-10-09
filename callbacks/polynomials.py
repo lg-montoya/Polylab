@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State, ALL
 from dash import Patch
 from defaults.cosmetics import trace_colours
 from defaults.dash_components import SLIDER_MAX
-from defaults.mathematics import derivative_notation, POLYNOMIALS, SINUSOIDALS
+from defaults.mathematics import derivative_notation, POLYNOMIALS, HYPERBOLAE
 from factory import MyPolynomial
 
 
@@ -17,7 +17,7 @@ x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
 # Wrapper function to register callbacks
 def callback_wrapper(app):
     # Update general form of equation based on polynomial-dropdown selection
-    @app.callback(Output("eq_1", "children"), Input("dropdown_menu_1", "value"))
+    @app.callback(Output("eq_1", "children"), Input("dropdown_polynomials", "value"))
     def display_general_polynomial_form(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]["general_form"]
 
@@ -25,7 +25,7 @@ def callback_wrapper(app):
     @app.callback(
         Output({"type": "polynomial_slider", "name": ALL}, "disabled"),
         Output({"type": "polynomial_slider", "name": ALL}, "value"),
-        Input("dropdown_menu_1", "value"),
+        Input("dropdown_polynomials", "value"),
         prevent_initial_call=True,
     )
     def update_slider_visibility(chosen_polynomial):
@@ -122,7 +122,7 @@ def callback_wrapper(app):
     update_derivative_graph(1)
     update_derivative_graph(2)
 
-    def modal_builder(name, link="lnk"):
+    def modal_callback(name, link="lnk"):
         @app.callback(
             Output(f"mdl-{name}", "is_open"),
             [
@@ -136,9 +136,9 @@ def callback_wrapper(app):
                 return not is_open
             return is_open
 
-    modal_builder("instructions-polynomials", link="btn")
+    modal_callback("instructions-polynomials", link="btn")
+    modal_callback("instructions-hyperbolae", link="btn")
 
-    # modal_builder('instructions-sinusoidals', link='btn')
 
     # # @app.callback(
     # #     Output('dynamic-sinusoidal', 'children'),
