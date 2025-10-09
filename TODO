@@ -1,13 +1,9 @@
-- HAVE ONLY Y in the first graph enabled. Have the derivatives disabled by default.
-
 
 P = Extended coursebook
 p = additional maths book
 
-
 - hyperbola 
-    - y = a/x P596
-    - y = a/x + b P599
+    - y = a + b/x P599
 
 - Exponential y = ab^x + c P619 
 

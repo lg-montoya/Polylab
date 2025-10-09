@@ -49,7 +49,7 @@ tab = html.Div(
                                 # Dropdown menu
                                 html.Div(
                                     dcc.Dropdown(
-                                        id="dropdown_menu_1",
+                                        id="dropdown_polynomials",
                                         options=dropdown_polynomial_options,
                                         clearable=False,
                                         placeholder="CHOOSE A POLYNOMIAL",

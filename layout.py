@@ -2,7 +2,7 @@ import dash_bootstrap_components as dbc
 from dash import html, dcc
 from forms import fluid_mode_switch, gridlines_radio, theme_mode_switch
 from dash_bootstrap_templates import ThemeSwitchAIO
-from tabs import introduction, polynomials, sinusoidals, linear_programming
+from tabs import hyperbolae, introduction, polynomials, linear_programming
 from modals import MODAL_GRIDLINES
 from defaults.cosmetics import graph_background_colours, APP_THEMES
 
@@ -76,9 +76,9 @@ def app_layout(app_themes):
                                 label="Polynomials",
                             ),
                             dbc.Tab(
-                                sinusoidals.tab,
-                                tab_id='tab-sinusoidals', 
-                                label='Sinusoidals', ),
+                                hyperbolae.tab,
+                                tab_id='tab-hyperbolae', 
+                                label='Hyperbolae', ),
                         ],
                         id="tab-group",
                         class_name="nav-stack",

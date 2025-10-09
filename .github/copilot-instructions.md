@@ -6,7 +6,7 @@ Polylab is a mathematical visualization dashboard built with Dash and Plotly, fe
 ## Architecture Patterns
 
 ### Modular Organization
-- **Tabs**: Each mathematical domain (polynomials, sinusoidals, linear programming) is a separate module in `tabs/`
+- **Tabs**: Each mathematical domain (polynomials, Hyperbolae, linear programming) is a separate module in `tabs/`
 - **Callbacks**: Split between `callbacks.py` (core functionality) and `callbacks_cosmetics.py` (theme/UI state)
 - **Components**: Reusable UI elements in `factory.py` and forms in `forms.py`
 - **Defaults**: Configuration and styling in `defaults/` directory with organized submodules

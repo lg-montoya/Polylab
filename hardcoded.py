@@ -124,3 +124,12 @@ Double-click a trace to isolate it.
 Choose the dashboard's skin at the top right: Fluffy marshmallow
  unicorn or Witch-king of Angmar.
 """
+
+HYPERBOLAE_INSTRUCTIONS = """
+**Add Graphs**  
+Click the "+" button to add a new graph with controls. A maximum of
+3 graphs is allowed.
+
+**HYPERBOLAE**  
+
+"""

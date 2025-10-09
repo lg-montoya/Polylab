@@ -2,8 +2,8 @@ import dash_bootstrap_components as dbc
 from dash import html
 from dash import dcc
 from hardcoded import (
-    POLYNOMIAL_INSTRUCTIONS,
-    SINUSOIDAL_INSTRUCTIONS,
+    POLYNOMIAL_INSTRUCTIONS, 
+    HYPERBOLAE_INSTRUCTIONS,
     WARNING_GRIDLINES,
 )
 
@@ -29,24 +29,24 @@ MODAL_POLYNOMIAL_INSTRUCTIONS = dbc.Modal(
     centered=True,
 )
 
-# Sinusoidals Instructions modal
-MODAL_SINUSOIDAL_INSTRUCTIONS = dbc.Modal(
+# Hyperbolae Instructions modal
+MODAL_HYPERBOLAE_INSTRUCTIONS = dbc.Modal(
     [
         dbc.ModalHeader("Instructions"),
         dbc.ModalBody(
             children=[
-                dcc.Markdown(SINUSOIDAL_INSTRUCTIONS),
+                dcc.Markdown(HYPERBOLAE_INSTRUCTIONS),
             ]
         ),
         dbc.ModalFooter(
             dbc.Button(
                 "Close",
-                id="btn-mdl-instructions-sinusoidals-close",
+                id="btn-mdl-instructions-hyperbolae-close",
                 class_name="ml-auto",
             )
         ),
     ],
-    id="mdl-instructions-sinusoidals",
+    id="mdl-instructions-hyperbolae",
     scrollable=True,
 )
 
