@@ -26,7 +26,7 @@ tab = html.Div(
                                     "Instructions",
                                     color="info",
                                     outline=False,
-                                    id="btn-mdl-instructions-hyperbolae-open",
+                                    # id="btn-mdl-instructions-hyperbolae-open",
                                 ),
                                 # dbc.Button(
                                 #     "+",
@@ -68,7 +68,7 @@ tab = html.Div(
                                     dcc.Markdown(
                                         rf"$$\Large y=a + \dfrac{{b}}{{x}}$$", 
                                         mathjax=True, 
-                                        id="equation_hyperbolae",
+                                        # id="equation_hyperbolae",
                                     ),
 
                                     className="d-flex align-items-center justify-content-center",
@@ -94,7 +94,7 @@ tab = html.Div(
                                             "default_theme"
                                         ],
                                     },
-                                    id="slider_hyperbolae_div",
+                                    # id="slider_hyperbolae_div",
                                 ),
                             ],
                             style=flex_column_style,
@@ -104,7 +104,7 @@ tab = html.Div(
                     sm=4,
                 ),
                 # Second column containing just the graph y=f(x)
-                graph_generator(id="hyperbolae-graph-1", class_name="mt-sm-2-custom"),
+                # graph_generator(id="hyperbolae-graph-1", class_name="mt-sm-2-custom"),
             ]
         ),
         

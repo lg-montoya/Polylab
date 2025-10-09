@@ -43,17 +43,19 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output("polynomial-graph-d2y", "figure", allow_duplicate=True),
+        Output("hyperbolae-graph", "figure", allow_duplicate=True),
         Output("gridlines", "data"),
         Input("gridlines-radio", "value"),
         State("polynomial-graph-y", "figure"),
         State("polynomial-graph-d1y", "figure"),
         State("polynomial-graph-d2y", "figure"),
+        State("hyperbolae-graph", "figure"),
         prevent_initial_call=True,
     )
-    def update_gridlines(gridline_amount, fig_y, fig_d1y, fig_d2y):
+    def update_gridlines(gridline_amount, fig_y, fig_d1y, fig_d2y, fig_hyperbolae):
         # Create patches for the figures
-        patched_figures = [Patch() for _ in range(3)]
-        current_figs = [fig_y, fig_d1y, fig_d2y]
+        patched_figures = [Patch() for _ in range(4)]
+        current_figs = [fig_y, fig_d1y, fig_d2y, fig_hyperbolae]
 
         small_range = []
         for fig in current_figs:
@@ -104,21 +106,17 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
     def toggle_fluid_mode(is_fluid):
         return not is_fluid
 
-    #     app.callback(
-    # Output("daq-knob", "data-bs-theme"),
-    # Input("theme-toggle", "value"),
-    # )
-
     # Update trace (graph lines) colours based on toggle
     @app.callback(
         Output("polynomial-graph-y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d1y", "figure", allow_duplicate=True),
         Output(f"polynomial-graph-d2y", "figure", allow_duplicate=True),
+        Output(f"hyperbolae-graph", "figure", allow_duplicate=True),
         Input("theme-toggle", "value"),
     )
-    def update_graph_from_sliders(is_dark):
+    def update_trace_colors(is_dark):
         patch_function_figure = Patch()
-        patched_derivative_figures = [Patch() for _ in range(2)]
+        patched_derivative_figures = [Patch() for _ in range(3)]
 
         patch_function_figure["layout"]["template"] = (
             pio.templates[chart_default_theme]
@@ -141,7 +139,11 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
         return patch_function_figure, *patched_derivative_figures
 
     # Change background of sliders based on theme
-    @app.callback(Output("slider_polynomials_div", "style"), Input("theme-toggle", "value"))
+    @app.callback(
+        Output("slider_polynomials_div", "style"),
+        Output("slider_hyperbolae_div", "style"), 
+        Input("theme-toggle", "value")
+    )
     def update_slider_background(is_dark):
         # Select the appropriate background color
         bg_color = (
@@ -156,14 +158,14 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
             "overflow": "hidden",
             "background": bg_color,  # Dynamically set background color
         }
-        return updated_style
+        return [updated_style]*2
 
     # Change background of cosmetics-controls-components based on theme
     @app.callback(
         Output("app-controls-div", "style"),
         Input("theme-toggle", "value"),
     )
-    def update_contlros_background(is_dark):
+    def update_controls_background(is_dark):
         # Select the appropriate background color depending on the theme
         if is_dark:
             bg_color = graph_background_colours["default_theme"]

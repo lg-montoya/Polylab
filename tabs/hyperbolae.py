@@ -91,7 +91,7 @@ tab = html.Div(
                     sm=4,
                 ),
                 # Second column containing just the graph y=f(x)
-                graph_generator(id="hyperbolae-graph-1", class_name="mt-sm-2-custom"),
+                graph_generator(id="hyperbolae-graph", class_name="mt-sm-2-custom"),
             ]
         ),
         
