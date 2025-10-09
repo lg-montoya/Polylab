@@ -3,14 +3,14 @@ Module containing (Non-cosmetic) Callbacks for the hyperbolae graphing app.
 """
 
 from dash.dependencies import Input, Output, ALL
-from dash import callback
+from dash import Patch
 
 
 def callback_wrapper(app):
     # Update hyperbolae equation based on slider values
     @app.callback(
         Output("equation_hyperbolae", "children"),
-        Input({"type": "hyperboalae_slider", "name": ALL}, "value"),
+        Input({"type": "hyperbolae_slider", "name": ALL}, "value"),
         prevent_initial_call=True,
     )
     def update_hyperbolae_equation(coefficients):
@@ -53,4 +53,41 @@ def callback_wrapper(app):
             equation = "0"
         
         return rf"$$\Large y={equation}$$"
+    
+    import numpy as np
+    from defaults.dash_components import SLIDER_MAX
+    
+    x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
+    
+    @app.callback(
+        Output("hyperbolae-graph", "figure", allow_duplicate=True),
+        Input({"type": "hyperbolae_slider", "name": ALL}, "value"),
+        prevent_initial_call=True,
+    )
+    def update_graph_from_sliders(coefficients):
+        patched_figure = Patch()
+    
+        if not coefficients or len(coefficients) < 2:
+            return patched_figure
+        
+        a, b = coefficients[0], coefficients[1]
+        
+        # Create x values, avoiding x = 0 to prevent division by zero
+        x_negative = np.linspace(-SLIDER_MAX, -0.1, 200)
+        x_positive = np.linspace(0.1, SLIDER_MAX, 200)
+        
+        # Vectorized calculation: y = a + b/x
+        y_negative = a + b / x_negative
+        y_positive = a + b / x_positive
+        
+        # Insert None values to break the line at the discontinuity
+        x_combined = np.concatenate([x_negative, [None], x_positive])
+        y_combined = np.concatenate([y_negative, [None], y_positive])
+        
+        # Update the trace data
+        patched_figure["data"][0]["x"] = x_combined
+        patched_figure["data"][0]["y"] = y_combined
+        
+        return patched_figure
+
 

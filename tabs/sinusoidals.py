@@ -80,7 +80,7 @@ tab = html.Div(
                                         dbc.Row(
                                             my_slider(
                                                 {
-                                                    "type": "hyperboalae_slider",
+                                                    "type": "hyperbolae_slider",
                                                     "name": f"{i}",
                                                 },
                                                 f"{i}",

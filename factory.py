@@ -79,7 +79,7 @@ def my_slider(id, label, disabled=True):
     step = int(slider_max / 5)
     
     # Enable hyperbolae sliders by default and set initial values
-    if id.get("type") == "hyperboalae_slider":
+    if id.get("type") == "hyperbolae_slider":
         disabled = False
         initial_value = 0 if id.get("name") == "a" else 1 if id.get("name") == "b" else 0
     else:
