@@ -58,7 +58,7 @@ tab = html.Div(
                                 ),
                                 # General form of the polynomial in LaTeX
                                 html.Div(
-                                    dcc.Markdown("&nbsp;", mathjax=True, id="eq_1"),
+                                    dcc.Markdown("&nbsp;", mathjax=True, id="equation_polynomials"),
                                     style={"textAlign": "center"},
                                     className="mt-3",
                                 ),
@@ -82,7 +82,7 @@ tab = html.Div(
                                             "default_theme"
                                         ],
                                     },
-                                    id="slider_div",
+                                    id="slider_polynomials_div",
                                 ),
                             ],
                             style=flex_column_style,

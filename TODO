@@ -18,8 +18,6 @@ p = additional maths book
 - y = ax^n for n = +-1/2
 
 - For regions shading try the example in https://stackoverflow.com/questions/69331683/how-to-fill-in-the-area-below-trendline-in-plotly-express-scatterplot
-- Rephrase Section on Toggles
-
 
 -----------------
 STATISTICS
@@ -29,3 +27,8 @@ STATISTICS
   in some of the bins (in the table represetation (will have a + or minus). Then see the
   histogram and cdf reflect the changes in real time. Also see if Q1 and Q3 change.
   And the mode and the mean, etc? 
+
+-----------------
+  - Rephrase Section on Toggles
+  - information (button) on each tab about polynomials, Hyperbolae, etc.
+  - SAME instructions modal for instructions. Just vary the content.

@@ -141,7 +141,7 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
         return patch_function_figure, *patched_derivative_figures
 
     # Change background of sliders based on theme
-    @app.callback(Output("slider_div", "style"), Input("theme-toggle", "value"))
+    @app.callback(Output("slider_polynomials_div", "style"), Input("theme-toggle", "value"))
     def update_slider_background(is_dark):
         # Select the appropriate background color
         bg_color = (

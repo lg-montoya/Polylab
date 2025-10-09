@@ -15,7 +15,7 @@ flex_column_style = {
 
 tab = html.Div(
     [
-        # ROW with just the instructions button
+        # ROW with just the instructions and "+" button
         dbc.Row(
             [
                 dbc.Col(
@@ -28,6 +28,12 @@ tab = html.Div(
                                     outline=False,
                                     id="btn-mdl-instructions-hyperbolae-open",
                                 ),
+                                # dbc.Button(
+                                #     "+",
+                                #     color="secondary",
+                                #     id="dynamic-add-sinusoidal-btn",
+                                #     className="me-md-2",
+                                # ),
                             ],
                             className="d-grid gap-2 d-md-flex justify-content-md-start",
                         ),
@@ -47,8 +53,16 @@ tab = html.Div(
                     [
                         dbc.Stack(
                             [
-                                # Spacer to push equation to middle
-                                html.Div(style={"flex": "1"}),
+                                # Dropdown menu
+                                # html.Div(
+                                #     dcc.Dropdown(
+                                #         id="dropdown_hyperbolae",
+                                #         options=dropdown_hyperbolae_options,
+                                #         clearable=False,
+                                #         placeholder="CHOOSE A POLYNOMIAL",
+                                #     ),
+                                #     className="d-grid",
+                                # ),
                                 # General form of the polynomial in LaTeX
                                 html.Div(
                                     dcc.Markdown(
@@ -56,10 +70,10 @@ tab = html.Div(
                                         mathjax=True, 
                                         id="equation_hyperbolae",
                                     ),
+
                                     className="d-flex align-items-center justify-content-center",
+
                                 ),
-                                # Spacer to push sliders to bottom
-                                html.Div(style={"flex": "1"}),
                                 # Sliders
                                 html.Div(
                                     [
@@ -83,7 +97,7 @@ tab = html.Div(
                                     id="slider_hyperbolae_div",
                                 ),
                             ],
-                            style={"display": "flex", "flexDirection": "column", "height": "100%"},
+                            style=flex_column_style,
                         ),
                     ],
                     style=flex_column_style,

@@ -82,7 +82,7 @@ def app_layout(app_themes):
                         ],
                         id="tab-group",
                         class_name="nav-stack",
-                        active_tab="tab-polynomials",
+                        active_tab="tab-hyperbolae",
                     ),
                     MODAL_GRIDLINES,
                 ],

@@ -8,22 +8,22 @@ derivative_notation = {1: rf"dy/dx", 2: rf"d^2y/dx^2"}
 POLYNOMIALS = {
     "constant": {
         "default_coefficients": [1, 0, 0, 0],
-        "general_form": r"$y=a$",
+        "general_form": rf"$$\Large y=a$$",
         "available_sliders": [True, False, False, False],
     },
     "linear": {
         "default_coefficients": [0, 1, 0, 0],
-        "general_form": r"$y=a + bx$",
+        "general_form": rf"$$\Large y=a + bx$$",
         "available_sliders": [True, True, False, False],
     },
     "quadratic": {
         "default_coefficients": [0, 0, 1, 0],
-        "general_form": r"$y=a+bx+cx^2$",
+        "general_form": rf"$$\Large y=a+bx+cx^2$$",
         "available_sliders": [True, True, True, False],
     },
     "cubic": {
         "default_coefficients": [0, 0, 0, 1],
-        "general_form": r"$y=a+bx+cx^2+dx^3$",
+        "general_form": rf"$$\Large y=a+bx+cx^2+dx^3$$",
         "available_sliders": [True, True, True, True],
     },
 }

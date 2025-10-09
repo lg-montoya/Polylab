@@ -7,7 +7,7 @@ from dash.dependencies import Input, Output, State, ALL
 from dash import Patch
 from defaults.cosmetics import trace_colours
 from defaults.dash_components import SLIDER_MAX
-from defaults.mathematics import derivative_notation, POLYNOMIALS, HYPERBOLAE
+from defaults.mathematics import derivative_notation, POLYNOMIALS
 from factory import MyPolynomial
 
 
@@ -17,7 +17,7 @@ x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
 # Wrapper function to register callbacks
 def callback_wrapper(app):
     # Update general form of equation based on polynomial-dropdown selection
-    @app.callback(Output("eq_1", "children"), Input("dropdown_polynomials", "value"))
+    @app.callback(Output("equation_polynomials", "children"), Input("dropdown_polynomials", "value"))
     def display_general_polynomial_form(chosen_polynomial):
         return POLYNOMIALS[chosen_polynomial]["general_form"]
 
