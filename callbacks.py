@@ -4,7 +4,8 @@ from factory import graph_generator, my_slider
 from modals import MODAL_SINUSOIDALS_INSTRUCTIONS
 from defaults.dash_components import slider_default, dropdown_sinusoidals_options
 from defaults.cosmetics import graph_background_colours, STYLE_GRAPH_BORDER
-from forms import angle_unit_switch
+import numpy as np
+from dash import Patch
 
 axis = dict(range=[slider_default["min"], slider_default["max"]], zeroline=True)
 flex_column_style = {
@@ -53,22 +54,15 @@ tab = html.Div(
                     [
                         dbc.Stack(
                             [
-                                dbc.Row(
-                                    [
-                                        dbc.Col(
-                                            html.Div(
-                                                dcc.Dropdown(
-                                                    id="dropdown_sinusoidals",
-                                                    options=dropdown_sinusoidals_options,
-                                                    clearable=False,
-                                                    placeholder="CHOOSE A SINUSOIDAL",
-                                                ),
-                                                className="d-grid",
-                                            ),
-                                            width=12,
-                                        ),
-                                    ],
-                                    className="g-2",
+                                # Dropdown menu
+                                html.Div(
+                                    dcc.Dropdown(
+                                        id="dropdown_sinusoidals",
+                                        options=dropdown_sinusoidals_options,
+                                        clearable=False,
+                                        placeholder="CHOOSE A SINUSOIDAL",
+                                    ),
+                                    className="d-grid",
                                 ),
                                 # General form of the sinusoidal in LaTeX
                                 html.Div(
@@ -76,38 +70,25 @@ tab = html.Div(
                                     style={"textAlign": "center"},
                                     className="mt-3",
                                 ),
-                                # Sliders with unit switch at top right
+                                # Sliders
                                 html.Div(
                                     [
-                                        # Unit switch positioned at top right
-                                        html.Div(
-                                            angle_unit_switch,
-                                            style={"position": "absolute", "top": "6px", "right": "16px", "zIndex": "10"},
-                                            # style=STYLE_GRAPH_BORDER
-                                        ),
-                                        # Sliders
-                                        html.Div(
-                                            [
-                                                dbc.Row(
-                                                    my_slider(
-                                                        {
-                                                            "type": "sinusoidals_slider",
-                                                            "name": f"{i}",
-                                                        },
-                                                        f"{i}",
-                                                    )
-                                                )
-                                                for i in ["a", "b", "c"]
-                                            ],
-                                            style={"paddingTop": "40px"},  # Add padding to avoid overlap
-                                        ),
+                                        dbc.Row(
+                                            my_slider(
+                                                {
+                                                    "type": "sinusoidals_slider",
+                                                    "name": f"{i}",
+                                                },
+                                                f"{i}",
+                                            )
+                                        )
+                                        for i in ["a", "b", "c"]
                                     ],
                                     style={
                                         **STYLE_GRAPH_BORDER,
                                         "background": graph_background_colours[
                                             "default_theme"
                                         ],
-                                        "position": "relative",  # Enable absolute positioning for child
                                     },
                                     id="slider_sinusoidals_div",
                                 ),
@@ -119,7 +100,7 @@ tab = html.Div(
                     sm=4,
                 ),
                 # Second column containing just the graph y=f(x)
-                graph_generator(id="sinusoidals-graph", class_name="mt-sm-2-custom", x_axis_title="x (radians)"),
+                graph_generator(id="sinusoidals-graph", class_name="mt-sm-2-custom"),
             ]
         ),
         

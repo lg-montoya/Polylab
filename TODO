@@ -32,3 +32,8 @@ STATISTICS
   - Rephrase Section on Toggles
   - information (button) on each tab about polynomials, Hyperbolae, etc.
   - SAME instructions modal for instructions. Just vary the content.
+  - Rephrase introduction. E.g. replace "polynomial' with 'graph'.
+  - Have a toggle to swap from radians to degrees. This should change just the labels. 
+  - Generated PDFs as exercises for users to fit a, b parameters
+  - Video of how to use app
+  - Translation into other languages

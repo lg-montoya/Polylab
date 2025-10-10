@@ -71,4 +71,15 @@ theme_mode_switch = html.Div(
         ),
     ],
     style={"marginTop": "8px"},
+
+)
+angle_unit_switch = html.Div(
+    [
+        dbc.Label("Radians", className="me-2 small"),
+        dbc.Switch(
+            id="sinusoidals-unit-toggle", value=False, className="d-inline-block me-1", persistence=False
+        ),
+        dbc.Label("Degrees", className="small"),
+    ],
+    style={"marginTop": "8px"},
 )

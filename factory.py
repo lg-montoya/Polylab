@@ -5,6 +5,8 @@ from dash import dcc, html
 from defaults.dash_components import slider_default
 from defaults.cosmetics import STYLE_GRAPH_BORDER
 from defaults.chart_elements import empty_figure
+from dataclasses import dataclass
+from copy import deepcopy
 
 
 slider_min = slider_default["min"]
@@ -115,11 +117,27 @@ def my_slider(id, label, disabled=True):
     return slider
 
 
-def graph_generator(id: str, class_name: str):
+@dataclass
+class GraphConfig:
+    """Ensure each graph has it's own configuration instance rather than sharing a mutable default."""
+    id: str
+    class_name: str
+    x_axis_title: str = None
+    
+    def create_figure(self):
+        """Create a fresh figure instance with this configuration."""
+        figure = deepcopy(empty_figure)
+        if self.x_axis_title:
+            figure.update_layout(xaxis_title=self.x_axis_title)
+        return figure
+
+
+def graph_generator(id: str, class_name: str, x_axis_title=None):
+    config = GraphConfig(id=id, class_name=class_name, x_axis_title=x_axis_title)
     my_graph = dbc.Col(
         html.Div(
             dcc.Graph(
-                figure=empty_figure,
+                figure=config.create_figure(),
                 id=id,
                 mathjax=True,
                 config={"scrollZoom": False},

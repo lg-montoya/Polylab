@@ -183,3 +183,35 @@ def callback_wrapper(app):
         patched_figure["layout"]["title"]["text"] = title
                 
         return patched_figure
+    
+    @app.callback(
+            Output("sinusoidals-graph", "figure", allow_duplicate=True),
+            Input("sinusoidals-unit-toggle", "value"),
+            prevent_initial_call=True,  
+        )
+    def update_sinusoidals_xaxis_units(units):
+        """Update x-axis labels between radians and degrees."""
+        fig_patch = Patch()
+        
+        # Define the x-axis range in radians
+        x_min, x_max = -4 * np.pi, 4 * np.pi
+        
+        if units:  # True means degrees
+            # Convert to degrees and round to nearest integer
+            x_min_deg = int(np.round(np.degrees(x_min)))
+            x_max_deg = int(np.round(np.degrees(x_max)))
+            
+            # Create tick values in radians but show degree labels
+            tick_radians = np.linspace(x_min, x_max, 9)  # 9 evenly spaced ticks
+            tick_degrees = [int(np.round(np.degrees(rad))) for rad in tick_radians]
+            
+            fig_patch["layout"]["xaxis"]["tickvals"] = tick_radians
+            fig_patch["layout"]["xaxis"]["ticktext"] = [f"{deg}°" for deg in tick_degrees]
+            fig_patch["layout"]["xaxis"]["title"]["text"] = "x (degrees)"
+        else:  # False means radians
+            # Reset to default radian display
+            fig_patch["layout"]["xaxis"]["tickvals"] = None
+            fig_patch["layout"]["xaxis"]["ticktext"] = None
+            fig_patch["layout"]["xaxis"]["title"]["text"] = "x (radians)"
+        
+        return fig_patch
