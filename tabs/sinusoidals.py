@@ -16,7 +16,7 @@ flex_column_style = {
 
 tab = html.Div(
     [
-        # ROW with just the instructions and "+" button
+        # First row with instructions and + - buttons
         dbc.Row(
             [
                 dbc.Col(
@@ -29,12 +29,22 @@ tab = html.Div(
                                     outline=False,
                                     id="btn-mdl-instructions-sinusoidals-open",
                                 ),
-                                # dbc.Button(
-                                #     "+",
-                                #     color="secondary",
-                                #     id="dynamic-add-sinusoidals-btn",
-                                #     className="me-md-2",
-                                # ),
+                                dbc.ButtonGroup([
+                                    dbc.Button(
+                                        "-",
+                                        color="primary",
+                                        id="dynamic-remove-sinusoidals-btn",
+                                        outline=True,
+                                        disabled=True,
+                                    ),
+                                    dbc.Button(
+                                        "+",
+                                        color="primary",
+                                        id="dynamic-add-sinusoidals-btn",
+                                        outline=True,
+                                    )
+                                    ]
+                                ),
                             ],
                             className="d-grid gap-2 d-md-flex justify-content-md-start",
                         ),
@@ -44,8 +54,8 @@ tab = html.Div(
                 )
             ]
         ),
-        
-        
+
+        # Second row with controls and y=f(x) graph.
         dbc.Row(
             [
                 # First column containing just controls
@@ -115,11 +125,10 @@ tab = html.Div(
                     sm=4,
                 ),
                 # Second column containing just the graph y=f(x)
-                graph_generator(id="sinusoidals-graph", class_name="mt-sm-2-custom", x_axis_title="x (radians)"),
+                graph_generator(id="sinusoidals-graph", class_name="mt-sm-2-custom", x_axis_title="radians"),
             ]
         ),
-        
         MODAL_SINUSOIDALS_INSTRUCTIONS,
     ],
-    className="mt-4",
+    className="mt-3",
 )

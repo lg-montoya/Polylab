@@ -101,5 +101,5 @@ tab = html.Div(
         dbc.Row(graph_generator(id="polynomial-graph-d2y", class_name="mt-2 ms-auto")),
         MODAL_POLYNOMIAL_INSTRUCTIONS,
     ],
-    className="mt-4",
+    className="mt-3",
 )

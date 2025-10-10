@@ -31,7 +31,6 @@ tab = html.Div(
                             ],
                             className="d-grid gap-2 d-md-flex justify-content-md-start",
                         ),
-                        
                     ],
                     class_name="mb-2",
                     sm=2,
@@ -94,10 +93,8 @@ tab = html.Div(
                 graph_generator(id="hyperbolae-graph", class_name="mt-sm-2-custom"),
             ]
         ),
-        
-        
         MODAL_HYPERBOLAE_INSTRUCTIONS,
     ],
-    className="mt-4",
+    className="mt-3",
 )
 

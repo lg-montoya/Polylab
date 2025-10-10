@@ -208,12 +208,12 @@ def callback_wrapper(app):
             
             fig_patch["layout"]["xaxis"]["tickvals"] = tick_radians
             fig_patch["layout"]["xaxis"]["ticktext"] = [f"{deg}°" for deg in tick_degrees]
-            fig_patch["layout"]["xaxis"]["title"]["text"] = "x (degrees)"
+            fig_patch["layout"]["xaxis"]["title"]["text"] = "degrees"
         else:  # False means radians
             # Reset to default radian display
             fig_patch["layout"]["xaxis"]["tickvals"] = None
             fig_patch["layout"]["xaxis"]["ticktext"] = None
-            fig_patch["layout"]["xaxis"]["title"]["text"] = "x (radians)"
+            fig_patch["layout"]["xaxis"]["title"]["text"] = "radians"
         
         return fig_patch
     
