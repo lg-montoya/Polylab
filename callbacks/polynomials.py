@@ -9,6 +9,7 @@ from defaults.cosmetics import trace_colours
 from defaults.dash_components import SLIDER_MAX
 from defaults.mathematics import derivative_notation, POLYNOMIALS
 from factory import MyPolynomial
+from .factory import modal_callback
 
 
 x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
@@ -140,20 +141,6 @@ def callback_wrapper(app):
     update_derivative_graph(1)
     update_derivative_graph(2)
 
-    def modal_callback(name, link="lnk"):
-        @app.callback(
-            Output(f"mdl-{name}", "is_open"),
-            [
-                Input(f"{link}-mdl-{name}-open", "n_clicks"),
-                Input(f"btn-mdl-{name}-close", "n_clicks"),
-            ],
-            [State(f"mdl-{name}", "is_open")],
-        )
-        def function(n1, n2, is_open):
-            if n1 or n2:
-                return not is_open
-            return is_open
 
-    modal_callback("instructions-polynomials", link="btn")
-    modal_callback("instructions-hyperbolae", link="btn")
-    modal_callback("instructions-sinusoidals", link="btn")
+
+    modal_callback(app, "instructions-polynomials", link="btn")

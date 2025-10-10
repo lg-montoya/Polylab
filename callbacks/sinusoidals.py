@@ -6,6 +6,7 @@ import numpy as np
 from dash.dependencies import Input, Output, ALL
 from dash import Patch
 from defaults.mathematics import SINUSOIDALS
+from .factory import modal_callback
 
 SLIDER_MAX = 10  # Assuming a constant for slider max value, adjust as needed
 
@@ -215,3 +216,5 @@ def callback_wrapper(app):
             fig_patch["layout"]["xaxis"]["title"]["text"] = "x (radians)"
         
         return fig_patch
+    
+    modal_callback(app, "instructions-sinusoidals", link="btn")

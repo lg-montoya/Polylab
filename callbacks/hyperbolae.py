@@ -6,6 +6,7 @@ import numpy as np
 from dash.dependencies import Input, Output, ALL
 from dash import Patch
 from defaults.dash_components import SLIDER_MAX
+from .factory import modal_callback
 
 
 # Create x values, avoiding x = 0 to prevent division by zero
@@ -86,5 +87,8 @@ def callback_wrapper(app):
         patched_figure["data"][0]["y"] = y_combined
         
         return patched_figure
+    
+    modal_callback(app, "instructions-hyperbolae", link="btn")
+    
 
 
