@@ -1,5 +1,5 @@
 import numpy as np
-import plotly.graph_objs as go
+# import plotly.graph_objs as go
 import dash_bootstrap_components as dbc
 from dash import dcc, html
 from defaults.dash_components import slider_default
@@ -41,25 +41,25 @@ class MyPolynomial:
 
         if b != 0:
             if b == 1:
-                terms.append(f"+x")  # Only sign and variable
+                terms.append("+x")  # Only sign and variable
             elif b == -1:
-                terms.append(f"-x")  # Only sign and variable
+                terms.append("-x")  # Only sign and variable
             else:
-                terms.append(f"{'+' if b > 0 else ''}{b}x")
+                terms.append("{'+' if b > 0 else ''}{b}x")
 
         if c != 0:
             if c == 1:
-                terms.append(f"+x^2")  # Only sign and variable
+                terms.append("+x^2")  # Only sign and variable
             elif c == -1:
-                terms.append(f"-x^2")  # Only sign and variable
+                terms.append("-x^2")  # Only sign and variable
             else:
                 terms.append(f"{'+' if c > 0 else ''}{c}x^2")
 
         if d != 0:
             if d == 1:
-                terms.append(f"+x^3")  # Only sign and variable
+                terms.append("+x^3")  # Only sign and variable
             elif d == -1:
-                terms.append(f"-x^3")  # Only sign and variable
+                terms.append("-x^3")  # Only sign and variable
             else:
                 terms.append(f"{'+' if d > 0 else ''}{d}x^3")
 
