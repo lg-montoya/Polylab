@@ -45,7 +45,7 @@ class MyPolynomial:
             elif b == -1:
                 terms.append("-x")  # Only sign and variable
             else:
-                terms.append("{'+' if b > 0 else ''}{b}x")
+                terms.append(f"{'+' if b > 0 else ''}{b}x")
 
         if c != 0:
             if c == 1:

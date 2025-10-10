@@ -88,7 +88,7 @@ def app_layout(app_themes):
                         ],
                         id="tab-group",
                         class_name="nav-stack",
-                        active_tab="tab-sinusoidals",
+                        active_tab="tab-polynomials",
                     ),
                     MODAL_GRIDLINES,
                 ],
