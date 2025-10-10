@@ -81,7 +81,7 @@ tab = html.Div(
                                     [
                                         html.Div(
                                             angle_unit_switch,
-                                            className="d-flex justify-content-end pe-3",
+                                            className="d-flex justify-content-end pe-4",
                                         ),
                                         html.Div(
                                             [
