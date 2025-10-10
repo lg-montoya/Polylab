@@ -79,13 +79,10 @@ tab = html.Div(
                                 # Sliders with unit switch at top right
                                 html.Div(
                                     [
-                                        # Unit switch positioned at top right
                                         html.Div(
                                             angle_unit_switch,
-                                            style={"position": "absolute", "top": "6px", "right": "16px", "zIndex": "10"},
-                                            # style=STYLE_GRAPH_BORDER
+                                            className="d-flex justify-content-end pe-3",
                                         ),
-                                        # Sliders
                                         html.Div(
                                             [
                                                 dbc.Row(
@@ -99,7 +96,6 @@ tab = html.Div(
                                                 )
                                                 for i in ["a", "b", "c"]
                                             ],
-                                            style={"paddingTop": "40px"},  # Add padding to avoid overlap
                                         ),
                                     ],
                                     style={
@@ -107,8 +103,8 @@ tab = html.Div(
                                         "background": graph_background_colours[
                                             "default_theme"
                                         ],
-                                        "position": "relative",  # Enable absolute positioning for child
                                     },
+                                    className="d-flex flex-column gap-3",
                                     id="slider_sinusoidals_div",
                                 ),
                             ],
