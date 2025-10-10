@@ -3,9 +3,8 @@ Module containing (Non-cosmetic) Callbacks for the polynomial graphing app.
 """
 
 import numpy as np
-from dash.dependencies import Input, Output, State, ALL
+from dash.dependencies import Input, Output, ALL
 from dash import Patch
-from defaults.cosmetics import trace_colours
 from defaults.mathematics import SINUSOIDALS
 
 SLIDER_MAX = 10  # Assuming a constant for slider max value, adjust as needed
@@ -61,6 +60,59 @@ def format_sinusoidal_title(a, b, c, function_type):
     return f"$y = {equation}$"
 
 
+def handle_tangent_discontinuities(x_values, y_values, c):
+    """
+    Handle tangent function discontinuities by inserting None values at asymptotes.
+    Following Polylab's mathematical accuracy patterns.
+    """
+    if c == 0:
+        return x_values, y_values
+    
+    # Find asymptotes: tan(cx) is undefined when cx = π/2 + nπ
+    # So x = (π/2 + nπ) / c
+    asymptote_period = np.pi / abs(c)
+    asymptote_offset = (np.pi / 2) / abs(c)
+    
+    # Find asymptotes within our domain
+    n_min = int(np.floor((x_values.min() * abs(c) - np.pi/2) / np.pi))
+    n_max = int(np.ceil((x_values.max() * abs(c) - np.pi/2) / np.pi))
+    
+    asymptotes = [(asymptote_offset + n * asymptote_period) * np.sign(c) 
+                  for n in range(n_min, n_max + 1)
+                  if x_values.min() <= (asymptote_offset + n * asymptote_period) * np.sign(c) <= x_values.max()]
+    
+    if not asymptotes:
+        return x_values, y_values
+    
+    # Split domain at asymptotes and insert None values
+    x_split = []
+    y_split = []
+    
+    prev_idx = 0
+    for asymptote in sorted(asymptotes):
+        # Find the index closest to asymptote
+        split_idx = np.searchsorted(x_values, asymptote)
+        
+        if split_idx > prev_idx:
+            # Add segment before asymptote
+            x_split.extend(x_values[prev_idx:split_idx])
+            y_split.extend(y_values[prev_idx:split_idx])
+            
+            # Add discontinuity break
+            if split_idx < len(x_values):
+                x_split.append(None)
+                y_split.append(None)
+        
+        prev_idx = split_idx
+    
+    # Add remaining segment
+    if prev_idx < len(x_values):
+        x_split.extend(x_values[prev_idx:])
+        y_split.extend(y_values[prev_idx:])
+    
+    return np.array(x_split, dtype=object), np.array(y_split, dtype=object)
+
+
 
 # Wrapper function to register callbacks
 def callback_wrapper(app):
@@ -110,23 +162,24 @@ def callback_wrapper(app):
         
         # Calculate y = a + b*FUNC(c*x)
         try:
-            # Handle potential domain issues (e.g., tan at π/2)
+            # Handle potential domain issues following Polylab mathematical accuracy
             with np.errstate(invalid='ignore', divide='ignore'):
                 y_values = a + b * math_function(c * x_values)
             
-            # Clip extreme values for better visualization
-            y_values = np.clip(y_values, -SLIDER_MAX*2, SLIDER_MAX*2)
+            # Handle tangent discontinuities specifically
+            if function_type == "Tangent":
+                x_values, y_values = handle_tangent_discontinuities(x_values, y_values, c)
             
         except Exception:
             # Fallback to zeros if calculation fails
             y_values = np.zeros_like(x_values)
-            
-        title = format_sinusoidal_title(a, b, c, function_type)
         
-        # Update the trace data
+        # Generate LaTeX-formatted title following polynomial patterns
+        title = format_sinusoidal_title(a, b, c, function_type)
+
+        # Update the trace data and title using Patch() pattern
         patched_figure["data"][0]["x"] = x_values
         patched_figure["data"][0]["y"] = y_values
-        # patched_figure["data"][0]["name"] = f"y = {a} + {b}{function_type.lower()}({c}x)"
         patched_figure["layout"]["title"]["text"] = title
-        
+                
         return patched_figure
