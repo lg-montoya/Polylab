@@ -1,5 +1,4 @@
 import dash_bootstrap_components as dbc
-from dash import html
 from dash import dcc
 from hardcoded import (
     POLYNOMIAL_INSTRUCTIONS, 
@@ -18,7 +17,8 @@ def create_instructions_modal(modal_id: str, content: str, close_button_id: str,
         close_button_id: ID for the close button
         centered: Whether to center the modal vertically
     
-    Returns:
+    Returns:+
+    
         dbc.Modal: Configured modal component
     """
     return dbc.Modal(
@@ -63,20 +63,10 @@ MODAL_SINUSOIDALS_INSTRUCTIONS = create_instructions_modal(
     close_button_id="btn-mdl-instructions-sinusoidals-close",
     centered=False  # Matches original hyperbolae modal
 )
-
-# Gridlines Warning modal
-MODAL_GRIDLINES = dbc.Modal(
-    [
-        dbc.ModalHeader("Range Warning"),
-        dbc.ModalBody(
-            children=[
-                dcc.Markdown(WARNING_GRIDLINES),
-            ]
-        ),
-        dbc.ModalFooter(
-            # dbc.Button("Close", id="btn-mdl-gridlines-close", class_name="ml-auto")
-        ),
-    ],
-    id="mdl-gridlines",
-    scrollable=True,
+# Sinusoidals Instructions modal
+MODAL_GRIDLINES = create_instructions_modal(
+    modal_id="mdl-gridlines",
+    content=WARNING_GRIDLINES,
+    close_button_id="btn-mdl-gridlines-close",
+    centered=False  # Matches original hyperbolae modal
 )

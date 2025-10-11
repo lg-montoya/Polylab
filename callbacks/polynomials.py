@@ -9,7 +9,7 @@ from defaults.cosmetics import trace_colours
 from defaults.dash_components import SLIDER_MAX
 from defaults.mathematics import derivative_notation, POLYNOMIALS
 from factory import MyPolynomial
-from .factory import modal_callback
+from .factory import modal_close_callback
 
 
 x_values = np.linspace(-SLIDER_MAX, SLIDER_MAX, 400)
@@ -143,4 +143,4 @@ def callback_wrapper(app):
 
 
 
-    modal_callback(app, "instructions-polynomials", link="btn")
+    modal_close_callback(app, "instructions-polynomials", link="btn")

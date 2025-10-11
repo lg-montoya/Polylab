@@ -6,7 +6,7 @@ import numpy as np
 from dash.dependencies import Input, Output, ALL
 from dash import Patch
 from defaults.mathematics import SINUSOIDALS
-from .factory import modal_callback
+from .factory import modal_close_callback
 
 SLIDER_MAX = 10  # Assuming a constant for slider max value, adjust as needed
 
@@ -195,15 +195,11 @@ def callback_wrapper(app):
         fig_patch = Patch()
         
         # Define the x-axis range in radians
-        x_min, x_max = -4 * np.pi, 4 * np.pi
+        x_min, x_max = -6 * np.pi, 6 * np.pi
         
         if units:  # True means degrees
-            # Convert to degrees and round to nearest integer
-            x_min_deg = int(np.round(np.degrees(x_min)))
-            x_max_deg = int(np.round(np.degrees(x_max)))
-            
             # Create tick values in radians but show degree labels
-            tick_radians = np.linspace(x_min, x_max, 9)  # 9 evenly spaced ticks
+            tick_radians = np.linspace(x_min, x_max, 25, endpoint=True)  # 9 evenly spaced ticks
             tick_degrees = [int(np.round(np.degrees(rad))) for rad in tick_radians]
             
             fig_patch["layout"]["xaxis"]["tickvals"] = tick_radians
@@ -217,4 +213,5 @@ def callback_wrapper(app):
         
         return fig_patch
     
-    modal_callback(app, "instructions-sinusoidals", link="btn")
+    modal_close_callback(app, "instructions-sinusoidals", link="btn")
+    # modal_close_callback(app, "gridlines", link="btn")

@@ -9,7 +9,6 @@ from defaults.cosmetics import graph_background_colours, APP_THEMES
 
 DEFAULT_THEME = "default_theme"
 
-
 def app_layout(app_themes):
     theme_switch = html.Span(
         ThemeSwitchAIO(
@@ -44,7 +43,6 @@ def app_layout(app_themes):
                                     fluid_mode_switch,
                                     theme_mode_switch,
                                 ],
-                                # children=[gridlines_radio, fluid_mode_switch, theme_switch],
                                 className="d-flex flex-row align-items-center gap-2 mb-2",
                                 style={
                                     "border": "1px solid var(--bs-primary)",
@@ -88,7 +86,7 @@ def app_layout(app_themes):
                         ],
                         id="tab-group",
                         class_name="nav-stack",
-                        active_tab="tab-polynomials",
+                        active_tab="tab-sinusoidals",
                     ),
                     MODAL_GRIDLINES,
                 ],

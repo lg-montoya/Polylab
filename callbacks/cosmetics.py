@@ -102,6 +102,8 @@ def callback_wrapper(app, chart_default_theme, chart_other_theme) -> None:
     def show_gridlines_modal(has_large_range):
         """Launch modal when gridlines store indicates large range"""
         return True if has_large_range else False
+    
+    # modal_close_callback(app, "gridlines", link="btn")
 
     # Update fluid-mode (affects app width) based on toggle
     @app.callback(Output("main-container", "fluid"), Input("fluid-toggle", "value"))

@@ -7,7 +7,7 @@
 from dash import Input, Output, State
 
 
-def modal_callback(app, name, link="lnk"):
+def modal_close_callback(app, name, link="lnk"):
     @app.callback(
         Output(f"mdl-{name}", "is_open"),
         [
